@@ -4,18 +4,20 @@
  * and open the template in the editor.
  */
 package udrive.control.center;
-
 /**
  *
  * @author Marcel
  */
 public class UDriveControlCenter {
-
+private static Login login;
+private static Fenster fenster;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        login = new Login();
+        fenster = new Fenster();
+        
     }
     
 }
