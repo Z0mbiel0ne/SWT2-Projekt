@@ -16,65 +16,43 @@ import java.util.logging.Logger;
  * @author ExaShox
  */
 public class SQLService {
-
-    private final Scanner SCANNER = new Scanner(System.in);
     
     /**
-     * Liefert Daten für die Auslast und gibt diese aus
+     * Legt einen neuen Kunden in der Datenbank an
      *
+     * @param vorname 
+     * @param nachname
      * @param plz
+     * @param stadt
+     * @param strasse 
+     * @param hausnummer
+     * @param kontonummer 
+     * @param blz
+     * @param iban
+     * @param bic
      */
-    public void auslast(int plz){
+    public void addKunde(String vorname, String nachname, int plz, String stadt, String strasse, int hausnummer, int kontonummer, int blz, int iban, int bic){
        Connection conn = ConnectionManager.getConnection();
-        PreparedStatement stmt;
+        CallableStatement stmt;
         try {
                      
-            String sqlString = "SELECT "
-                    + "(SELECT COUNT(lieferer_lieferbezirk.Lieferer_idLieferer) "
-                    + "FROM lieferer_lieferbezirk "
-                    + "WHERE lieferer_lieferbezirk.Lieferbezirk_idLieferbezirk = lieferbezirk.idLieferbezirk) AS Lieferer "
-                    + ", "
-                    + "(Select COUNT(bestellung.idBestellung) from bestellung "
-                    + "inner join getraenkemarkt on bestellung.Getraenkemarkt_idGetraenkemarkt = getraenkemarkt.idGetraenkemarkt "
-                    + "where bestellung.bestellstatus = 'abgeschlossen' and getraenkemarkt.plz = lieferbezirk.plz "
-                    + ") as Bestellungen "
-                    + ", "
-                    + "(SELECT avg(anzahl*preis) "
-                    + "FROM bestellposition "
-                    + "JOIN artikel ON bestellposition.Artikel_idArtikel = artikel.idArtikel "
-                    + "JOIN bestellung ON bestellung.idBestellung = bestellposition.Bestellung_idBestellung "
-                    + "inner join getraenkemarkt on bestellung.Getraenkemarkt_idGetraenkemarkt = getraenkemarkt.idGetraenkemarkt "
-                    + "WHERE bestellstatus = 'abgeschlossen' "
-                    + "and getraenkemarkt.plz = lieferbezirk.plz) "
-                    + "as Preis "
-                    + "FROM lieferbezirk "
-                    + "WHERE lieferbezirk.plz = ? ";
+            String sqlString = "{CALL addKunde(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             
-            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
             
-            stmt.setInt(1, plz); // Parameter setzen
+            stmt.setString(1, vorname); // Parameter setzen
+            stmt.setString(2,nachname);
+            stmt.setInt(3,plz);
+            stmt.setString(4,stadt);
+            stmt.setString(5,strasse);
+            stmt.setInt(6,hausnummer);
+            stmt.setInt(7,kontonummer);
+            stmt.setInt(8,blz);
+            stmt.setInt(9,iban);
+            stmt.setInt(10,bic);
+            
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-
-            System.out.println("");
-            rs.next();
-            if(!rs.getString("Lieferer").equals("0"))
-            {
-               do
-               { 
-                String lieferer = rs.getString("Lieferer");
-                String bestellungen = rs.getString("Bestellungen"); // Daten aus ResultSet holen
-                String preis = rs.getString("Preis");
-
-                System.out.println("Liefer : " + lieferer);
-                System.out.println("Bestellungen : " + bestellungen);
-                System.out.println("Preis : " + preis);
-               }
-                while(rs.next());
-            }
-            else 
-            {
-                System.out.println("Es existiert keine Lieferer zu dieser Postleitzahl");
-            }
+            
             stmt.close();
         
         } catch (SQLException ex) {
