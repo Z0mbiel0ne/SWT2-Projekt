@@ -8,6 +8,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -116,7 +118,55 @@ public class SQLService {
             tab = new DefaultTableModel(data, columnNames);
 
         } catch (SQLException ex) {
-            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tab;
+    }
+
+    public TableModel getFortschrittTable(int kundenID) {
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement stmt;
+        DefaultTableModel tab = new DefaultTableModel();
+        try {
+            // select data
+            String sqlString
+                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname, pe.Vorname, CONCAT(tp.Straße, ', ', tp.Postleitzahl, ' ', tp.Stadt) AS Adresse"
+                    + "FROM kunde AS ku"
+                    + "INNER JOIN fahrstunde AS fs"
+                    + "ON ku.KundeID = fs.KundeID"
+                    + "INNER JOIN fahrlehrer AS fl"
+                    + "ON fl.FahrlehrerID = fs.FahrlehrerID"
+                    + "INNER JOIN personal AS pe"
+                    + "ON pe.PersonalID = fl.PersonalID"
+                    + "INNER JOIN treffpunkt AS tp"
+                    + "ON tp.TreffpunktID = fs.TreffpunktID"
+                    + "WHERE ku.KundenID = " + kundenID;
+            
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            ResultSetMetaData metaData = rs.getMetaData();
+
+            // names of columns
+            Vector<String> columnNames = new Vector<String>();
+            int columnCount = metaData.getColumnCount();
+            for (int column = 1; column <= columnCount; column++) {
+                columnNames.add(metaData.getColumnName(column));
+            }
+
+            // data of the table
+            Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+            while (rs.next()) {
+                Vector<Object> vector = new Vector<Object>();
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    vector.add(rs.getObject(columnIndex));
+                }
+                data.add(vector);
+            }
+
+            tab = new DefaultTableModel(data, columnNames);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tab;
     }
