@@ -89,7 +89,11 @@ public class SQLService {
     
 =======
 
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/Bla
     /**
      * Liefert alle vorhandenen Bezirke und gibt diese aus
      */
