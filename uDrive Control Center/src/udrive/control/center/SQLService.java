@@ -4,11 +4,14 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * SQL Service
@@ -82,6 +85,35 @@ public class SQLService {
         } catch (SQLException ex) {
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public TableModel getKundenTable()
+    {
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement stmt; 
+        DefaultTableModel tab = new DefaultTableModel();
+        try{           
+            String sqlString = "SELECT KundeID, Concat(Nachname,Vorname), Stadt, Guthaben from kunde";
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            
+            ResultSetMetaData meta = rs.getMetaData();
+            int numberOfColumns = meta.getColumnCount();
+            while (rs.next())
+            {
+                Object [] rowData = new Object[numberOfColumns];
+                for (int i = 0; i < rowData.length; ++i)
+                {
+                    rowData[i] = rs.getObject(i+1);
+                }
+                tab.addRow(rowData);
+            }
+            
+
+        } catch (SQLException ex) {
+            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tab;
     }
     
     public boolean checkPasswort(String user, String pass)

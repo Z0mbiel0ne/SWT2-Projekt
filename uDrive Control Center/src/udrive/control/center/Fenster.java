@@ -10,13 +10,14 @@ package udrive.control.center;
  * @author Marcel
  */
 public class Fenster extends javax.swing.JFrame {
-
+private final static SQLService SERVICE = new SQLService();
     /**
      * Creates new form Fenster
      */
     public Fenster() {
         initComponents();
         setVisible(true);
+        jTable1.setModel(SERVICE.getKundenTable());
     }
 
     /**
