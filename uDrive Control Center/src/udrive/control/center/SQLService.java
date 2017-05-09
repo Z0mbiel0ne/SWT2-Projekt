@@ -63,6 +63,29 @@ public class SQLService {
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+        public void deleteKunde(int id)
+    {
+        Connection conn = ConnectionManager.getConnection();
+        CallableStatement stmt;
+        try {
+                     
+            String sqlString = "{CALL deleteKunde(?)}";
+            
+            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
+            
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            
+            stmt.close();
+        
+        } catch (SQLException ex) {
+            //TODO Logger
+            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Liefert alle vorhandenen Bezirke und gibt diese aus
      */
