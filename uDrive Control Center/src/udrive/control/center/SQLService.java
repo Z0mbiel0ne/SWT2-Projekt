@@ -63,7 +63,6 @@ public class SQLService {
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-<<<<<<< HEAD
     
         public void deleteKunde(int id)
     {
@@ -87,13 +86,6 @@ public class SQLService {
         }
     }
     
-=======
-
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Bla
     /**
      * Liefert alle vorhandenen Bezirke und gibt diese aus
      */
@@ -217,11 +209,10 @@ public class SQLService {
             } else {
                 return false;
             }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("Es konnte keine Verbindung hergestellt werden sie befinden sich im Testmodus");
+            return true;
         }
-        return false;
     }
 
     /**
