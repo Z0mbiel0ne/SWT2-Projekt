@@ -63,7 +63,6 @@ public class SQLService {
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-<<<<<<< HEAD
     
         public void deleteKunde(int id)
     {
@@ -87,13 +86,6 @@ public class SQLService {
         }
     }
     
-=======
-
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Bla
     /**
      * Liefert alle vorhandenen Bezirke und gibt diese aus
      */
