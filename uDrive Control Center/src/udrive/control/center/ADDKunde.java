@@ -16,6 +16,7 @@ public class ADDKunde extends javax.swing.JFrame {
      */
     public ADDKunde() {
         initComponents();
+        jLabel11.setVisible(false);
     }
 
     /**
@@ -48,6 +49,7 @@ public class ADDKunde extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +104,9 @@ public class ADDKunde extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel11.setText("Bitte korrekte Werte eingeben.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,8 +150,10 @@ public class ADDKunde extends javax.swing.JFrame {
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addContainerGap()
                 .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,7 +190,9 @@ public class ADDKunde extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel11))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -207,7 +216,37 @@ public class ADDKunde extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SERVICE.addKunde(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()), jTextField4.getText(), jTextField5.getText(), Integer.parseInt(jTextField6.getText()), Integer.parseInt(jTextField7.getText()), Integer.parseInt(jTextField8.getText()), Integer.parseInt(jTextField9.getText()), Integer.parseInt(jTextField10.getText()));
+
+            String vorname = null;
+            String nachname = null;
+            int plz = 0;
+            String stadt = null;
+            String strasse = null;
+            int hausnummer = 0;
+            int kontonummer = 0;
+            int blz = 0;
+            int iban = 0;
+            int bic = 0;   
+            
+            try {
+                vorname = jTextField1.getText();
+                nachname = jTextField6.getText();
+                plz = Integer.parseInt(jTextField2.getText());
+                stadt = jTextField7.getText();
+                strasse = jTextField3.getText();
+                hausnummer = Integer.parseInt(jTextField8.getText());
+                kontonummer = Integer.parseInt(jTextField4.getText());
+                blz = Integer.parseInt(jTextField9.getText());
+                iban = Integer.parseInt(jTextField5.getText());
+                bic = Integer.parseInt(jTextField10.getText());
+                
+                SERVICE.addKunde(vorname, nachname , plz , stadt , strasse , hausnummer, kontonummer, blz , iban , bic);
+            } 
+            catch (NumberFormatException numberFormatException) 
+            {
+              jLabel11.setVisible(true);
+            }
+           
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -249,6 +288,7 @@ public class ADDKunde extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

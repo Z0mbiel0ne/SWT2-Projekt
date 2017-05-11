@@ -115,7 +115,7 @@ public class SQLService {
         DefaultTableModel tab = new DefaultTableModel();
         try {
             // select data
-            String sqlString = "SELECT KundeID, CONCAT(Vorname, ' ', Nachname), CONCAT(Straße, ', ', Postleitzahl, ' ', Stadt), Guthaben from kunde";
+            String sqlString = "SELECT KundeID, CONCAT(Vorname, ' ', Nachname) as 'Name', CONCAT(Straße, ', ', Postleitzahl, ' ', Stadt) as 'Adresse', Guthaben from kunde";
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
             ResultSetMetaData metaData = rs.getMetaData();
@@ -145,24 +145,23 @@ public class SQLService {
         return tab;
     }
 
-    public TableModel getFortschrittTable(int kundenID) {
+    public TableModel getFahrstundeTable(int kundenID) {
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement stmt;
         DefaultTableModel tab = new DefaultTableModel();
         try {
             // select data
             String sqlString
-                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname, pe.Vorname, CONCAT(tp.Straße, ', ', tp.Postleitzahl, ' ', tp.Stadt) AS Adresse"
-                    + "FROM kunde AS ku"
-                    + "INNER JOIN fahrstunde AS fs"
-                    + "ON ku.KundeID = fs.KundeID"
-                    + "INNER JOIN fahrlehrer AS fl"
-                    + "ON fl.FahrlehrerID = fs.FahrlehrerID"
-                    + "INNER JOIN personal AS pe"
-                    + "ON pe.PersonalID = fl.PersonalID"
-                    + "INNER JOIN treffpunkt AS tp"
-                    + "ON tp.TreffpunktID = fs.TreffpunktID"
-                    + "WHERE ku.KundenID = " + kundenID;
+                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname as 'Schüler', pe.Vorname as 'Fahrlehrer', CONCAT(tp.Straße, ', ', tp.Postleitzahl, ' ', tp.Stadt) AS "
+                    + "Adresse FROM kunde AS ku INNER JOIN fahrstunde AS fs " 
+                    + "ON ku.KundeID = fs.KundeID " 
+                    + "INNER JOIN fahrlehrer AS fl " 
+                    + "ON fl.FahrlehrerID = fs.FahrlehrerID " 
+                    + "INNER JOIN personal AS pe " 
+                    + "ON pe.PersonalID = fl.PersonalID " 
+                    + "INNER JOIN treffpunkt AS tp " 
+                    + "ON tp.TreffpunktID = fs.TreffpunktID " 
+                    + "WHERE ku.KundeID = " + kundenID;
             
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
