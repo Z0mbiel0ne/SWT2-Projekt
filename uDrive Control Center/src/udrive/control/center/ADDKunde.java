@@ -241,6 +241,8 @@ public class ADDKunde extends javax.swing.JFrame {
                 bic = Integer.parseInt(jTextField10.getText());
                 
                 SERVICE.addKunde(vorname, nachname , plz , stadt , strasse , hausnummer, kontonummer, blz , iban , bic);
+                
+                dispose();
             } 
             catch (NumberFormatException numberFormatException) 
             {

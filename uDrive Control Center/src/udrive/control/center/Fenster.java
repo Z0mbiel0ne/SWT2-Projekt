@@ -219,6 +219,7 @@ private ADDKunde addKunde;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        addKunde = new ADDKunde();
        addKunde.setVisible(true);
+       refreshtable1();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -232,6 +233,7 @@ private ADDKunde addKunde;
             for (int row : rows) 
             {
               SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+              refreshtable1();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -268,19 +270,18 @@ private ADDKunde addKunde;
             {
               int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
               jTable2.setModel(SERVICE.getFahrstundeTable(value));
-              jTable2.repaint();
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     public void refreshtable1()
     {
-        
+        jTable1.setModel(SERVICE.getKundenTable());
     }
     
     public void refreshtable2()
-    {
-        
+    {   int row = jTable1.getSelectedRow();
+        jTable2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString())));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
