@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 
 # Created by https://www.gitignore.io/api/java,netbeans
 
 ### Java ###
+=======
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+>>>>>>> origin/master
 # Compiled class file
 *.class
 
@@ -23,6 +33,7 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+<<<<<<< HEAD
 hs_err_pid*
 
 ### NetBeans ###
@@ -34,3 +45,6 @@ uDrive Control Center/nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
+=======
+hs_err_pid
+>>>>>>> origin/master
