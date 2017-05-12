@@ -203,15 +203,81 @@ public class SQLService {
             ResultSet rs = stmt.executeQuery();
             rs.next();
             String test = rs.getString(1);
-            if (pass.equals(test)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception ex) {
+            return pass.equals(test);
+        } catch (SQLException ex) {
             System.out.println("Es konnte keine Verbindung hergestellt werden sie befinden sich im Testmodus");
             return true;
         }
+    }
+    
+    /**
+     * Löscht in der Tabelle Fahrstunde den eintrag mit der ID 
+     *
+     * @param id FahrstundenID
+     */
+    public void deleteFahrstunde(int id) 
+    {
+        //TO-DO
+    }
+    
+    /**
+     * Updated den Geldbetrag eines Kunden  
+     *
+     * @param id KundeID
+     * @param value Betrag
+     */
+    public void updateCredit(int id, int value) 
+    {
+        //TO-DO
+    }
+    
+    /**
+     * Liefert ALLE Treffpunkte in der Form ID|Straße
+     *
+     * @return Bsp: [0][0] : 1
+     *              [0][1] : Essen
+     */
+    public String[][] getTreffpunkte() 
+    {
+         //TO-DO
+         return new String[0][1];
+    }
+    
+    /**
+     * Liefert ALLE Fahrlehrer in der Form FahrlehrerID|Vorname
+     *
+     * @return Bsp: [0][0] : 1
+     *              [0][1] : Hans
+     */
+    public String[][] getFahrlehrer() 
+    {
+         //TO-DO
+         return new String[0][1];
+    }
+
+    /**
+     * Liefert ALLE Kunden in der Form ID|Vorname
+     *
+     * @return Bsp: [0][0] : 1
+     *              [0][1] : Stephan
+     */
+    public String[][] getKunden() 
+    {
+         //TO-DO
+         return new String[0][1];
+    }
+    
+     /**
+     * Erstellt einen Fahrstunde in der Tabelle Fahrstunden
+     *
+     * @param datum Datum
+     * @param fahrlehrerID FahrlehrerID aus Tabelle Fahrlehrer
+     * @param kundeID KundenId aus Tabelle Kunden
+     * @param rechnungID 
+     */
+    public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) 
+    {
+        //TO-DO
     }
 
     /**
