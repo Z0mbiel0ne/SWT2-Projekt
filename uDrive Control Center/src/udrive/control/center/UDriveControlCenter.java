@@ -15,8 +15,8 @@ private static Fenster fenster;
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-            //login = new Login();  
-            fenster = new Fenster();    
+            login = new Login();  
+            //fenster = new Fenster();    
     }
     
 }
