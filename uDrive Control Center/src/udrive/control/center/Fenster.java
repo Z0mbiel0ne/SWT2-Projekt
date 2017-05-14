@@ -272,11 +272,7 @@ private UpdateCredit updateCredit;
             for (int row : rows) 
             {
               int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
-                try {
-                    SERVICE.deleteFahrstunde(value);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
-                }
+              SERVICE.deleteFahrstunde(value);
             }
         }
         refreshtable2();

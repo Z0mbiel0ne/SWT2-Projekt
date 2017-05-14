@@ -94,9 +94,7 @@ public class UpdateCredit extends javax.swing.JFrame {
             catch (NumberFormatException numberFormatException) 
             {
                 
-            } catch (SQLException ex) {
-            Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

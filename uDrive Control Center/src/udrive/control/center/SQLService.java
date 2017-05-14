@@ -211,25 +211,18 @@ public class SQLService {
      * Löscht in der Tabelle Fahrstunde den eintrag mit der ID
      *
      * @param id FahrstundenID
-     * @throws java.sql.SQLException
      */
-    public void deleteFahrstunde(int id) throws SQLException {
+    public void deleteFahrstunde(int id){
         Connection conn = ConnectionManager.getConnection();
-        CallableStatement stmt;
+        PreparedStatement stmt;
+        String sqlString = "DELETE FROM fahrstunde WHERE FahrstundeID = ?";
+        
         try {
-            String sqlString
-                    = "DELETE FROM fahrstunde"
-                    + "WHERE FahrstundeID = ?";
-
-            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
+            stmt = conn.prepareStatement(sqlString);
             stmt.setInt(1, id);
-            stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-            stmt.close();
+            stmt.executeUpdate();
         } catch (SQLException ex) {
-            //TODO Logger
-            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            conn.close();
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -238,26 +231,21 @@ public class SQLService {
      *
      * @param id KundeID
      * @param value Betrag
-     * @throws java.sql.SQLException
      */
-    public void updateCredit(int id, int value) throws SQLException {
+    public void updateCredit(int id, int value) {
         Connection conn = ConnectionManager.getConnection();
-        CallableStatement stmt;
+        PreparedStatement stmt;
+        
+        String sqlString = "UPDATE kunde AS ku "
+                + "SET ku.Guthaben = ? "
+                + "WHERE ku.KundeID = ? ";
         try {
-            String sqlString
-                    = "UPDATE kunde AS ku"
-                    + "SET ku.Guthaben = ?"
-                    + "WHERE ku.KundeID = ?";
-
-            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
+            stmt = conn.prepareStatement(sqlString);
             stmt.setInt(1, value);
             stmt.setInt(2, id);
-            stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-            stmt.close();
+            stmt.executeUpdate();
         } catch (SQLException ex) {
-            //TODO Logger
-        } finally {
-            conn.close();
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -410,15 +398,13 @@ public class SQLService {
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());   
 
             String sqlString
-                    = "INSERT INTO fahrstunde (\n"
-                    + "Datum,\n"
-                    + "TreffpunktID,\n"
-                    + "FahrlehrerID,\n"
-                    + "KundeID,\n"
-                    + "RechnungID\n"
-                    + ") VALUES (\n"
-                    + "?, ?, ?, ?, ?\n"
-                    + ");";
+                    = "INSERT INTO fahrstunde ("
+                    + "Datum,"
+                    + "TreffpunktID,"
+                    + "FahrlehrerID,"
+                    + "KundeID,"
+                    + "RechnungID ) "
+                    + "VALUES (?, ?, ?, ?, ?)";
 
             stmt = conn.prepareStatement(sqlString);
             stmt.setDate(1, sqlDate);
@@ -426,11 +412,9 @@ public class SQLService {
             stmt.setInt(3, fahrlehrerID);
             stmt.setInt(4, kundeID);
             stmt.setInt(5, rechnungID);
-            stmt.executeQuery();
+            stmt.executeUpdate();
             stmt.close();
-        } catch (SQLException ex) {
-            System.out.println("Es konnte keine Verbindung hergestellt werden sie befinden sich im Testmodus");
-        } catch (ParseException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
