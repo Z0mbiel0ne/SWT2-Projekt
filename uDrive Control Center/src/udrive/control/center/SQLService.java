@@ -307,8 +307,43 @@ public class SQLService {
      * @return Bsp: [0][0] : 1 [0][1] : Hans
      */
     public String[][] getFahrlehrer() {
-        //TO-DO
-        return new String[0][1];
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement stmt;
+        String[][] resultArray = new String[0][0];
+        try {
+            // select data
+            String sqlString
+                    = "SELECT fa.FahrlehrerID, CONCAT(pe.Vorname, ' ', pe.Name) \n"
+                    + "FROM fahrlehrer AS fa\n"
+                    + "INNER JOIN personal AS pe\n"
+                    + "ON pe.PersonalID = fa.PersonalID;;";
+
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            ResultSetMetaData metaData = rs.getMetaData();
+
+            // names of columns
+            Vector<String> columnNames = new Vector<String>();
+            int columnCount = metaData.getColumnCount();
+            for (int column = 1; column <= columnCount; column++) {
+                columnNames.add(metaData.getColumnName(column));
+            }
+
+            // data of the table
+            Vector<String[]> data = new Vector<String[]>();
+            while (rs.next()) {
+                Vector<String> vector = new Vector<String>();
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    vector.add(rs.getString(columnIndex));
+                }
+                data.add(vector.toArray(new String[vector.size()]));
+            }
+
+            resultArray = data.toArray(new String[data.size()][]);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultArray;
     }
 
     /**
@@ -317,8 +352,41 @@ public class SQLService {
      * @return Bsp: [0][0] : 1 [0][1] : Stephan
      */
     public String[][] getKunden() {
-        //TO-DO
-        return new String[0][1];
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement stmt;
+        String[][] resultArray = new String[0][0];
+        try {
+            // select data
+            String sqlString
+                    = "SELECT *\n"
+                    + "FROM kunde;";
+
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            ResultSetMetaData metaData = rs.getMetaData();
+
+            // names of columns
+            Vector<String> columnNames = new Vector<String>();
+            int columnCount = metaData.getColumnCount();
+            for (int column = 1; column <= columnCount; column++) {
+                columnNames.add(metaData.getColumnName(column));
+            }
+
+            // data of the table
+            Vector<String[]> data = new Vector<String[]>();
+            while (rs.next()) {
+                Vector<String> vector = new Vector<String>();
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    vector.add(rs.getString(columnIndex));
+                }
+                data.add(vector.toArray(new String[vector.size()]));
+            }
+
+            resultArray = data.toArray(new String[data.size()][]);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultArray;
     }
 
     /**
@@ -330,7 +398,33 @@ public class SQLService {
      * @param rechnungID
      */
     public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) {
-        //TO-DO
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement stmt;
+
+            String sqlString
+                    = "INSERT INTO fahrstunde (\n"
+                    + "Datum,\n"
+                    + "TreffpunktID,\n"
+                    + "FahrlehrerID,\n"
+                    + "KundeID,\n"
+                    + "RechnungID\n"
+                    + ") VALUES (\n"
+                    + "?, ?, ?, ?, ?\n"
+                    + ");";
+            
+            stmt = conn.prepareStatement(sqlString);
+            stmt.setString(1, datum);
+            stmt.setInt(2, treffpunktID);
+            stmt.setInt(3, fahrlehrerID);
+            stmt.setInt(4, kundeID);
+            stmt.setInt(5, rechnungID);
+            stmt.executeQuery();
+            stmt.close();
+        } catch (SQLException ex) {
+            System.out.println("Es konnte keine Verbindung hergestellt werden sie befinden sich im Testmodus");
+        }
     }
 
     /**
