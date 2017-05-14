@@ -5,6 +5,7 @@
  */
 package udrive.control.center;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,7 +21,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     /**
      * Creates new form ADDFahrstunde
      */
-    public ADDFahrstunde() {
+    public ADDFahrstunde() throws SQLException {
         initComponents();
         jLabel11.setVisible(false);
         
@@ -31,19 +32,22 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         
         jComboBox1.addItem("Auswahl...");
         treffpunktarr = SERVICE.getTreffpunkte();
-        for (String[] arr : treffpunktarr) {
+        for (String[] arr : treffpunktarr) 
+        {
             jComboBox1.addItem(arr[1]);
         }
                 
         jComboBox2.addItem("Auswahl...");
         fahrlehrerarr = SERVICE.getFahrlehrer();
-        for (String[] arr : fahrlehrerarr) {
+        for (String[] arr : fahrlehrerarr) 
+        {
             jComboBox2.addItem(arr[1]);
         }
         
         jComboBox3.addItem("Auswahl...");
         kundearr = SERVICE.getKunden();
-        for (String[] arr : fahrlehrerarr) {
+        for (String[] arr : kundearr) 
+        {
             jComboBox3.addItem(arr[1]);
         }
         
@@ -72,6 +76,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,20 +128,23 @@ public class ADDFahrstunde extends javax.swing.JFrame {
                             .addComponent(jComboBox3, 0, 128, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(jTextField1)
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,7 +161,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
@@ -170,19 +178,19 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         try {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String datum = df.format(jXDatePicker1.getDate());
             
             int id;
             
             id = jComboBox1.getSelectedIndex();
-            int treffpunktID = Integer.parseInt(treffpunktarr[id][1]);
+            int treffpunktID = Integer.parseInt(treffpunktarr[id-1][0]);
             
             id = jComboBox2.getSelectedIndex();
-            int fahrlehrerID = Integer.parseInt(fahrlehrerarr[id][1]);
+            int fahrlehrerID = Integer.parseInt(fahrlehrerarr[id-1][0]);
             
             id = jComboBox3.getSelectedIndex();
-            int kundeID = Integer.parseInt(kundearr[id][1]);
+            int kundeID = Integer.parseInt(kundearr[id-1][0]);
             
             int rechnungID = Integer.parseInt(jTextField1.getText());
             
@@ -196,41 +204,6 @@ public class ADDFahrstunde extends javax.swing.JFrame {
  
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ADDFahrstunde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ADDFahrstunde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ADDFahrstunde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ADDFahrstunde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ADDFahrstunde().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -243,5 +216,6 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package udrive.control.center;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Marcel
@@ -90,7 +94,9 @@ public class UpdateCredit extends javax.swing.JFrame {
             catch (NumberFormatException numberFormatException) 
             {
                 
-            }
+            } catch (SQLException ex) {
+            Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

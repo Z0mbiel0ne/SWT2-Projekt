@@ -211,6 +211,7 @@ public class SQLService {
      * Löscht in der Tabelle Fahrstunde den eintrag mit der ID
      *
      * @param id FahrstundenID
+     * @throws java.sql.SQLException
      */
     public void deleteFahrstunde(int id) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
@@ -237,13 +238,14 @@ public class SQLService {
      *
      * @param id KundeID
      * @param value Betrag
+     * @throws java.sql.SQLException
      */
     public void updateCredit(int id, int value) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         CallableStatement stmt;
         try {
             String sqlString
-                    = "UPDATE kunden AS ku"
+                    = "UPDATE kunde AS ku"
                     + "SET ku.Guthaben = ?"
                     + "WHERE ku.KundeID = ?";
 
@@ -254,7 +256,6 @@ public class SQLService {
             stmt.close();
         } catch (SQLException ex) {
             //TODO Logger
-            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             conn.close();
         }

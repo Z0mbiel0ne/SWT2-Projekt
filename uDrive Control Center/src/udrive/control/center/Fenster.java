@@ -5,6 +5,10 @@
  */
 package udrive.control.center;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Marcel
@@ -219,22 +223,30 @@ private UpdateCredit updateCredit;
         {
             for (int row : rows) 
             {
-              SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                try {
+                    SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+                }
               refreshtable1();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    try {
+        ADDFahrstunde addfahrstunde = new ADDFahrstunde();
+    } catch (SQLException ex) {
+        Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       int rows[] = jTable2.getSelectedRows();
+       int rows[] = jTable1.getSelectedRows();
         if(rows == null)
         {
             
@@ -243,7 +255,7 @@ private UpdateCredit updateCredit;
         {
             for (int row : rows) 
             {
-              int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
+              int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
               updateCredit = new UpdateCredit(value);
             }
         }
@@ -260,7 +272,11 @@ private UpdateCredit updateCredit;
             for (int row : rows) 
             {
               int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
-              SERVICE.deleteFahrstunde(value);
+                try {
+                    SERVICE.deleteFahrstunde(value);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         refreshtable2();
