@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -398,10 +400,13 @@ public class SQLService {
      * @param rechnungID
      */
     public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) {
-
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement stmt;
+            
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
+            java.util.Date utilDate = sdf1.parse(datum);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());   
 
             String sqlString
                     = "INSERT INTO fahrstunde (\n"
@@ -413,9 +418,9 @@ public class SQLService {
                     + ") VALUES (\n"
                     + "?, ?, ?, ?, ?\n"
                     + ");";
-            
+
             stmt = conn.prepareStatement(sqlString);
-            stmt.setString(1, datum);
+            stmt.setDate(1, sqlDate);
             stmt.setInt(2, treffpunktID);
             stmt.setInt(3, fahrlehrerID);
             stmt.setInt(4, kundeID);
@@ -424,6 +429,8 @@ public class SQLService {
             stmt.close();
         } catch (SQLException ex) {
             System.out.println("Es konnte keine Verbindung hergestellt werden sie befinden sich im Testmodus");
+        } catch (ParseException ex) {
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
