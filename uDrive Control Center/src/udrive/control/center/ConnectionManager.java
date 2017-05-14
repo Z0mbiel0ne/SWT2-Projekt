@@ -11,11 +11,11 @@ import java.sql.SQLException;
  */
 public class ConnectionManager {
     private final static String 
-            URL = "jdbc:mysql://localhost:3306/",
-            DATABASE = "uDrive",
+            URL = "jdbc:mysql://dd23226.kasserver.com:3306/",
+            DATABASE = "d0265e02",
             DRIVER = "com.mysql.jdbc.Driver", // Verbindungsdaten
-            USER = "root",
-            PASSWORD = "";
+            USER = "d0265e02",
+            PASSWORD = "fJzTUszXQFEb2okz";
     private static Connection conn;
 
     /**

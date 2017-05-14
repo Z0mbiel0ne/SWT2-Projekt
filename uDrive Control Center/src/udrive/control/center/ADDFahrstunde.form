@@ -36,8 +36,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jComboBox3" max="32767" attributes="0"/>
-                          <Component id="jXDatePicker1" pref="128" max="32767" attributes="0"/>
+                          <Component id="jComboBox3" pref="128" max="32767" attributes="0"/>
                           <Component id="jComboBox1" max="32767" attributes="0"/>
                           <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField1" max="32767" attributes="0"/>
@@ -60,10 +59,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jXDatePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -84,7 +80,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -94,8 +90,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Datum"/>
