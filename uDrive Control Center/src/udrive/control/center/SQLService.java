@@ -63,29 +63,24 @@ public class SQLService {
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-        public void deleteKunde(int id)
-    {
+
+    public void deleteKunde(int id) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         CallableStatement stmt;
         try {
-                     
             String sqlString = "{CALL deleteKunde(?)}";
-            
             stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
-            
             stmt.setInt(1, id);
-            
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-            
             stmt.close();
-        
         } catch (SQLException ex) {
             //TODO Logger
             //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
         }
     }
-    
+
     /**
      * Liefert alle vorhandenen Bezirke und gibt diese aus
      */
@@ -153,16 +148,16 @@ public class SQLService {
             // select data
             String sqlString
                     = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname as 'Schüler', pe.Vorname as 'Fahrlehrer', CONCAT(tp.Straße, ', ', tp.Postleitzahl, ' ', tp.Stadt) AS "
-                    + "Adresse FROM kunde AS ku INNER JOIN fahrstunde AS fs " 
-                    + "ON ku.KundeID = fs.KundeID " 
-                    + "INNER JOIN fahrlehrer AS fl " 
-                    + "ON fl.FahrlehrerID = fs.FahrlehrerID " 
-                    + "INNER JOIN personal AS pe " 
-                    + "ON pe.PersonalID = fl.PersonalID " 
-                    + "INNER JOIN treffpunkt AS tp " 
-                    + "ON tp.TreffpunktID = fs.TreffpunktID " 
+                    + "Adresse FROM kunde AS ku INNER JOIN fahrstunde AS fs "
+                    + "ON ku.KundeID = fs.KundeID "
+                    + "INNER JOIN fahrlehrer AS fl "
+                    + "ON fl.FahrlehrerID = fs.FahrlehrerID "
+                    + "INNER JOIN personal AS pe "
+                    + "ON pe.PersonalID = fl.PersonalID "
+                    + "INNER JOIN treffpunkt AS tp "
+                    + "ON tp.TreffpunktID = fs.TreffpunktID "
                     + "WHERE ku.KundeID = " + kundenID;
-            
+
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
             ResultSetMetaData metaData = rs.getMetaData();
@@ -209,74 +204,132 @@ public class SQLService {
             return true;
         }
     }
-    
+
     /**
-     * Löscht in der Tabelle Fahrstunde den eintrag mit der ID 
+     * Löscht in der Tabelle Fahrstunde den eintrag mit der ID
      *
      * @param id FahrstundenID
      */
-    public void deleteFahrstunde(int id) 
-    {
-        //TO-DO
+    public void deleteFahrstunde(int id) throws SQLException {
+        Connection conn = ConnectionManager.getConnection();
+        CallableStatement stmt;
+        try {
+            String sqlString
+                    = "DELETE FROM fahrstunde"
+                    + "WHERE id = ?";
+
+            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
+            stmt.setInt(1, id);
+            stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            stmt.close();
+        } catch (SQLException ex) {
+            //TODO Logger
+            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
+        }
     }
-    
+
     /**
-     * Updated den Geldbetrag eines Kunden  
+     * Updated den Geldbetrag eines Kunden
      *
      * @param id KundeID
      * @param value Betrag
      */
-    public void updateCredit(int id, int value) 
-    {
-        //TO-DO
+    public void updateCredit(int id, int value) throws SQLException {
+        Connection conn = ConnectionManager.getConnection();
+        CallableStatement stmt;
+        try {
+            String sqlString
+                    = "UPDATE kunden AS ku"
+                    + "SET ku.Guthaben = ?"
+                    + "WHERE ku.KundeID = ?";
+
+            stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
+            stmt.setInt(1, value);
+            stmt.setInt(2, id);
+            stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            stmt.close();
+        } catch (SQLException ex) {
+            //TODO Logger
+            //Logger.getLogger(Bonusaufgabe.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
+        }
     }
-    
+
     /**
      * Liefert ALLE Treffpunkte in der Form ID|Straße
      *
-     * @return Bsp: [0][0] : 1
-     *              [0][1] : Essen
+     * @return Bsp: [0][0] : 1 [0][1] : Essen
      */
-    public String[][] getTreffpunkte() 
-    {
-         //TO-DO
-         return new String[0][1];
+    public String[][] getTreffpunkte() throws SQLException {
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement stmt;
+        String[][] resultArray = new String[0][0];
+        try {
+            // select data
+            String sqlString
+                    = "SELECT * \n"
+                    + "FROM treffpunkt;";
+
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+            ResultSetMetaData metaData = rs.getMetaData();
+
+            // names of columns
+            Vector<String> columnNames = new Vector<String>();
+            int columnCount = metaData.getColumnCount();
+            for (int column = 1; column <= columnCount; column++) {
+                columnNames.add(metaData.getColumnName(column));
+            }
+
+            // data of the table
+            Vector<String[]> data = new Vector<String[]>();
+            while (rs.next()) {
+                Vector<String> vector = new Vector<String>();
+                for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    vector.add(rs.getString(columnIndex));
+                }
+                data.add(vector.toArray(new String[vector.size()]));
+            }
+
+            resultArray = data.toArray(new String[data.size()][]);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultArray;
     }
-    
+
     /**
      * Liefert ALLE Fahrlehrer in der Form FahrlehrerID|Vorname
      *
-     * @return Bsp: [0][0] : 1
-     *              [0][1] : Hans
+     * @return Bsp: [0][0] : 1 [0][1] : Hans
      */
-    public String[][] getFahrlehrer() 
-    {
-         //TO-DO
-         return new String[0][1];
+    public String[][] getFahrlehrer() {
+        //TO-DO
+        return new String[0][1];
     }
 
     /**
      * Liefert ALLE Kunden in der Form ID|Vorname
      *
-     * @return Bsp: [0][0] : 1
-     *              [0][1] : Stephan
+     * @return Bsp: [0][0] : 1 [0][1] : Stephan
      */
-    public String[][] getKunden() 
-    {
-         //TO-DO
-         return new String[0][1];
+    public String[][] getKunden() {
+        //TO-DO
+        return new String[0][1];
     }
-    
-     /**
+
+    /**
      * Erstellt einen Fahrstunde in der Tabelle Fahrstunden
      *
      * @param datum Datum
      * @param fahrlehrerID FahrlehrerID aus Tabelle Fahrlehrer
      * @param kundeID KundenId aus Tabelle Kunden
-     * @param rechnungID 
+     * @param rechnungID
      */
-    public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) 
-    {
+    public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) {
         //TO-DO
     }
 
