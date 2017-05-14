@@ -218,7 +218,7 @@ public class SQLService {
         try {
             String sqlString
                     = "DELETE FROM fahrstunde"
-                    + "WHERE id = ?";
+                    + "WHERE FahrstundeID = ?";
 
             stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
             stmt.setInt(1, id);
