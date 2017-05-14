@@ -25,16 +25,10 @@ nbdist/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
 *.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-<<<<<<< HEAD
-hs_err_pid*
 
 ### NetBeans ###
 uDrive Control Center/nbproject/private/
@@ -45,6 +39,3 @@ uDrive Control Center/nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
-=======
-hs_err_pid
->>>>>>> origin/master

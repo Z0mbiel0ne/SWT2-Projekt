@@ -5,6 +5,10 @@
  */
 package udrive.control.center;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Marcel
@@ -83,7 +87,11 @@ public class UpdateCredit extends javax.swing.JFrame {
                 
                 value = Integer.parseInt(jTextField1.getText());
                 
-                SERVICE.updateCredit(id, value);
+                try {
+                    SERVICE.updateCredit(id, value);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 dispose();
             } 

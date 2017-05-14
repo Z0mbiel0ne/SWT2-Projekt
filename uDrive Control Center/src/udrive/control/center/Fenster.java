@@ -5,6 +5,10 @@
  */
 package udrive.control.center;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Marcel
@@ -219,14 +223,22 @@ private UpdateCredit updateCredit;
         {
             for (int row : rows) 
             {
-              SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                try {
+                    SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+                }
               refreshtable1();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    try {
+        ADDFahrstunde addFarstunde = new ADDFahrstunde();
+    } catch (SQLException ex) {
+        Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -260,7 +272,11 @@ private UpdateCredit updateCredit;
             for (int row : rows) 
             {
               int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
-              SERVICE.deleteFahrstunde(value);
+                try {
+                    SERVICE.deleteFahrstunde(value);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         refreshtable2();
