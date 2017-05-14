@@ -48,8 +48,3 @@ uDrive Control Center/nbdist/
 =======
 hs_err_pid
 >>>>>>> origin/master
-*.properties
-uDrive Control Center/build/classes/udrive/control/center/Login.class
-*.class
-uDrive Control Center/build/classes/udrive/control/center/Fenster.class
-*.class
