@@ -15,8 +15,16 @@ private static Fenster fenster;
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-            //login = new Login();  
-            fenster = new Fenster();    
+            
+        ConnectionManager manager = new ConnectionManager();
+        if (ConnectionManager.getConnection() != null)
+        {
+            login = new Login();
+        }
+        else
+        {
+            fenster = new Fenster();
+        }
     }
     
 }
