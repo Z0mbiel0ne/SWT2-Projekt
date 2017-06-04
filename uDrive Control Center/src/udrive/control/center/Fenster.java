@@ -24,6 +24,7 @@ private UpdateCredit updateCredit;
         initComponents();
         setVisible(true);
         jTable1.setModel(SERVICE.getKundenTable());
+        jTable1.setRowSelectionInterval(0,0);
     }
 
     /**
@@ -208,7 +209,7 @@ private UpdateCredit updateCredit;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       addKunde = new ADDKunde();
+       addKunde = new ADDKunde(jTable1);
        addKunde.setVisible(true);
        refreshtable1();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -235,7 +236,7 @@ private UpdateCredit updateCredit;
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     try {
-        ADDFahrstunde addfahrstunde = new ADDFahrstunde();
+        ADDFahrstunde addfahrstunde = new ADDFahrstunde(jTable1, jTable2);
     } catch (SQLException ex) {
         Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -256,7 +257,7 @@ private UpdateCredit updateCredit;
             for (int row : rows) 
             {
               int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-              updateCredit = new UpdateCredit(value);
+              updateCredit = new UpdateCredit(value, jTable1);
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed

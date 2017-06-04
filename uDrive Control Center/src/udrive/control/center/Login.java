@@ -5,6 +5,9 @@
  */
 package udrive.control.center;
 
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Marcel
@@ -17,6 +20,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        rootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
 

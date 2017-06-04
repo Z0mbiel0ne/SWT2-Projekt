@@ -8,6 +8,9 @@ package udrive.control.center;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JRootPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -17,14 +20,18 @@ public class UpdateCredit extends javax.swing.JFrame {
 
     private final SQLService SERVICE;
     private final int id;
+    private final JTable table;
     /**
      * Creates new form updateCredit
      * @param id
      */
-    public UpdateCredit(int id) {
+    public UpdateCredit(int id, JTable j) {
+        table = j;
         this.SERVICE = new SQLService();
         this.id = id;
         initComponents();
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        rootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
 
@@ -89,6 +96,7 @@ public class UpdateCredit extends javax.swing.JFrame {
                 
                 SERVICE.updateCredit(id, value);
                 
+                table.setModel(SERVICE.getKundenTable());
                 dispose();
             } 
             catch (NumberFormatException numberFormatException) 

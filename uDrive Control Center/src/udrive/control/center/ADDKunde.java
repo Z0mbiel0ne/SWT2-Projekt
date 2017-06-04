@@ -5,17 +5,25 @@
  */
 package udrive.control.center;
 
+import javax.swing.JRootPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
  private static final SQLService SERVICE = new SQLService();  
+ private JTable table;
     /**
      * Creates new form ADDKunde
      */
-    public ADDKunde() {
+    public ADDKunde(JTable j) {
+        table = j;
         initComponents();
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        rootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
     }
 
@@ -242,6 +250,7 @@ public class ADDKunde extends javax.swing.JFrame {
                 
                 SERVICE.addKunde(vorname, nachname , plz , stadt , strasse , hausnummer, kontonummer, blz , iban , bic);
                 
+                table.setModel(SERVICE.getKundenTable());
                 dispose();
             } 
             catch (NumberFormatException numberFormatException) 

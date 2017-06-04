@@ -8,6 +8,9 @@ package udrive.control.center;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JRootPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -18,11 +21,20 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     String [][] treffpunktarr;
     String [][] fahrlehrerarr;
     String [][] kundearr;
+    private final JTable table1;
+    private final JTable table2;
     /**
      * Creates new form ADDFahrstunde
+     * @param j1
+     * @param j2
+     * @throws java.sql.SQLException
      */
-    public ADDFahrstunde() throws SQLException {
+    public ADDFahrstunde(JTable j1, JTable j2) throws SQLException {
+        table1 = j1;
+        table2 = j2;
         initComponents();
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        rootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
         
         setVisible(rootPaneCheckingEnabled);
@@ -131,11 +143,11 @@ public class ADDFahrstunde extends javax.swing.JFrame {
                             .addComponent(jTextField1)
                             .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel11)))
+                        .addComponent(jLabel11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,6 +208,8 @@ public class ADDFahrstunde extends javax.swing.JFrame {
             
             SERVICE.insertFahrstunde(datum, treffpunktID, fahrlehrerID, kundeID, rechnungID);
             
+            int row = table1.getSelectedRow();
+            table2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString())));
             dispose();
         } catch (NumberFormatException numberFormatException) 
         {
