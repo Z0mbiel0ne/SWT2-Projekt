@@ -23,7 +23,7 @@ public class UDriveControlCenter {
      */
     public static void main(String[] args) {
         ConnectionManager manager = new ConnectionManager();
-        if (manager.getConnection() != null) {
+        if (manager.checkConnection()) {
             login = new Login();
         } else {
             fenster = new Fenster();

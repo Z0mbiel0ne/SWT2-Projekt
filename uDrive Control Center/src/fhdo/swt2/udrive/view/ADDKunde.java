@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
- private static final SQLService SERVICE = new SQLServicFe();  
+ private static final SQLService SERVICE = new SQLService();  
  private JTable table;
     /**
      * Creates new form ADDKunde

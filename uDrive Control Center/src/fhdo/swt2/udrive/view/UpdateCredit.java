@@ -5,10 +5,8 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.SQLService;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
