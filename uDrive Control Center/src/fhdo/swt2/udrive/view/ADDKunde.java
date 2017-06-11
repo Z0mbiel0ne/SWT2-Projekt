@@ -15,15 +15,17 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
- private static final SQLService SERVICE = new SQLService();  
- private JTable table;
+
+    private static final SQLService SERVICE = new SQLService();
+    private JTable table;
+
     /**
      * Creates new form ADDKunde
      */
     public ADDKunde(JTable j) {
         table = j;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
         rootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
     }
@@ -226,39 +228,37 @@ public class ADDKunde extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-            String vorname = null;
-            String nachname = null;
-            int plz = 0;
-            String stadt = null;
-            String strasse = null;
-            int hausnummer = 0;
-            int kontonummer = 0;
-            int blz = 0;
-            int iban = 0;
-            int bic = 0;   
-            
-            try {
-                vorname = jTextField1.getText();
-                nachname = jTextField6.getText();
-                plz = Integer.parseInt(jTextField2.getText());
-                stadt = jTextField7.getText();
-                strasse = jTextField3.getText();
-                hausnummer = Integer.parseInt(jTextField8.getText());
-                kontonummer = Integer.parseInt(jTextField4.getText());
-                blz = Integer.parseInt(jTextField9.getText());
-                iban = Integer.parseInt(jTextField5.getText());
-                bic = Integer.parseInt(jTextField10.getText());
-                
-                SERVICE.addKunde(vorname, nachname , plz , stadt , strasse , hausnummer, kontonummer, blz , iban , bic);
-                
-                table.setModel(SERVICE.getKundenTable());
-                dispose();
-            } 
-            catch (NumberFormatException numberFormatException) 
-            {
-              jLabel11.setVisible(true);
-            }
-           
+        String vorname = null;
+        String nachname = null;
+        int plz = 0;
+        String stadt = null;
+        String strasse = null;
+        int hausnummer = 0;
+        int kontonummer = 0;
+        int blz = 0;
+        int iban = 0;
+        int bic = 0;
+
+        try {
+            vorname = jTextField1.getText();
+            nachname = jTextField6.getText();
+            plz = Integer.parseInt(jTextField2.getText());
+            stadt = jTextField7.getText();
+            strasse = jTextField3.getText();
+            hausnummer = Integer.parseInt(jTextField8.getText());
+            kontonummer = Integer.parseInt(jTextField4.getText());
+            blz = Integer.parseInt(jTextField9.getText());
+            iban = Integer.parseInt(jTextField5.getText());
+            bic = Integer.parseInt(jTextField10.getText());
+
+            SERVICE.addKunde(vorname, nachname, plz, stadt, strasse, hausnummer, kontonummer, blz, iban, bic);
+
+            table.setModel(SERVICE.getKundenTable());
+            dispose();
+        } catch (NumberFormatException numberFormatException) {
+            jLabel11.setVisible(true);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

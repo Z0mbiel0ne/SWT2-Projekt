@@ -5,7 +5,6 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.SQLService;
 import javax.swing.JRootPane;
 import javax.swing.JTable;

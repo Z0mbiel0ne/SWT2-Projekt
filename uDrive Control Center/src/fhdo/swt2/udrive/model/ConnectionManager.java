@@ -38,7 +38,7 @@ public class ConnectionManager {
 
     /**
      * Check Connection availability
-     * 
+     *
      * @return boolean
      */
     public boolean checkConnection() {

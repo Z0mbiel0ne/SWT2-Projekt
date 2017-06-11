@@ -5,9 +5,6 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.view.ADDKunde;
-import fhdo.swt2.udrive.view.ADDFahrstunde;
-import fhdo.swt2.udrive.view.UpdateCredit;
 import fhdo.swt2.udrive.model.SQLService;
 import java.sql.SQLException;
 import java.util.logging.Level;

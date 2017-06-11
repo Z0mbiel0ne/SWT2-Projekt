@@ -15,16 +15,15 @@ import javax.swing.SwingUtilities;
  */
 public class Login extends javax.swing.JFrame {
 
-    private Fenster fenster;
-    private static SQLService SERVICE = new SQLService();
+    private static final SQLService SERVICE = new SQLService();
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
-        rootPane.setDefaultButton(jButton1);
+        JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
+        jRootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
 
@@ -100,7 +99,7 @@ public class Login extends javax.swing.JFrame {
         if (SERVICE.checkPasswort(user, pass)) {
             setVisible(false);
             dispose();
-            fenster = new Fenster();
+            Fenster fenster = new Fenster();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
