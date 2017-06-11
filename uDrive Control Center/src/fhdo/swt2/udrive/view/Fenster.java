@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package udrive.control.center;
+package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.view.ADDKunde;
+import fhdo.swt2.udrive.view.ADDFahrstunde;
+import fhdo.swt2.udrive.view.UpdateCredit;
+import fhdo.swt2.udrive.model.SQLService;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,9 +18,11 @@ import java.util.logging.Logger;
  * @author Marcel
  */
 public class Fenster extends javax.swing.JFrame {
-private final static SQLService SERVICE = new SQLService();
-private ADDKunde addKunde;
-private UpdateCredit updateCredit;
+
+    private final static SQLService SERVICE = new SQLService();
+    private ADDKunde addKunde;
+    private UpdateCredit updateCredit;
+
     /**
      * Creates new form Fenster
      */
@@ -24,7 +30,7 @@ private UpdateCredit updateCredit;
         initComponents();
         setVisible(true);
         jTable1.setModel(SERVICE.getKundenTable());
-        jTable1.setRowSelectionInterval(0,0);
+        jTable1.setRowSelectionInterval(0, 0);
     }
 
     /**
@@ -209,37 +215,33 @@ private UpdateCredit updateCredit;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       addKunde = new ADDKunde(jTable1);
-       addKunde.setVisible(true);
-       refreshtable1();
+        addKunde = new ADDKunde(jTable1);
+        addKunde.setVisible(true);
+        refreshtable1();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int rows[] = jTable1.getSelectedRows();
-        if(rows == null)
-        {
-            
-        }
-        else
-        {
-            for (int row : rows) 
-            {
+        if (rows == null) {
+
+        } else {
+            for (int row : rows) {
                 try {
                     SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
                 }
-              refreshtable1();
+                refreshtable1();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    try {
-        ADDFahrstunde addfahrstunde = new ADDFahrstunde(jTable1, jTable2);
-    } catch (SQLException ex) {
-        Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            ADDFahrstunde addfahrstunde = new ADDFahrstunde(jTable1, jTable2);
+        } catch (SQLException ex) {
+            Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -247,33 +249,25 @@ private UpdateCredit updateCredit;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       int rows[] = jTable1.getSelectedRows();
-        if(rows == null)
-        {
-            
-        }
-        else
-        {
-            for (int row : rows) 
-            {
-              int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-              updateCredit = new UpdateCredit(value, jTable1);
+        int rows[] = jTable1.getSelectedRows();
+        if (rows == null) {
+
+        } else {
+            for (int row : rows) {
+                int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
+                updateCredit = new UpdateCredit(value, jTable1);
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int rows[] = jTable2.getSelectedRows();
-        if(rows == null)
-        {
-            
-        }
-        else
-        {
-            for (int row : rows) 
-            {
-              int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
-              SERVICE.deleteFahrstunde(value);
+        if (rows == null) {
+
+        } else {
+            for (int row : rows) {
+                int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
+                SERVICE.deleteFahrstunde(value);
             }
         }
         refreshtable2();
@@ -281,27 +275,22 @@ private UpdateCredit updateCredit;
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int rows[] = jTable1.getSelectedRows();
-        if(rows == null)
-        {
-            
-        }
-        else
-        {
-            for (int row : rows) 
-            {
-              int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-              jTable2.setModel(SERVICE.getFahrstundeTable(value));
+        if (rows == null) {
+
+        } else {
+            for (int row : rows) {
+                int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
+                jTable2.setModel(SERVICE.getFahrstundeTable(value));
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    public void refreshtable1()
-    {
+    public void refreshtable1() {
         jTable1.setModel(SERVICE.getKundenTable());
     }
-    
-    public void refreshtable2()
-    {   int row = jTable1.getSelectedRow();
+
+    public void refreshtable2() {
+        int row = jTable1.getSelectedRow();
         jTable2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString())));
     }
 

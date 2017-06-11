@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package udrive.control.center;
+package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.SQLService;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +22,10 @@ public class UpdateCredit extends javax.swing.JFrame {
     private final SQLService SERVICE;
     private final int id;
     private final JTable table;
+
     /**
      * Creates new form updateCredit
+     *
      * @param id
      */
     public UpdateCredit(int id, JTable j) {
@@ -30,7 +33,7 @@ public class UpdateCredit extends javax.swing.JFrame {
         this.SERVICE = new SQLService();
         this.id = id;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
         rootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
@@ -88,21 +91,19 @@ public class UpdateCredit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
-            int value; 
-            try {
-                
-                value = Integer.parseInt(jTextField1.getText());
-                
-                SERVICE.updateCredit(id, value);
-                
-                table.setModel(SERVICE.getKundenTable());
-                dispose();
-            } 
-            catch (NumberFormatException numberFormatException) 
-            {
-                
-            }
+
+        int value;
+        try {
+
+            value = Integer.parseInt(jTextField1.getText());
+
+            SERVICE.updateCredit(id, value);
+
+            table.setModel(SERVICE.getKundenTable());
+            dispose();
+        } catch (NumberFormatException numberFormatException) {
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

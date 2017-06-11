@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package udrive.control.center;
+package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.SQLService;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -14,7 +15,7 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
- private static final SQLService SERVICE = new SQLService();  
+ private static final SQLService SERVICE = new SQLServicFe();  
  private JTable table;
     /**
      * Creates new form ADDKunde

@@ -1,5 +1,6 @@
-package udrive.control.center;
+package fhdo.swt2.udrive.model;
 
+import fhdo.swt2.udrive.model.ConnectionManager;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -212,11 +213,11 @@ public class SQLService {
      *
      * @param id FahrstundenID
      */
-    public void deleteFahrstunde(int id){
+    public void deleteFahrstunde(int id) {
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement stmt;
         String sqlString = "DELETE FROM fahrstunde WHERE FahrstundeID = ?";
-        
+
         try {
             stmt = conn.prepareStatement(sqlString);
             stmt.setInt(1, id);
@@ -235,7 +236,7 @@ public class SQLService {
     public void updateCredit(int id, int value) {
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement stmt;
-        
+
         String sqlString = "UPDATE kunde AS ku "
                 + "SET ku.Guthaben = ? "
                 + "WHERE ku.KundeID = ? ";
@@ -392,10 +393,10 @@ public class SQLService {
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement stmt;
-            
+
             SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
             java.util.Date utilDate = sdf1.parse(datum);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());   
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
             String sqlString
                     = "INSERT INTO fahrstunde ("

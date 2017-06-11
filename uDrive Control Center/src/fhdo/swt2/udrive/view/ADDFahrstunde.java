@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package udrive.control.center;
+package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.SQLService;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,14 +18,17 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDFahrstunde extends javax.swing.JFrame {
+
     private final SQLService SERVICE = new SQLService();
-    String [][] treffpunktarr;
-    String [][] fahrlehrerarr;
-    String [][] kundearr;
+    String[][] treffpunktarr;
+    String[][] fahrlehrerarr;
+    String[][] kundearr;
     private final JTable table1;
     private final JTable table2;
+
     /**
      * Creates new form ADDFahrstunde
+     *
      * @param j1
      * @param j2
      * @throws java.sql.SQLException
@@ -33,36 +37,33 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         table1 = j1;
         table2 = j2;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
         rootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
-        
+
         setVisible(rootPaneCheckingEnabled);
         Date date = java.util.Calendar.getInstance().getTime();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
         jXDatePicker1.setDate(date);
-        
+
         jComboBox1.addItem("Auswahl...");
         treffpunktarr = SERVICE.getTreffpunkte();
-        for (String[] arr : treffpunktarr) 
-        {
+        for (String[] arr : treffpunktarr) {
             jComboBox1.addItem(arr[1]);
         }
-                
+
         jComboBox2.addItem("Auswahl...");
         fahrlehrerarr = SERVICE.getFahrlehrer();
-        for (String[] arr : fahrlehrerarr) 
-        {
+        for (String[] arr : fahrlehrerarr) {
             jComboBox2.addItem(arr[1]);
         }
-        
+
         jComboBox3.addItem("Auswahl...");
         kundearr = SERVICE.getKunden();
-        for (String[] arr : kundearr) 
-        {
+        for (String[] arr : kundearr) {
             jComboBox3.addItem(arr[1]);
         }
-        
+
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);
         jComboBox3.setSelectedIndex(0);
@@ -188,34 +189,33 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String datum = df.format(jXDatePicker1.getDate());
-            
+
             int id;
-            
+
             id = jComboBox1.getSelectedIndex();
-            int treffpunktID = Integer.parseInt(treffpunktarr[id-1][0]);
-            
+            int treffpunktID = Integer.parseInt(treffpunktarr[id - 1][0]);
+
             id = jComboBox2.getSelectedIndex();
-            int fahrlehrerID = Integer.parseInt(fahrlehrerarr[id-1][0]);
-            
+            int fahrlehrerID = Integer.parseInt(fahrlehrerarr[id - 1][0]);
+
             id = jComboBox3.getSelectedIndex();
-            int kundeID = Integer.parseInt(kundearr[id-1][0]);
-            
+            int kundeID = Integer.parseInt(kundearr[id - 1][0]);
+
             int rechnungID = Integer.parseInt(jTextField1.getText());
-            
+
             SERVICE.insertFahrstunde(datum, treffpunktID, fahrlehrerID, kundeID, rechnungID);
-            
+
             int row = table1.getSelectedRow();
             table2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString())));
             dispose();
-        } catch (NumberFormatException numberFormatException) 
-        {
+        } catch (NumberFormatException numberFormatException) {
             jLabel11.setVisible(true);
         }
- 
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

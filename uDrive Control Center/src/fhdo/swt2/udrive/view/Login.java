@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package udrive.control.center;
+package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.SQLService;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -13,14 +14,16 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class Login extends javax.swing.JFrame {
- private Fenster fenster;
- private static SQLService SERVICE = new SQLService();
+
+    private Fenster fenster;
+    private static SQLService SERVICE = new SQLService();
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1); 
+        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
         rootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
@@ -94,14 +97,13 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String user = jTextField1.getText();
         String pass = String.copyValueOf(jPasswordField1.getPassword());
-        if(SERVICE.checkPasswort(user, pass))
-        {
+        if (SERVICE.checkPasswort(user, pass)) {
             setVisible(false);
             dispose();
             fenster = new Fenster();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
