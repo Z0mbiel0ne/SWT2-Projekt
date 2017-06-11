@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/SQLService.java</file>
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ConnectionManager.java</file>
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Fenster.java</file>
@@ -10,6 +11,13 @@
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDFahrstunde.java</file>
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDKunde.java</file>
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/UpdateCredit.java</file>
+=======
+            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/UDriveControlCenter.java</file>
+            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDFahrstunde.java</file>
+            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Fenster.java</file>
+            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Login.java</file>
+            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/SQLService.java</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
