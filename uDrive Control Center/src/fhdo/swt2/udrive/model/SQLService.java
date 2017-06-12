@@ -86,30 +86,6 @@ public class SQLService {
         }
     }
 
-    /**
-     * Liefert alle vorhandenen Bezirke und gibt diese aus
-     */
-    public void getBezirke() {
-        try (Connection conn = ConnectionManager.getConnection()) {
-            PreparedStatement stmt;
-
-            String sqlString = "select lieferbezirk.plz from lieferbezirk";
-            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
-            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-
-            System.out.println("Vorhandene Bezirke:");
-
-            while (rs.next()) { //Loop über Ergebnis
-                System.out.println(rs.getInt("plz")); // Postleitzahlen ausgeben
-            }
-
-            stmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public DefaultTableModel getKundenTable() {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
@@ -160,7 +136,7 @@ public class SQLService {
             return null;
         }
     }
-
+    
     public boolean checkPasswort(String user, String pass) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
@@ -178,7 +154,7 @@ public class SQLService {
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Es konnte keine Verbindung hergestellt werden Sie befinden sich im Testmodus");
-            return true;
+            return false;
         }
     }
 

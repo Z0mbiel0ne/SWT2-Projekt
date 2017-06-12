@@ -282,10 +282,16 @@ public class Fenster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     *
+     */
     public void refreshtable1() {
         jTable1.setModel(SERVICE.getKundenTable());
     }
 
+    /**
+     *
+     */
     public void refreshtable2() {
         int row = jTable1.getSelectedRow();
         jTable2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString())));

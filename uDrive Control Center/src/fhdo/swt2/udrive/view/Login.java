@@ -96,11 +96,14 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String user = jTextField1.getText();
         String pass = String.copyValueOf(jPasswordField1.getPassword());
-        if (SERVICE.checkPasswort(user, pass)) {
-            setVisible(false);
-            dispose();
-            Fenster fenster = new Fenster();
-        }
+        if(!user.equals("") && !pass.equals(""))
+        {    
+            if (SERVICE.checkPasswort(user, pass)) {
+                setVisible(false);
+                dispose();
+                Fenster fenster = new Fenster();
+            }
+        }    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
