@@ -5,7 +5,10 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
+import fhdo.swt2.udrive.model.ADDKundeFactory;
 import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.UpdateCreditFactory;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +20,10 @@ import java.util.logging.Logger;
 public class Fenster extends javax.swing.JFrame {
 
     private final static SQLService SERVICE = new SQLService();
-    private ADDKunde addKunde;
+    ADDKunde addKunde;
+    ADDKundeFactory addKundeFactory;
+    ADDFahrstundenFactory addfactory;
+    UpdateCreditFactory updateCreditFactory;
     private UpdateCredit updateCredit;
 
     /**
@@ -26,6 +32,8 @@ public class Fenster extends javax.swing.JFrame {
     public Fenster() {
         initComponents();
         setVisible(true);
+        addfactory = new ADDFahrstundenFactory();
+        addKundeFactory = new ADDKundeFactory();
         jTable1.setModel(SERVICE.getKundenTable());
         jTable1.setRowSelectionInterval(0, 0);
     }
@@ -212,7 +220,7 @@ public class Fenster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        addKunde = new ADDKunde(jTable1);
+        addKunde = addKundeFactory.newInstance(jTable1);
         addKunde.setVisible(true);
         refreshtable1();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -234,11 +242,7 @@ public class Fenster extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            ADDFahrstunde addfahrstunde = new ADDFahrstunde(jTable1, jTable2);
-        } catch (SQLException ex) {
-            Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        addfactory.newInstance(jTable1, jTable2);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -252,7 +256,8 @@ public class Fenster extends javax.swing.JFrame {
         } else {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-                updateCredit = new UpdateCredit(value, jTable1);
+                updateCreditFactory = new UpdateCreditFactory();
+                updateCreditFactory.newInsatnce(value, jTable1);
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed

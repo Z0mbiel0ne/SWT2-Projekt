@@ -17,7 +17,7 @@ public class ConnectionManager {
             DATABASE = "d0265e02",
             DRIVER = "com.mysql.jdbc.Driver", // Verbindungsdaten
             USER = "d0265e02",
-            PASSWORD = "fJzTUszXQFEb2ok";
+            PASSWORD = "fJzTUszXQFEb2okz";
     private static Connection conn;
 
     /**
