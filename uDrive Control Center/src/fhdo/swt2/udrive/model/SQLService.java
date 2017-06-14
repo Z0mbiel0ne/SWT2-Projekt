@@ -190,7 +190,7 @@ public class SQLService {
             PreparedStatement stmt;
 
             String sqlString = "UPDATE kunde AS ku "
-                    + "SET ku.Guthaben = ? "
+                    + "SET ku.Guthaben = ku.Guthaben + ? "
                     + "WHERE ku.KundeID = ? ";
 
             stmt = conn.prepareStatement(sqlString);
