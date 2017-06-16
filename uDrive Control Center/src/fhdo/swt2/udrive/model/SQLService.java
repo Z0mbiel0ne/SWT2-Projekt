@@ -91,7 +91,9 @@ public class SQLService {
             PreparedStatement stmt;
 
             // select data
-            String sqlString = "SELECT KundeID, CONCAT(Vorname, ' ', Nachname) as 'Name', CONCAT(Straße, ', ', Postleitzahl, ' ', Stadt) as 'Adresse', Guthaben from kunde";
+            String sqlString = "SELECT "
+                    + "KundeID, Vorname, Nachname, Straße, Postleitzahl, Stadt, Guthaben "
+                    + "FROM kunde";
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
@@ -112,8 +114,9 @@ public class SQLService {
 
             // select data
             String sqlString
-                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname as 'Schüler', pe.Vorname as 'Fahrlehrer', CONCAT(tp.Straße, ', ', tp.Postleitzahl, ' ', tp.Stadt) AS "
-                    + "Adresse FROM kunde AS ku INNER JOIN fahrstunde AS fs "
+                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname as 'Schüler', "
+                    + "pe.Vorname as 'Fahrlehrer', tp.Straße, tp.Postleitzahl, tp.Stadt "
+                    + "FROM kunde AS ku INNER JOIN fahrstunde AS fs "
                     + "ON ku.KundeID = fs.KundeID "
                     + "INNER JOIN fahrlehrer AS fl "
                     + "ON fl.FahrlehrerID = fs.FahrlehrerID "
@@ -136,7 +139,7 @@ public class SQLService {
             return null;
         }
     }
-    
+
     public boolean checkPasswort(String user, String pass) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
@@ -216,7 +219,7 @@ public class SQLService {
 
             // select data
             String sqlString
-                    = "SELECT * \n"
+                    = "SELECT * "
                     + "FROM treffpunkt;";
 
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
