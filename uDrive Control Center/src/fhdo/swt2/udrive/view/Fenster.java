@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class Fenster extends javax.swing.JFrame {
 
-    private final static SQLService SERVICE = new SQLService();
+    private final static DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
     private ADDKunde addKunde;
     private UpdateCredit updateCredit;
 

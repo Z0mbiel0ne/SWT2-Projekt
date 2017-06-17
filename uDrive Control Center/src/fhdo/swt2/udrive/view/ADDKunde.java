@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
  */
 public class ADDKunde extends javax.swing.JFrame {
 
-    private static final SQLService SERVICE = new SQLService();
+    private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
     private JTable table;
 
     /**

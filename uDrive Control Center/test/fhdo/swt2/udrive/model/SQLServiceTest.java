@@ -40,7 +40,7 @@ public class SQLServiceTest {
     }
 
     /**
-     * Test of addKunde method, of class SQLService.
+     * Test of addKunde method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testAddKunde() {
@@ -55,31 +55,31 @@ public class SQLServiceTest {
         int blz = 4526789;
         int iban = 8323223;
         int bic = 343545;
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         instance.addKunde(vorname, nachname, plz, stadt, strasse, hausnummer, kontonummer, blz, iban, bic);
         // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of deleteKunde method, of class SQLService.
+     * Test of deleteKunde method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testDeleteKunde() throws Exception {
         System.out.println("deleteKunde");
         int id = 18;
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         instance.deleteKunde(id);
     }
 
     /**
-     * Test of checkPasswort method, of class SQLService.
+     * Test of checkPasswort method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testCheckPasswort() {
         System.out.println("checkPasswort");
         String user = "test";
         String pass = "test";
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         boolean expResult = true;
         boolean result = instance.checkPasswort(user, pass);
         assertEquals(expResult, result);
@@ -87,14 +87,14 @@ public class SQLServiceTest {
     }
     
     /**
-     * Test of checkPasswort method, of class SQLService.
+     * Test of checkPasswort method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testCheckPasswort2() {
         System.out.println("checkPasswort");
         String user = "Peter";
         String pass = "Lutz";
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         boolean expResult = false;
         boolean result = instance.checkPasswort(user, pass);
         assertEquals(expResult, result);
@@ -102,38 +102,38 @@ public class SQLServiceTest {
     }
 
     /**
-     * Test of deleteFahrstunde method, of class SQLService.
+     * Test of deleteFahrstunde method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testDeleteFahrstunde() {
         System.out.println("deleteFahrstunde");
         int id = 0;
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         instance.deleteFahrstunde(id);
         // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of updateCredit method, of class SQLService.
+     * Test of updateCredit method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testUpdateCredit() {
         System.out.println("updateCredit");
         int id = 20;
         int value = 60;
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         instance.updateCredit(id, value);
         // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of get method, of class SQLService.
+     * Test of get method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testGet() {
         System.out.println("get");
         String sql = "";
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         ResultSet expResult = null;
         ResultSet result = instance.get(sql);
         assertEquals(expResult, result);
@@ -141,13 +141,13 @@ public class SQLServiceTest {
     }
 
     /**
-     * Test of set method, of class SQLService.
+     * Test of set method, of class DerRestDerInKeineKategoriePasstService.
      */
     @Test
     public void testSet() {
         System.out.println("set");
         String sql = "";
-        SQLService instance = new SQLService();
+        DerRestDerInKeineKategoriePasstService instance = new DerRestDerInKeineKategoriePasstService();
         instance.set(sql);
         // TODO review the generated test code and remove the default call to fail.
     }

@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
  */
 public class Login extends javax.swing.JFrame {
 
-    private static final SQLService SERVICE = new SQLService();
+    private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
 
     /**
      * Creates new form Login
