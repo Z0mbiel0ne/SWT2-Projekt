@@ -1,6 +1,11 @@
 package fhdo.swt2.udrive.model;
 
 import fhdo.swt2.udrive.controller.Converter;
+import fhdo.swt2.udrive.model.dto.Fahrlehrer;
+import fhdo.swt2.udrive.model.dto.Fahrstunde;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.dto.Treffpunkt;
+import fhdo.swt2.udrive.model.dto.User;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +14,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * SQL Service
@@ -19,8 +24,6 @@ import javax.swing.table.DefaultTableModel;
  * @author ExaShox
  */
 public class SQLService {
-
-    private final static Converter CONVERTER = new Converter();
 
     /**
      * Konstruktor
@@ -31,18 +34,9 @@ public class SQLService {
     /**
      * Legt einen neuen Kunden in der Datenbank an
      *
-     * @param vorname
-     * @param nachname
-     * @param plz
-     * @param stadt
-     * @param strasse
-     * @param hausnummer
-     * @param kontonummer
-     * @param blz
-     * @param iban
-     * @param bic
+     * @param kunde
      */
-    public void addKunde(String vorname, String nachname, int plz, String stadt, String strasse, int hausnummer, int kontonummer, int blz, int iban, int bic) {
+    public void addKunde(Fahrschueler kunde) {
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
 
@@ -50,16 +44,16 @@ public class SQLService {
 
             stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
 
-            stmt.setString(1, vorname); // Parameter setzen
-            stmt.setString(2, nachname);
-            stmt.setInt(3, plz);
-            stmt.setString(4, stadt);
-            stmt.setString(5, strasse);
-            stmt.setInt(6, hausnummer);
-            stmt.setInt(7, kontonummer);
-            stmt.setInt(8, blz);
-            stmt.setInt(9, iban);
-            stmt.setInt(10, bic);
+            stmt.setString(1, kunde.getVorname()); // Parameter setzen
+            stmt.setString(2, kunde.getNachname());
+            stmt.setString(3, kunde.getPlz());
+            stmt.setString(4, kunde.getStadt());
+            stmt.setString(5, kunde.getStrasse());
+            stmt.setInt(6, kunde.getHausnummer());
+            stmt.setString(7, kunde.getKontonummer());
+            stmt.setString(8, kunde.getBlz());
+            stmt.setString(9, kunde.getIban());
+            stmt.setString(10, kunde.getBic());
 
             stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
@@ -70,13 +64,13 @@ public class SQLService {
         }
     }
 
-    public void deleteKunde(int id) throws SQLException {
+    public void deleteKunde(Fahrschueler kunde) throws SQLException {
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
 
             String sqlString = "{CALL deleteKunde(?)}";
             stmt = conn.prepareCall(sqlString); // Prepared Statement anlegen 
-            stmt.setInt(1, id);
+            stmt.setInt(1, kunde.getId());
             stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             stmt.close();
@@ -86,36 +80,58 @@ public class SQLService {
         }
     }
 
-    public DefaultTableModel getKundenTable() {
+    public ArrayList<Fahrschueler> getKundenTable() {
+        ArrayList<Fahrschueler> kundeList = new ArrayList<>();
+
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
             // select data
-            String sqlString = "SELECT "
-                    + "KundeID, Vorname, Nachname, Straße, Postleitzahl, Stadt, Guthaben "
-                    + "FROM kunde";
+            String sqlString = "SELECT * FROM kunde";
+
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
-            DefaultTableModel tableModel = CONVERTER.convertToDefaultTableModel(rs);
+            while (rs.next()) {
+                Fahrschueler kunde = new Fahrschueler(
+                        rs.getInt("KundeID"),
+                        rs.getInt("Hausnummer"),
+                        rs.getInt("Guthaben"),
+                        rs.getString("Vorname"),
+                        rs.getString("Nachname"),
+                        rs.getString("Postleitzahl"),
+                        rs.getString("Stadt"),
+                        rs.getString("Straße")
+                );
+
+                kundeList.add(kunde);
+            }
 
             stmt.close();
             conn.close();
-            return tableModel;
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } finally {
+            return kundeList;
         }
     }
 
-    public DefaultTableModel getFahrstundeTable(int kundenID) {
+    public ArrayList<Fahrstunde> getFahrstundeTable(int kundenID) {
+        ArrayList<Fahrstunde> fahrstundeList = new ArrayList<>();
+
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
             // select data
             String sqlString
-                    = "SELECT fs.FahrstundeID, fs.Datum, ku.Vorname as 'Schüler', "
-                    + "pe.Vorname as 'Fahrlehrer', tp.Straße, tp.Postleitzahl, tp.Stadt "
+                    = "SELECT "
+                    + "fs.FahrstundeID AS 'ID', "
+                    + "fs.Datum AS 'Datum', "
+                    + "ku.Vorname AS 'Schüler', "
+                    + "pe.Vorname AS 'Fahrlehrer', "
+                    + "tp.Straße AS 'Strasse', "
+                    + "tp.Postleitzahl AS 'PLZ', "
+                    + "tp.Stadt AS 'Stadt' "
                     + "FROM kunde AS ku INNER JOIN fahrstunde AS fs "
                     + "ON ku.KundeID = fs.KundeID "
                     + "INNER JOIN fahrlehrer AS fl "
@@ -129,31 +145,43 @@ public class SQLService {
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
-            DefaultTableModel tableModel = CONVERTER.convertToDefaultTableModel(rs);
+            while (rs.next()) {
+                Fahrstunde fahrstunde = new Fahrstunde(
+                        rs.getInt("ID"),
+                        rs.getString("Schüler"),
+                        rs.getString("Fahrlehrer"),
+                        rs.getString("Strasse"),
+                        rs.getString("PLZ"),
+                        rs.getString("Stadt"),
+                        rs.getDate("Datum")
+                );
+
+                fahrstundeList.add(fahrstunde);
+            }
 
             stmt.close();
             conn.close();
-            return tableModel;
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } finally {
+            return fahrstundeList;
         }
     }
 
-    public boolean checkPasswort(String user, String pass) {
+    public boolean checkPasswort(User user) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
             String sqlString = "select passwort, personal.name from passwort join personal on passwort.personalID = personal.PersonalID where personal.name = ?";
             stmt = conn.prepareStatement(sqlString);
-            stmt.setString(1, user);
+            stmt.setString(1, user.getUsername());
             ResultSet rs = stmt.executeQuery();
             rs.next();
             String test = rs.getString(1);
 
             stmt.close();
             conn.close();
-            return pass.equals(test);
+            return user.getPassword().equals(test);
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Es konnte keine Verbindung hergestellt werden Sie befinden sich im Testmodus");
@@ -166,13 +194,13 @@ public class SQLService {
      *
      * @param id FahrstundenID
      */
-    public void deleteFahrstunde(int id) {
+    public void deleteFahrstunde(Fahrstunde fahrstunde) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
             String sqlString = "DELETE FROM fahrstunde WHERE FahrstundeID = ?";
 
             stmt = conn.prepareStatement(sqlString);
-            stmt.setInt(1, id);
+            stmt.setInt(1, fahrstunde.getId());
             stmt.executeUpdate();
 
             stmt.close();
@@ -188,7 +216,7 @@ public class SQLService {
      * @param id KundeID
      * @param value Betrag
      */
-    public void updateCredit(int id, int value) {
+    public void updateCredit(Fahrschueler kunde) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
@@ -197,8 +225,8 @@ public class SQLService {
                     + "WHERE ku.KundeID = ? ";
 
             stmt = conn.prepareStatement(sqlString);
-            stmt.setInt(1, value);
-            stmt.setInt(2, id);
+            stmt.setInt(1, kunde.getGuthaben());
+            stmt.setInt(2, kunde.getId());
             stmt.executeUpdate();
 
             stmt.close();
@@ -213,7 +241,9 @@ public class SQLService {
      *
      * @return Bsp: [0][0] : 1 [0][1] : Essen
      */
-    public String[][] getTreffpunkte() {
+    public ArrayList<Treffpunkt> getTreffpunkte() {
+        ArrayList<Treffpunkt> treffpunktList = new ArrayList<>();
+
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
@@ -225,14 +255,23 @@ public class SQLService {
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
-            String[][] stringArray = CONVERTER.convertTo2DStringArray(rs);
+            while (rs.next()) {
+                Treffpunkt treffpunkt = new Treffpunkt(
+                        rs.getInt("TreffpunktID"),
+                        rs.getString("Straße"),
+                        rs.getString("Postleitzahl"),
+                        rs.getString("Stadt")
+                );
+
+                treffpunktList.add(treffpunkt);
+            }
 
             stmt.close();
             conn.close();
-            return stringArray;
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } finally {
+            return treffpunktList;
         }
     }
 
@@ -241,13 +280,23 @@ public class SQLService {
      *
      * @return Bsp: [0][0] : 1 [0][1] : Hans
      */
-    public String[][] getFahrlehrer() {
+    public ArrayList<Fahrlehrer> getFahrlehrer() {
+        ArrayList<Fahrlehrer> fahrlehrerList = new ArrayList<>();
+
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
             // select data
             String sqlString
-                    = "SELECT fa.FahrlehrerID, CONCAT(pe.Vorname, ' ', pe.Name) \n"
+                    = "SELECT "
+                    + "fa.FahrerID AS FahrerID, "
+                    + "pe.PersonalID AS PersonalID, "
+                    + "pe.Vorname AS Vorname, "
+                    + "pe.Name AS Name, "
+                    + "pe.Postleitzahl AS Postleitzahl, "
+                    + "pe.Stadt AS Stadt, "
+                    + "pe.Straße AS Straße, "
+                    + "pe.Hausnummer AS Hausnummer "
                     + "FROM fahrlehrer AS fa\n"
                     + "INNER JOIN personal AS pe\n"
                     + "ON pe.PersonalID = fa.PersonalID;;";
@@ -255,14 +304,27 @@ public class SQLService {
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
-            String[][] stringArray = CONVERTER.convertTo2DStringArray(rs);
+            while (rs.next()) {
+                Fahrlehrer fahrlehrer = new Fahrlehrer(
+                        rs.getInt("FahrerID"),
+                        rs.getInt("PersonalID"),
+                        rs.getString("Vorname"),
+                        rs.getString("Name"),
+                        rs.getString("Postleitzahl"),
+                        rs.getString("Stadt"),
+                        rs.getString("Straße"),
+                        rs.getString("Hausnummer")
+                );
+
+                fahrlehrerList.add(fahrlehrer);
+            }
 
             stmt.close();
             conn.close();
-            return stringArray;
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } finally {
+            return fahrlehrerList;
         }
     }
 
@@ -271,43 +333,53 @@ public class SQLService {
      *
      * @return Bsp: [0][0] : 1 [0][1] : Stephan
      */
-    public String[][] getKunden() {
-        try (Connection conn = ConnectionManager.getConnection()) {
-            ResultSet rs;
-            PreparedStatement stmt;
-            // select data
-            String sqlString
-                    = "SELECT *\n"
-                    + "FROM kunde;";
-            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
-            rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+    public ArrayList<Fahrschueler> getKunden() {
+        ArrayList<Fahrschueler> kundeList = new ArrayList<>();
 
-            String[][] stringArray = CONVERTER.convertTo2DStringArray(rs);
+        try (Connection conn = ConnectionManager.getConnection()) {
+            PreparedStatement stmt;
+
+            // select data
+            String sqlString = "SELECT * FROM kunde";
+
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+
+            while (rs.next()) {
+                Fahrschueler kunde = new Fahrschueler(
+                        rs.getInt("KundeID"),
+                        rs.getInt("Hausnummer"),
+                        rs.getInt("Guthaben"),
+                        rs.getString("Vorname"),
+                        rs.getString("Nachname"),
+                        rs.getString("Postleitzahl"),
+                        rs.getString("Stadt"),
+                        rs.getString("Straße")
+                );
+
+                kundeList.add(kunde);
+            }
 
             stmt.close();
             conn.close();
-            return stringArray;
         } catch (SQLException ex) {
             Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } finally {
+            return kundeList;
         }
     }
 
     /**
      * Erstellt einen Fahrstunde in der Tabelle Fahrstunden
      *
-     * @param datum Datum
-     * @param fahrlehrerID FahrlehrerID aus Tabelle Fahrlehrer
-     * @param kundeID KundenId aus Tabelle Kunden
-     * @param rechnungID
+     * @param fahrstunde
      */
-    public void insertFahrstunde(String datum, int treffpunktID, int fahrlehrerID, int kundeID, int rechnungID) {
+    public void insertFahrstunde(Fahrstunde fahrstunde, Treffpunkt treffpunkt,
+            Fahrlehrer fahrlehrer, Fahrschueler kunde, int rechnungID) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
-            java.util.Date utilDate = sdf1.parse(datum);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            java.sql.Date sqlDate = new java.sql.Date(fahrstunde.getDatum().getTime());
 
             String sqlString
                     = "INSERT INTO fahrstunde ("
@@ -320,50 +392,11 @@ public class SQLService {
 
             stmt = conn.prepareStatement(sqlString);
             stmt.setDate(1, sqlDate);
-            stmt.setInt(2, treffpunktID);
-            stmt.setInt(3, fahrlehrerID);
-            stmt.setInt(4, kundeID);
+            stmt.setInt(2, treffpunkt.getId());
+            stmt.setInt(3, fahrlehrer.getFahrlehrerID());
+            stmt.setInt(4, kunde.getId());
             stmt.setInt(5, rechnungID);
             stmt.executeUpdate();
-
-            stmt.close();
-            conn.close();
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-        }
-    }
-
-    /**
-     * Get data from Database
-     *
-     * @param sql
-     * @return ResultSet
-     */
-    public ResultSet get(String sql) {
-        ResultSet rs;
-        try (Connection conn = ConnectionManager.getConnection();
-                Statement stmt = conn.createStatement()) {
-            rs = stmt.executeQuery(sql);
-
-            stmt.close();
-            conn.close();
-            return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
-    /**
-     * Set data from Database
-     *
-     * @param sql
-     */
-    public void set(String sql) {
-        try (Connection conn = ConnectionManager.getConnection();
-                Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
 
             stmt.close();
             conn.close();

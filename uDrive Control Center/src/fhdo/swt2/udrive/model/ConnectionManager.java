@@ -15,9 +15,9 @@ public class ConnectionManager {
 
     private final static String URL = "jdbc:mysql://dd23226.kasserver.com:3306/",
             DATABASE = "d0265e02",
-            DRIVER = "com.mysql.jdbc.Driver", // Verbindungsdaten
+            DRIVER = "com.mysql.jdbc.Driver",
             USER = "d0265e02",
-            PASSWORD = "fJzTUszXQFEb2ok";
+            PASSWORD = "p5p4zc2b9edc4P5K";
     private static Connection conn;
 
     /**
@@ -37,8 +37,7 @@ public class ConnectionManager {
     }
 
     /**
-     * Check Connection availability. 
-     * Returns true if success.
+     * Check Connection availability. Returns true if success.
      *
      * @return boolean
      */

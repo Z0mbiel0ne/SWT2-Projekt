@@ -1,11 +1,11 @@
 package fhdo.swt2.udrive.model.dto;
 
 /**
- * Kunde - Transfer Object
+ * Fahrschueler - Transfer Object
  *
  * @author ExaShox
  */
-public class Kunde {
+public class Fahrschueler {
 
     private int id,
             hausnummer,
@@ -36,7 +36,9 @@ public class Kunde {
      * @param iban
      * @param bic
      */
-    public Kunde(int id, int hausnummer, int guthaben, String vorname, String nachname, String plz, String stadt, String strasse, String kontonummer, String blz, String iban, String bic) {
+    public Fahrschueler(int id, int hausnummer, int guthaben, String vorname,
+            String nachname, String plz, String stadt, String strasse,
+            String kontonummer, String blz, String iban, String bic) {
         this.id = id;
         this.hausnummer = hausnummer;
         this.guthaben = guthaben;
@@ -65,7 +67,9 @@ public class Kunde {
      * @param bic
      * @param hausnummer
      */
-    public Kunde(String vorname, String nachname, String plz, String stadt, String strasse, String kontonummer, String blz, String iban, String bic, int hausnummer) {
+    public Fahrschueler(String vorname, String nachname, String plz, String stadt,
+            String strasse, String kontonummer, String blz, String iban,
+            String bic, int hausnummer) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.plz = plz;
@@ -76,6 +80,30 @@ public class Kunde {
         this.iban = iban;
         this.bic = bic;
         this.hausnummer = hausnummer;
+        this.guthaben = 0;
+    }
+
+    /**
+     * Only kunde constructor
+     *
+     * @param hausnummer
+     * @param guthaben
+     * @param vorname
+     * @param nachname
+     * @param plz
+     * @param stadt
+     * @param strasse
+     */
+    public Fahrschueler(int id, int hausnummer, int guthaben, String vorname, String nachname,
+            String plz, String stadt, String strasse) {
+        this.id = id;
+        this.hausnummer = hausnummer;
+        this.guthaben = guthaben;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.plz = plz;
+        this.stadt = stadt;
+        this.strasse = strasse;
     }
 
     /**
@@ -173,5 +201,13 @@ public class Kunde {
 
     public void setHausnummer(int hausnummer) {
         this.hausnummer = hausnummer;
+    }
+
+    public int getGuthaben() {
+        return guthaben;
+    }
+
+    public void setGuthaben(int guthaben) {
+        this.guthaben = guthaben;
     }
 }
