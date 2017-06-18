@@ -61,6 +61,12 @@ public class Fahrstunde {
         this.stadt = stadt;
         this.datum = datum;
     }
+
+    public Fahrstunde(Date datum) {
+        this.datum = datum;
+    }
+    
+    
     
     public int getId() {
         return id;

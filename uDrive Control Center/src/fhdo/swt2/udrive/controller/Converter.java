@@ -9,6 +9,7 @@ import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,19 @@ public class Converter {
      * Konstruktor
      */
     public Converter() {
+    }
+
+    /**
+     * Convert ArrayList ti DefaultTableModel
+     * 
+     * @param list
+     * @return 
+     */
+    public DefaultTableModel convertToDefaultTableModel(ArrayList<?> list) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        
+        return tableModel;
     }
 
     /**
@@ -57,14 +71,14 @@ public class Converter {
 
             return new DefaultTableModel(data, columnNames);
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
             return new DefaultTableModel();
         }
     }
 
     /**
      * Convert ResultSet to 2D String Array
-     * 
+     *
      * @param resultSet
      * @return String[][]
      */
@@ -88,7 +102,7 @@ public class Converter {
 
             resultArray = data.toArray(new String[data.size()][]);
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultArray;
     }

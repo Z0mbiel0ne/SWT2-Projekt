@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,12 +114,12 @@ public class FahrstundeService {
      *
      * @param fahrstunde
      */
-    public void insertFahrstunde(Fahrstunde fahrstunde, Treffpunkt treffpunkt,
+    public void insertFahrstunde(Date datum, Treffpunkt treffpunkt,
             Fahrlehrer fahrlehrer, Fahrschueler kunde, int rechnungID) {
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
-            java.sql.Date sqlDate = new java.sql.Date(fahrstunde.getDatum().getTime());
+            java.sql.Date sqlDate = new java.sql.Date(datum.getTime());
 
             String sqlString
                     = "INSERT INTO fahrstunde ("

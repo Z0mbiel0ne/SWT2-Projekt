@@ -5,10 +5,19 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.FahrstundeService;
+import fhdo.swt2.udrive.model.KundenService;
+import fhdo.swt2.udrive.model.dto.Fahrlehrer;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.dto.Treffpunkt;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -20,9 +29,12 @@ import javax.swing.SwingUtilities;
 public class ADDFahrstunde extends javax.swing.JFrame {
 
     private final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
-    String[][] treffpunktarr;
-    String[][] fahrlehrerarr;
-    String[][] kundearr;
+    private final KundenService KUNDENSERVICE = new KundenService();
+    private final FahrstundeService FAHRSTUNDENSERVICE = new FahrstundeService();
+    private final Converter CONVERTER = new Converter();
+    ArrayList<Treffpunkt> treffpunktList;
+    ArrayList<Fahrlehrer> fahrlehrerList;
+    ArrayList<Fahrschueler> fahrschuelerList;
     private final JTable table1;
     private final JTable table2;
 
@@ -46,21 +58,21 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         jXDatePicker1.setDate(date);
 
         jComboBox1.addItem("Auswahl...");
-        treffpunktarr = SERVICE.getTreffpunkte();
-        for (String[] arr : treffpunktarr) {
-            jComboBox1.addItem(arr[1]);
+        treffpunktList = SERVICE.getTreffpunkte();
+        for (Treffpunkt treffpunkt : treffpunktList) {
+            jComboBox1.addItem(treffpunkt.getPlz());
         }
 
         jComboBox2.addItem("Auswahl...");
-        fahrlehrerarr = SERVICE.getFahrlehrer();
-        for (String[] arr : fahrlehrerarr) {
-            jComboBox2.addItem(arr[1]);
+        fahrlehrerList = SERVICE.getFahrlehrer();
+        for (Fahrlehrer fahrlehrer : fahrlehrerList) {
+            jComboBox2.addItem(fahrlehrer.getName());
         }
 
         jComboBox3.addItem("Auswahl...");
-        kundearr = SERVICE.getKunden();
-        for (String[] arr : kundearr) {
-            jComboBox3.addItem(arr[2]);
+        fahrschuelerList = KUNDENSERVICE.getKunden();
+        for (Fahrschueler fahrschueler : fahrschuelerList) {
+            jComboBox3.addItem(fahrschueler.getNachname());
         }
 
         jComboBox1.setSelectedIndex(0);
@@ -194,27 +206,28 @@ public class ADDFahrstunde extends javax.swing.JFrame {
 
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String datum = df.format(jXDatePicker1.getDate());
+            Date datum = df.format(jXDatePicker1.getDate());
 
             int id;
 
             id = jComboBox1.getSelectedIndex();
-            int treffpunktID = Integer.parseInt(treffpunktarr[id - 1][0]);
+            Treffpunkt treffpunkt = treffpunktList.get(id - 1);
 
             id = jComboBox2.getSelectedIndex();
-            int fahrlehrerID = Integer.parseInt(fahrlehrerarr[id - 1][0]);
+            Fahrlehrer fahrlehrer = fahrlehrerList.get(id - 1);
 
             id = jComboBox3.getSelectedIndex();
-            int kundeID = Integer.parseInt(kundearr[id - 1][0]);
+            Fahrschueler fahrschueler = fahrschuelerList.get(id - 1);
 
             int rechnungID = Integer.parseInt(jTextField1.getText());
 
-            SERVICE.insertFahrstunde(datum, treffpunktID, fahrlehrerID, kundeID, rechnungID);
+            FAHRSTUNDENSERVICE.insertFahrstunde(datum, treffpunkt, fahrlehrer, fahrschueler, rechnungID);
 
             int row = table1.getSelectedRow();
-            table2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString())));
+            table2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDENSERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString()))));
             dispose();
-        } catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(ADDFahrstunde.class.getName()).log(Level.SEVERE, null, ex);
             jLabel11.setVisible(true);
         }
 
