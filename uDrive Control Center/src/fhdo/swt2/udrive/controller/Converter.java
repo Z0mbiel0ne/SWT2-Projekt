@@ -34,42 +34,44 @@ public class Converter {
 
     /**
      * Convert ArrayList ti DefaultTableModel
-     * 
+     *
      * @param list
-     * @return 
+     * @return
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        
+
         for (Fahrstunde fahrstunde : list) {
-          Object[] data = { fahrstunde.getId(), 
-                            fahrstunde.getDatum(),
-                            fahrstunde.getKundeName(),
-                            fahrstunde.getFahrlehrerName(),
-                            fahrstunde.getPlz()};
-         tableModel.addRow(data);   
+            Object[] data = {fahrstunde.getId(),
+                fahrstunde.getDatum(),
+                fahrstunde.getKundeName(),
+                fahrstunde.getFahrlehrerName(),
+                fahrstunde.getPlz()};
+            tableModel.addRow(data);
         }
-        
+
         return tableModel;
     }
+
     /**
      * Convert ArrayList ti DefaultTableModel
-     * 
+     *
      * @param list
-     * @return 
+     * @return
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
         DefaultTableModel tableModel = new DefaultTableModel();
-        
+
+        Vector<Object> data = new Vector<>();
         for (Fahrschueler fahrschueler : list) {
-          Object[] data = { fahrschueler.getId(), 
-                            fahrschueler.getVorname()+ 
-                            fahrschueler.getNachname(),
-                            fahrschueler.getFullAddress(),
-                            fahrschueler.getGuthaben()};
-         tableModel.addRow(data);   
+            Vector<Object> dataitems = new Vector<>();
+            dataitems.add(fahrschueler.getId());
+            dataitems.add(fahrschueler.getVorname() + fahrschueler.getNachname());
+            dataitems.add(fahrschueler.getFullAddress());
+            dataitems.add(fahrschueler.getGuthaben());
+            data.add(dataitems);
         }
-        
+        tableModel.addRow(data);
         return tableModel;
     }
 
