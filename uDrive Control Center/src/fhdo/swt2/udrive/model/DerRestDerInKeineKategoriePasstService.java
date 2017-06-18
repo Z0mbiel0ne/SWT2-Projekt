@@ -109,8 +109,6 @@ public class DerRestDerInKeineKategoriePasstService {
                     + "FROM fahrlehrer AS fa "
                     + "INNER JOIN personal AS pe "
                     + "ON pe.PersonalID = fa.PersonalID;";
-
-            System.out.println(sqlString);
             
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
