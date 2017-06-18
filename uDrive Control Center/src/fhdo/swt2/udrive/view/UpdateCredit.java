@@ -102,7 +102,7 @@ public class UpdateCredit extends javax.swing.JFrame {
 
             SERVICEKUNDEN.updateCredit(new Fahrschueler(id, 1, value, null, null, null, null, null));
 
-            table.setModel(SERVICECONVERTER.convertToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
+            table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
             dispose();
         } catch (NumberFormatException numberFormatException) {
 

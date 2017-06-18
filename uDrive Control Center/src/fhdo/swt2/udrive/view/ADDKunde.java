@@ -258,7 +258,7 @@ public class ADDKunde extends javax.swing.JFrame {
 
             SERVICEKUNDE.addKunde( new Fahrschueler(bic, hausnummer, iban, vorname, nachname, stadt, stadt, strasse));
 
-            table.setModel(SERVICECONVERTER.convertToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
+            table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
             dispose();
         } catch (NumberFormatException numberFormatException) {
             jLabel11.setVisible(true);

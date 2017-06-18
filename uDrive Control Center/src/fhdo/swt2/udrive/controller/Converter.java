@@ -6,10 +6,14 @@
 package fhdo.swt2.udrive.controller;
 
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.KundenService;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.dto.Fahrstunde;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,9 +38,23 @@ public class Converter {
      * @param list
      * @return 
      */
-    public DefaultTableModel convertToDefaultTableModel(ArrayList<?> list) {
+    public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
         DefaultTableModel tableModel = new DefaultTableModel();
         
+        tableModel.addRow(list.toArray());
+        
+        return tableModel;
+    }
+    /**
+     * Convert ArrayList ti DefaultTableModel
+     * 
+     * @param list
+     * @return 
+     */
+    public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        tableModel.addRow(list.toArray());
         
         return tableModel;
     }

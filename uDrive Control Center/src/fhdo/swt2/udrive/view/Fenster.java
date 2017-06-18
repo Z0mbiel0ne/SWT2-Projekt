@@ -41,7 +41,7 @@ public class Fenster extends javax.swing.JFrame {
         setVisible(true);
         addfactory = new ADDFahrstundenFactory();
         addKundeFactory = new ADDKundeFactory();
-        jTable1.setModel(CONVERTER.convertToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
+        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
         jTable1.setRowSelectionInterval(0, 0);
     }
 
@@ -292,7 +292,7 @@ public class Fenster extends javax.swing.JFrame {
         } else {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-                jTable2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(value)));
+                jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(value)));
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -301,7 +301,7 @@ public class Fenster extends javax.swing.JFrame {
      *
      */
     public void refreshtable1() {
-        jTable1.setModel(CONVERTER.convertToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
+        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
     }
 
     /**
@@ -309,7 +309,7 @@ public class Fenster extends javax.swing.JFrame {
      */
     public void refreshtable2() {
         int row = jTable1.getSelectedRow();
-        jTable2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
+        jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

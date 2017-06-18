@@ -206,7 +206,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
 
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            Date datum = df.format(jXDatePicker1.getDate());
+            Date datum = jXDatePicker1.getDate();
 
             int id;
 
@@ -224,7 +224,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
             FAHRSTUNDENSERVICE.insertFahrstunde(datum, treffpunkt, fahrlehrer, fahrschueler, rechnungID);
 
             int row = table1.getSelectedRow();
-            table2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDENSERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString()))));
+            table2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDENSERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString()))));
             dispose();
         } catch (NumberFormatException ex) {
             Logger.getLogger(ADDFahrstunde.class.getName()).log(Level.SEVERE, null, ex);
