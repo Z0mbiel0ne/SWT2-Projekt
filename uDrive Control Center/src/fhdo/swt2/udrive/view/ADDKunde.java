@@ -22,10 +22,11 @@ public class ADDKunde extends javax.swing.JFrame {
     private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
     private static  final KundenService SERVICEKUNDE = new KundenService();
     private  static  final Converter SERVICECONVERTER = new Converter();
-    private JTable table;
+    private final JTable table;
 
     /**
      * Creates new form ADDKunde
+     * @param j
      */
     public ADDKunde(JTable j) {
         table = j;

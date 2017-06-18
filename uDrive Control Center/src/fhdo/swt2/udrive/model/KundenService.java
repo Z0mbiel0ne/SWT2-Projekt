@@ -85,7 +85,7 @@ public class KundenService {
     /**
      * Hier nix Conventieren. Bitte weg damit
      *
-     * @return ArrayList<Fahrschueler>
+     * @return ArrayList 
      */
     public ArrayList<Fahrschueler> getKundenTable() {
         return getKunden();
@@ -94,7 +94,7 @@ public class KundenService {
     /**
      * Liefert ALLE Kunden
      *
-     * @return ArrayList<Fahrschueler>
+     * @return ArrayList
      */
     public ArrayList<Fahrschueler> getKunden() {
         ArrayList<Fahrschueler> kundeList = new ArrayList<>();
@@ -135,8 +135,7 @@ public class KundenService {
     /**
      * Updatet den Geldbetrag eines Kunden
      *
-     * @param id KundeID
-     * @param value Betrag
+     * @param kunde
      */
     public void updateCredit(Fahrschueler kunde) {
         try (Connection conn = ConnectionManager.getConnection()) {
