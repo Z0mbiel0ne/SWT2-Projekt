@@ -39,17 +39,25 @@ public class Converter {
      * @return
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
-        DefaultTableModel tableModel = new DefaultTableModel();
+        Vector<Object> columnNames = new Vector<>();
+        columnNames.add("ID");
+        columnNames.add("Datum");
+        columnNames.add("Fahrschüler");
+        columnNames.add("Fahrlehrer");
+        columnNames.add("Adresse");
 
-        for (Fahrstunde fahrstunde : list) {
-            Object[] data = {fahrstunde.getId(),
-                fahrstunde.getDatum(),
-                fahrstunde.getKundeName(),
-                fahrstunde.getFahrlehrerName(),
-                fahrstunde.getPlz()};
-            tableModel.addRow(data);
+        Vector<Vector<Object>> data = new Vector<>();
+        for (Fahrstunde Fahrstunde : list) {
+            Vector<Object> dataitems = new Vector<>();
+            dataitems.add(Fahrstunde.getId());
+            dataitems.add(Fahrstunde.getDatum());
+            dataitems.add(Fahrstunde.getKundeName());
+            dataitems.add(Fahrstunde.getFahrlehrerName());
+            dataitems.add(Fahrstunde.getFullAddress());
+            data.add(dataitems);
         }
 
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         return tableModel;
     }
 
@@ -60,18 +68,23 @@ public class Converter {
      * @return
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
-        DefaultTableModel tableModel = new DefaultTableModel();
+        Vector<Object> columnNames = new Vector<>();
+        columnNames.add("Id");
+        columnNames.add("Name");
+        columnNames.add("Adresse");
+        columnNames.add("Guthaben");
 
-        Vector<Object> data = new Vector<>();
+        Vector<Vector<Object>> data = new Vector<>();
         for (Fahrschueler fahrschueler : list) {
             Vector<Object> dataitems = new Vector<>();
             dataitems.add(fahrschueler.getId());
-            dataitems.add(fahrschueler.getVorname() + fahrschueler.getNachname());
+            dataitems.add(fahrschueler.getVorname() + " " + fahrschueler.getNachname());
             dataitems.add(fahrschueler.getFullAddress());
             dataitems.add(fahrschueler.getGuthaben());
             data.add(dataitems);
         }
-        tableModel.addRow(data);
+
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         return tableModel;
     }
 

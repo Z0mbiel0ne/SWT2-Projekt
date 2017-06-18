@@ -71,7 +71,9 @@ public class Fahrstunde {
         this.datum = datum;
     }
     
-    
+    public String getFullAddress() {
+        return strasse + ", " + plz + " " + stadt;
+    }
     
     public int getId() {
         return id;

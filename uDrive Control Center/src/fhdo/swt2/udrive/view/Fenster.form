@@ -84,9 +84,9 @@
               <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Datum" type="java.lang.String"/>
-                <Column editable="false" title="Vorname" type="java.lang.String"/>
+                <Column editable="false" title="Fahrsch&#xfc;ler" type="java.lang.String"/>
                 <Column editable="false" title="Fahrlehrer" type="java.lang.String"/>
-                <Column editable="false" title="Treffpunkt" type="java.lang.String"/>
+                <Column editable="false" title="Adresse" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -75,7 +75,7 @@ public class Fenster extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Datum", "Vorname", "Fahrlehrer", "Treffpunkt"
+                "ID", "Datum", "Fahrschüler", "Fahrlehrer", "Adresse"
             }
         ) {
             Class[] types = new Class [] {
