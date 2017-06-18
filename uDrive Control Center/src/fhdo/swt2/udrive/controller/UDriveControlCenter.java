@@ -8,6 +8,8 @@ package fhdo.swt2.udrive.controller;
 import fhdo.swt2.udrive.view.Fenster;
 import fhdo.swt2.udrive.view.Login;
 import fhdo.swt2.udrive.model.ConnectionManager;
+import fhdo.swt2.udrive.model.LoginFactory;
+import fhdo.swt2.udrive.model.FensterFactory;
 
 /**
  *
@@ -16,7 +18,9 @@ import fhdo.swt2.udrive.model.ConnectionManager;
 public class UDriveControlCenter {
 
     private static Login login;
+    private static LoginFactory loginfactory;
     private static Fenster fenster;
+    private static FensterFactory fensterfactory;
 
     /**
      * @param args the command line arguments
@@ -24,9 +28,11 @@ public class UDriveControlCenter {
     public static void main(String[] args) {
         ConnectionManager manager = new ConnectionManager();
         if (manager.checkConnection()) {
-            login = new Login();
+            loginfactory = new LoginFactory();
+            login = loginfactory.newInstance();
         } else {
-            fenster = new Fenster();
+            fensterfactory = new FensterFactory();
+            fenster = fensterfactory.newInstance();
         }
     }
 
