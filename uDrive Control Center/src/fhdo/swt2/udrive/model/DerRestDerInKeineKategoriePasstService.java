@@ -98,7 +98,7 @@ public class DerRestDerInKeineKategoriePasstService {
             // select data
             String sqlString
                     = "SELECT "
-                    + "fa.FahrerID AS FahrerID, "
+                    + "fa.FahrlehrerID AS FahrlehrerID, "
                     + "pe.PersonalID AS PersonalID, "
                     + "pe.Vorname AS Vorname, "
                     + "pe.Name AS Name, "
@@ -106,16 +106,18 @@ public class DerRestDerInKeineKategoriePasstService {
                     + "pe.Stadt AS Stadt, "
                     + "pe.Straße AS Straße, "
                     + "pe.Hausnummer AS Hausnummer "
-                    + "FROM fahrlehrer AS fa\n"
-                    + "INNER JOIN personal AS pe\n"
-                    + "ON pe.PersonalID = fa.PersonalID;;";
+                    + "FROM fahrlehrer AS fa "
+                    + "INNER JOIN personal AS pe "
+                    + "ON pe.PersonalID = fa.PersonalID;";
 
+            System.out.println(sqlString);
+            
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             while (rs.next()) {
                 Fahrlehrer fahrlehrer = new Fahrlehrer(
-                        rs.getInt("FahrerID"),
+                        rs.getInt("FahrlehrerID"),
                         rs.getInt("PersonalID"),
                         rs.getString("Vorname"),
                         rs.getString("Name"),
