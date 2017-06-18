@@ -21,6 +21,11 @@ public class Fahrstunde {
             plz,
             stadt;
     private Date datum;
+    
+    /**
+     * Empty Constructor
+     */
+    public Fahrstunde() {}
 
     /**
      * Full constructor

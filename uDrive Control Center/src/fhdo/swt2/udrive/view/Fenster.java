@@ -5,10 +5,15 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
 import fhdo.swt2.udrive.model.ADDKundeFactory;
+import fhdo.swt2.udrive.model.FahrstundeService;
+import fhdo.swt2.udrive.model.KundenService;
 import fhdo.swt2.udrive.model.UpdateCreditFactory;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.dto.Fahrstunde;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +24,9 @@ import java.util.logging.Logger;
  */
 public class Fenster extends javax.swing.JFrame {
 
-    private final static DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
+    private final static KundenService KUNDENSERVICE = new KundenService();
+    private final static FahrstundeService FAHRSTUNDESERVICE = new FahrstundeService();
+    private final static Converter CONVERTER = new Converter();
     private ADDKunde addKunde;
     ADDKundeFactory addKundeFactory;
     ADDFahrstundenFactory addfactory;
@@ -34,7 +41,7 @@ public class Fenster extends javax.swing.JFrame {
         setVisible(true);
         addfactory = new ADDFahrstundenFactory();
         addKundeFactory = new ADDKundeFactory();
-        jTable1.setModel(SERVICE.getKundenTable());
+        jTable1.setModel(CONVERTER.convertToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
         jTable1.setRowSelectionInterval(0, 0);
     }
 
@@ -232,7 +239,7 @@ public class Fenster extends javax.swing.JFrame {
         } else {
             for (int row : rows) {
                 try {
-                    SERVICE.deleteKunde(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                    KUNDENSERVICE.deleteKunde(new Fahrschueler(Integer.parseInt(jTable1.getValueAt(row, 0).toString()), 0, 0, null, null, null, null, null));
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -269,7 +276,10 @@ public class Fenster extends javax.swing.JFrame {
         } else {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
-                SERVICE.deleteFahrstunde(value);
+
+                Fahrstunde fahrstunde = new Fahrstunde();
+                fahrstunde.setId(value);
+                FAHRSTUNDESERVICE.deleteFahrstunde(fahrstunde);
             }
         }
         refreshtable2();
@@ -282,7 +292,7 @@ public class Fenster extends javax.swing.JFrame {
         } else {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-                jTable2.setModel(SERVICE.getFahrstundeTable(value));
+                jTable2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(value)));
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -291,7 +301,7 @@ public class Fenster extends javax.swing.JFrame {
      *
      */
     public void refreshtable1() {
-        jTable1.setModel(SERVICE.getKundenTable());
+        jTable1.setModel(CONVERTER.convertToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
     }
 
     /**
@@ -299,7 +309,7 @@ public class Fenster extends javax.swing.JFrame {
      */
     public void refreshtable2() {
         int row = jTable1.getSelectedRow();
-        jTable2.setModel(SERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString())));
+        jTable2.setModel(CONVERTER.convertToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
