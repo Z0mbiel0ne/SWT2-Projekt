@@ -41,7 +41,14 @@ public class Converter {
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
         DefaultTableModel tableModel = new DefaultTableModel();
         
-        tableModel.addRow(list.toArray());
+        for (Fahrstunde fahrstunde : list) {
+          Object[] data = { fahrstunde.getId(), 
+                            fahrstunde.getDatum(),
+                            fahrstunde.getKundeName(),
+                            fahrstunde.getFahrlehrerName(),
+                            fahrstunde.getPlz()};
+         tableModel.addRow(data);   
+        }
         
         return tableModel;
     }
@@ -54,7 +61,14 @@ public class Converter {
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
         DefaultTableModel tableModel = new DefaultTableModel();
         
-        tableModel.addRow(list.toArray());
+        for (Fahrschueler fahrschueler : list) {
+          Object[] data = { fahrschueler.getId(), 
+                            fahrschueler.getVorname()+ 
+                            fahrschueler.getNachname(),
+                            fahrschueler.getFullAddress(),
+                            fahrschueler.getGuthaben()};
+         tableModel.addRow(data);   
+        }
         
         return tableModel;
     }
