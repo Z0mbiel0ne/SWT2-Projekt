@@ -59,21 +59,21 @@ public class ADDFahrstunde extends javax.swing.JFrame {
 
         jComboBox1.addItem("Auswahl...");
         treffpunktList = SERVICE.getTreffpunkte();
-        for (Treffpunkt treffpunkt : treffpunktList) {
+        treffpunktList.forEach((treffpunkt) -> {
             jComboBox1.addItem(treffpunkt.getPlz());
-        }
+        });
 
         jComboBox2.addItem("Auswahl...");
         fahrlehrerList = SERVICE.getFahrlehrer();
-        for (Fahrlehrer fahrlehrer : fahrlehrerList) {
+        fahrlehrerList.forEach((fahrlehrer) -> {
             jComboBox2.addItem(fahrlehrer.getName());
-        }
+        });
 
         jComboBox3.addItem("Auswahl...");
         fahrschuelerList = KUNDENSERVICE.getKunden();
-        for (Fahrschueler fahrschueler : fahrschuelerList) {
+        fahrschuelerList.forEach((fahrschueler) -> {
             jComboBox3.addItem(fahrschueler.getNachname());
-        }
+        });
 
         jComboBox1.setSelectedIndex(0);
         jComboBox2.setSelectedIndex(0);

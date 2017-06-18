@@ -5,16 +5,14 @@
  */
 package fhdo.swt2.udrive.controller;
 
-import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
-import fhdo.swt2.udrive.model.KundenService;
 import fhdo.swt2.udrive.model.dto.Fahrschueler;
 import fhdo.swt2.udrive.model.dto.Fahrstunde;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -47,15 +45,17 @@ public class Converter {
         columnNames.add("Adresse");
 
         Vector<Vector<Object>> data = new Vector<>();
-        for (Fahrstunde Fahrstunde : list) {
+        list.stream().map((Fahrstunde Fahrstunde) -> {
             Vector<Object> dataitems = new Vector<>();
             dataitems.add(Fahrstunde.getId());
             dataitems.add(Fahrstunde.getDatum());
             dataitems.add(Fahrstunde.getKundeName());
             dataitems.add(Fahrstunde.getFahrlehrerName());
             dataitems.add(Fahrstunde.getFullAddress());
+            return dataitems;
+        }).forEachOrdered((dataitems) -> {
             data.add(dataitems);
-        }
+        });
 
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         return tableModel;
@@ -75,14 +75,16 @@ public class Converter {
         columnNames.add("Guthaben");
 
         Vector<Vector<Object>> data = new Vector<>();
-        for (Fahrschueler fahrschueler : list) {
+        list.stream().map((Fahrschueler fahrschueler) -> {
             Vector<Object> dataitems = new Vector<>();
             dataitems.add(fahrschueler.getId());
             dataitems.add(fahrschueler.getVorname() + " " + fahrschueler.getNachname());
             dataitems.add(fahrschueler.getFullAddress());
             dataitems.add(fahrschueler.getGuthaben());
+            return dataitems;
+        }).forEachOrdered((dataitems) -> {
             data.add(dataitems);
-        }
+        });
 
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         return tableModel;

@@ -3,21 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/SQLService.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ConnectionManager.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Fenster.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/UDriveControlCenter.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDFahrstunde.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDKunde.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/UpdateCredit.java</file>
-=======
-            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/UDriveControlCenter.java</file>
-            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/ADDFahrstunde.java</file>
-            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Fenster.java</file>
-            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/Login.java</file>
-            <file>file:/C:/git/SWT2-Projekt/uDrive%20Control%20Center/src/udrive/control/center/SQLService.java</file>
->>>>>>> origin/master
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/ADDFahrstundenFactory.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/UpdateCredit.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/ADDFahrstunde.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/FensterFactory.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/LoginFactory.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/Fenster.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/DerRestDerInKeineKategoriePasstService.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/ConnectionManager.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/ADDKundeFactory.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/Login.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/UpdateCreditFactory.java</file>
+            <file>file:/C:/svn/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/ADDKunde.java</file>
         </group>
     </open-files>
 </project-private>

@@ -91,7 +91,7 @@ public class FahrstundeService {
     /**
      * Löscht in der Tabelle Fahrstunde den eintrag mit der ID
      *
-     * @param id FahrstundenID
+     * @param fahrstunde
      */
     public void deleteFahrstunde(Fahrstunde fahrstunde) {
         try (Connection conn = ConnectionManager.getConnection()) {
@@ -112,7 +112,11 @@ public class FahrstundeService {
     /**
      * Erstellt einen Fahrstunde in der Tabelle Fahrstunden
      *
-     * @param fahrstunde
+     * @param datum
+     * @param treffpunkt
+     * @param fahrlehrer
+     * @param kunde
+     * @param rechnungID
      */
     public void insertFahrstunde(Date datum, Treffpunkt treffpunkt,
             Fahrlehrer fahrlehrer, Fahrschueler kunde, int rechnungID) {

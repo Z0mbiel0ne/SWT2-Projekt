@@ -24,6 +24,7 @@ public class ConnectionManager {
      * Get Database Connection
      *
      * @return Connection
+     * @throws java.sql.SQLException
      */
     public static Connection getConnection() throws SQLException {
         try {

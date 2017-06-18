@@ -9,6 +9,8 @@ import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import fhdo.swt2.udrive.model.KundenService;
 import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -29,16 +31,17 @@ public class UpdateCredit extends javax.swing.JFrame {
      * Creates new form updateCredit
      *
      * @param id
+     * @param j
      */
     public UpdateCredit(int id, JTable j) {
         table = j;
         this.SERVICE = new DerRestDerInKeineKategoriePasstService();
-        this.SERVICEKUNDEN= new KundenService();
+        this.SERVICEKUNDEN = new KundenService();
         this.SERVICECONVERTER = new Converter();
         this.id = id;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
-        rootPane.setDefaultButton(jButton1);
+        JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
+        jRootPane.setDefaultButton(jButton1);
         setVisible(true);
     }
 
@@ -104,8 +107,8 @@ public class UpdateCredit extends javax.swing.JFrame {
 
             table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
             dispose();
-        } catch (NumberFormatException numberFormatException) {
-
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -86,6 +86,7 @@ public class Fahrschueler {
     /**
      * Only kunde constructor
      *
+     * @param id
      * @param hausnummer
      * @param guthaben
      * @param vorname

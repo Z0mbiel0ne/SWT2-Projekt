@@ -50,3 +50,5 @@ hs_err_pid
 uDrive Control Center/nbproject/private/private.xml
 uDrive Control Center/nbproject/private/private.xml
 *.properties
+uDrive Control Center/nbproject/private/private.properties
+*.xml
