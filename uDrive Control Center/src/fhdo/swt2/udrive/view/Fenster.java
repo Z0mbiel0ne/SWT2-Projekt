@@ -5,6 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
 import fhdo.swt2.udrive.model.ADDKundeFactory;
 import fhdo.swt2.udrive.model.SQLService;
@@ -19,8 +20,8 @@ import java.util.logging.Logger;
  */
 public class Fenster extends javax.swing.JFrame {
 
-    private final static SQLService SERVICE = new SQLService();
-    ADDKunde addKunde;
+    private final static DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
+    private ADDKunde addKunde;
     ADDKundeFactory addKundeFactory;
     ADDFahrstundenFactory addfactory;
     UpdateCreditFactory updateCreditFactory;

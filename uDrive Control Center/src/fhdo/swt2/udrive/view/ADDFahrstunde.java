@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
  */
 public class ADDFahrstunde extends javax.swing.JFrame {
 
-    private final SQLService SERVICE = new SQLService();
+    private final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
     String[][] treffpunktarr;
     String[][] fahrlehrerarr;
     String[][] kundearr;

@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
  */
 public class UpdateCredit extends javax.swing.JFrame {
 
-    private final SQLService SERVICE;
+    private final DerRestDerInKeineKategoriePasstService SERVICE;
     private final int id;
     private final JTable table;
 
@@ -27,7 +27,7 @@ public class UpdateCredit extends javax.swing.JFrame {
      */
     public UpdateCredit(int id, JTable j) {
         table = j;
-        this.SERVICE = new SQLService();
+        this.SERVICE = new DerRestDerInKeineKategoriePasstService();
         this.id = id;
         initComponents();
         JRootPane rootPane = SwingUtilities.getRootPane(jButton1);

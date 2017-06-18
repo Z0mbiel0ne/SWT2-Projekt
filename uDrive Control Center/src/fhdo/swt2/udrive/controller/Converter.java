@@ -5,7 +5,7 @@
  */
 package fhdo.swt2.udrive.controller;
 
-import fhdo.swt2.udrive.model.SQLService;
+import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -57,7 +57,7 @@ public class Converter {
 
             return new DefaultTableModel(data, columnNames);
         } catch (SQLException ex) {
-            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
             return new DefaultTableModel();
         }
     }
@@ -88,7 +88,7 @@ public class Converter {
 
             resultArray = data.toArray(new String[data.size()][]);
         } catch (SQLException ex) {
-            Logger.getLogger(SQLService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultArray;
     }
