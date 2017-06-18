@@ -8,7 +8,6 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
 import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
 import fhdo.swt2.udrive.model.ADDKundeFactory;
-import fhdo.swt2.udrive.model.SQLService;
 import fhdo.swt2.udrive.model.UpdateCreditFactory;
 import java.sql.SQLException;
 import java.util.logging.Level;

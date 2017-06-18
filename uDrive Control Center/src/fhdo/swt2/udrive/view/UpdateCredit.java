@@ -5,7 +5,10 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.KundenService;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -17,6 +20,8 @@ import javax.swing.SwingUtilities;
 public class UpdateCredit extends javax.swing.JFrame {
 
     private final DerRestDerInKeineKategoriePasstService SERVICE;
+    private final KundenService SERVICEKUNDEN;
+    private final Converter SERVICECONVERTER;
     private final int id;
     private final JTable table;
 
@@ -28,6 +33,8 @@ public class UpdateCredit extends javax.swing.JFrame {
     public UpdateCredit(int id, JTable j) {
         table = j;
         this.SERVICE = new DerRestDerInKeineKategoriePasstService();
+        this.SERVICEKUNDEN= new KundenService();
+        this.SERVICECONVERTER = new Converter();
         this.id = id;
         initComponents();
         JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
@@ -91,12 +98,11 @@ public class UpdateCredit extends javax.swing.JFrame {
 
         int value;
         try {
-
             value = Integer.parseInt(jTextField1.getText());
 
-            SERVICE.updateCredit(id, value);
+            SERVICEKUNDEN.updateCredit(new Fahrschueler(id, 1, value, null, null, null, null, null));
 
-            table.setModel(SERVICE.getKundenTable());
+            table.setModel(SERVICECONVERTER.convertToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
             dispose();
         } catch (NumberFormatException numberFormatException) {
 

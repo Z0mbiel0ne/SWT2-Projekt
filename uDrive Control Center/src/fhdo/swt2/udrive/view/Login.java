@@ -6,6 +6,7 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.dto.User;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -98,7 +99,7 @@ public class Login extends javax.swing.JFrame {
         String pass = String.copyValueOf(jPasswordField1.getPassword());
         if(!user.equals("") && !pass.equals(""))
         {    
-            if (SERVICE.checkPasswort(user, pass)) {
+            if (SERVICE.checkPasswort(new User(user, pass))) {
                 setVisible(false);
                 dispose();
                 Fenster fenster = new Fenster();

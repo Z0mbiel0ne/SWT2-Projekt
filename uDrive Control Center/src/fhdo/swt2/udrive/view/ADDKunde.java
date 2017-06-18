@@ -5,7 +5,10 @@
  */
 package fhdo.swt2.udrive.view;
 
+import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.KundenService;
+import fhdo.swt2.udrive.model.dto.Fahrschueler;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -17,6 +20,8 @@ import javax.swing.SwingUtilities;
 public class ADDKunde extends javax.swing.JFrame {
 
     private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
+    private static  final KundenService SERVICEKUNDE = new KundenService();
+    private  static  final Converter SERVICECONVERTER = new Converter();
     private JTable table;
 
     /**
@@ -251,9 +256,9 @@ public class ADDKunde extends javax.swing.JFrame {
             iban = Integer.parseInt(jTextField5.getText());
             bic = Integer.parseInt(jTextField10.getText());
 
-            SERVICE.addKunde(vorname, nachname, plz, stadt, strasse, hausnummer, kontonummer, blz, iban, bic);
+            SERVICEKUNDE.addKunde( new Fahrschueler(bic, hausnummer, iban, vorname, nachname, stadt, stadt, strasse));
 
-            table.setModel(SERVICE.getKundenTable());
+            table.setModel(SERVICECONVERTER.convertToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
             dispose();
         } catch (NumberFormatException numberFormatException) {
             jLabel11.setVisible(true);
