@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fhdo.swt2.udrive.controller;
 
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
@@ -11,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
-import java.util.function.Function;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -37,16 +31,16 @@ public class Converter {
      * @return
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
-        Vector<Object> columnNames = new Vector<>();
+        LinkedList<Object> columnNames = new LinkedList<>();
         columnNames.add("ID");
         columnNames.add("Datum");
         columnNames.add("Fahrschüler");
         columnNames.add("Fahrlehrer");
         columnNames.add("Adresse");
 
-        Vector<Vector<Object>> data = new Vector<>();
+        LinkedList<LinkedList<Object>> data = new LinkedList<>();
         list.stream().map((Fahrstunde Fahrstunde) -> {
-            Vector<Object> dataitems = new Vector<>();
+            LinkedList<Object> dataitems = new LinkedList<>();
             dataitems.add(Fahrstunde.getId());
             dataitems.add(Fahrstunde.getDatum());
             dataitems.add(Fahrstunde.getKundeName());
@@ -57,7 +51,8 @@ public class Converter {
             data.add(dataitems);
         });
 
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        Object[][] objectArray = convertLinkedListToVector(data);
+        DefaultTableModel tableModel = new DefaultTableModel(objectArray, columnNames.toArray());
         return tableModel;
     }
 
@@ -68,15 +63,15 @@ public class Converter {
      * @return
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
-        Vector<Object> columnNames = new Vector<>();
+        LinkedList<Object> columnNames = new LinkedList<>();
         columnNames.add("Id");
         columnNames.add("Name");
         columnNames.add("Adresse");
         columnNames.add("Guthaben");
 
-        Vector<Vector<Object>> data = new Vector<>();
+        LinkedList<LinkedList<Object>> data = new LinkedList<>();
         list.stream().map((Fahrschueler fahrschueler) -> {
-            Vector<Object> dataitems = new Vector<>();
+            LinkedList<Object> dataitems = new LinkedList<>();
             dataitems.add(fahrschueler.getId());
             dataitems.add(fahrschueler.getVorname() + " " + fahrschueler.getNachname());
             dataitems.add(fahrschueler.getFullAddress());
@@ -86,7 +81,8 @@ public class Converter {
             data.add(dataitems);
         });
 
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        Object[][] objectArray = convertLinkedListToVector(data);
+        DefaultTableModel tableModel = new DefaultTableModel(objectArray, columnNames.toArray());
         return tableModel;
     }
 
@@ -102,23 +98,25 @@ public class Converter {
             metaData = resultSet.getMetaData();
 
             // names of columns
-            Vector<String> columnNames = new Vector<>();
+            LinkedList<String> columnNames = new LinkedList<>();
             int columnCount = metaData.getColumnCount();
             for (int column = 1; column <= columnCount; column++) {
                 columnNames.add(metaData.getColumnName(column));
             }
 
             // data of the table
-            Vector<Vector<Object>> data = new Vector<>();
+            LinkedList<LinkedList<Object>> data = new LinkedList<>();
             while (resultSet.next()) {
-                Vector<Object> vector = new Vector<>();
+                LinkedList<Object> vector = new LinkedList<>();
                 for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
                     vector.add(resultSet.getObject(columnIndex));
                 }
                 data.add(vector);
             }
 
-            return new DefaultTableModel(data, columnNames);
+            Object[][] objectArray = convertLinkedListToVector(data);
+            DefaultTableModel tableModel = new DefaultTableModel(objectArray, columnNames.toArray());
+            return tableModel;
         } catch (SQLException ex) {
             Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
             return new DefaultTableModel();
@@ -140,9 +138,9 @@ public class Converter {
             int columnCount = metaData.getColumnCount();
 
             // data of the table
-            Vector<String[]> data = new Vector<>();
+            LinkedList<String[]> data = new LinkedList<>();
             while (resultSet.next()) {
-                Vector<String> vector = new Vector<>();
+                LinkedList<String> vector = new LinkedList<>();
                 for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
                     vector.add(resultSet.getString(columnIndex));
                 }
@@ -154,5 +152,29 @@ public class Converter {
             Logger.getLogger(Converter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultArray;
+    }
+
+    /**
+     * Convert LinkedList to Object[][]
+     *
+     * @param list
+     * @return doubleArray
+     */
+    private Object[][] convertLinkedListToVector(LinkedList<LinkedList<Object>> list) {
+        if (list.isEmpty()) {
+            return new Object[0][0];
+        }
+
+        Object[][] doubleArray = new Object[list.size()][list.getFirst().size()];
+        int i = 0;
+
+        for (LinkedList<Object> l : list) {
+            int j = 0;
+            for (Object o : l) {
+                doubleArray[i][j++] = o;
+            }
+            i++;
+        }
+        return doubleArray;
     }
 }
