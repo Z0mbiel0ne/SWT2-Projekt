@@ -26,12 +26,6 @@ import java.util.logging.Logger;
 public class BuchungsServices {
 
     /**
-     * Empty Constructor
-     */
-    public BuchungsServices() {
-    }
-
-    /**
      * Gimme Fahrstunde
      *
      * @param kundenID

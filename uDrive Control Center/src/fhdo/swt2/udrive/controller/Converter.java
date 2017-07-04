@@ -19,16 +19,10 @@ import javax.swing.table.DefaultTableModel;
 public class Converter {
 
     /**
-     * Konstruktor
-     */
-    public Converter() {
-    }
-
-    /**
-     * Convert ArrayList ti DefaultTableModel
+     * Convert ArrayList to DefaultTableModel
      *
      * @param list
-     * @return
+     * @return tableModel
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
         LinkedList<Object> columnNames = new LinkedList<>();
@@ -57,10 +51,10 @@ public class Converter {
     }
 
     /**
-     * Convert ArrayList ti DefaultTableModel
+     * Convert ArrayList to DefaultTableModel
      *
      * @param list
-     * @return
+     * @return tableModel
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
         LinkedList<Object> columnNames = new LinkedList<>();
@@ -90,7 +84,7 @@ public class Converter {
      * Convert ResultSet to DefaultTableModel with header
      *
      * @param resultSet
-     * @return DefaultTableModel
+     * @return tableModel
      */
     public DefaultTableModel convertToDefaultTableModel(ResultSet resultSet) {
         try {
