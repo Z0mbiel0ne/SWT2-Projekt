@@ -23,12 +23,12 @@ import java.util.logging.Logger;
  *
  * @author ExaShox
  */
-public class FahrstundeService {
+public class BuchungsServices {
 
     /**
      * Empty Constructor
      */
-    public FahrstundeService() {
+    public BuchungsServices() {
     }
 
     /**
@@ -83,7 +83,7 @@ public class FahrstundeService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             return fahrstundeList;
         }
@@ -106,7 +106,7 @@ public class FahrstundeService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -146,7 +146,46 @@ public class FahrstundeService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Liefert ALLE Treffpunkte in der Form ID|Straße
+     *
+     * @return Bsp: [0][0] : 1 [0][1] : Essen
+     */
+    public ArrayList<Treffpunkt> getTreffpunkte() {
+        ArrayList<Treffpunkt> treffpunktList = new ArrayList<>();
+
+        try (Connection conn = ConnectionManager.getConnection()) {
+            PreparedStatement stmt;
+
+            // select data
+            String sqlString
+                    = "SELECT * "
+                    + "FROM treffpunkt;";
+
+            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
+            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
+
+            while (rs.next()) {
+                Treffpunkt treffpunkt = new Treffpunkt();
+
+                treffpunkt.setId(rs.getInt("TreffpunktID"));
+                treffpunkt.setStrasse(rs.getString("Straße"));
+                treffpunkt.setPlz(rs.getString("Postleitzahl"));
+                treffpunkt.setStadt(rs.getString("Stadt"));
+
+                treffpunktList.add(treffpunkt);
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return treffpunktList;
         }
     }
 }

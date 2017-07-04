@@ -57,7 +57,7 @@ public class KundenService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +79,7 @@ public class KundenService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -127,7 +127,7 @@ public class KundenService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             return kundeList;
         }
@@ -154,7 +154,7 @@ public class KundenService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

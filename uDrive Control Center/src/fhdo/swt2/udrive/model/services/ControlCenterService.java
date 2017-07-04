@@ -2,7 +2,6 @@ package fhdo.swt2.udrive.model.services;
 
 import fhdo.swt2.udrive.model.ConnectionManager;
 import fhdo.swt2.udrive.model.services.objects.Fahrlehrer;
-import fhdo.swt2.udrive.model.services.objects.Treffpunkt;
 import fhdo.swt2.udrive.model.services.objects.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,12 +16,12 @@ import java.util.logging.Logger;
  *
  * @author ExaShox
  */
-public class DerRestDerInKeineKategoriePasstService {
+public class ControlCenterService {
 
     /**
      * Konstruktor
      */
-    public DerRestDerInKeineKategoriePasstService() {
+    public ControlCenterService() {
     }
 
     public boolean checkPasswort(User user) {
@@ -40,48 +39,9 @@ public class DerRestDerInKeineKategoriePasstService {
             conn.close();
             return user.getPassword().equals(test);
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Es konnte keine Verbindung hergestellt werden Sie befinden sich im Testmodus");
             return false;
-        }
-    }
-
-    /**
-     * Liefert ALLE Treffpunkte in der Form ID|Straße
-     *
-     * @return Bsp: [0][0] : 1 [0][1] : Essen
-     */
-    public ArrayList<Treffpunkt> getTreffpunkte() {
-        ArrayList<Treffpunkt> treffpunktList = new ArrayList<>();
-
-        try (Connection conn = ConnectionManager.getConnection()) {
-            PreparedStatement stmt;
-
-            // select data
-            String sqlString
-                    = "SELECT * "
-                    + "FROM treffpunkt;";
-
-            stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
-            ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
-
-            while (rs.next()) {
-                Treffpunkt treffpunkt = new Treffpunkt();
-
-                treffpunkt.setId(rs.getInt("TreffpunktID"));
-                treffpunkt.setStrasse(rs.getString("Straße"));
-                treffpunkt.setPlz(rs.getString("Postleitzahl"));
-                treffpunkt.setStadt(rs.getString("Stadt"));
-
-                treffpunktList.add(treffpunkt);
-            }
-
-            stmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return treffpunktList;
         }
     }
 
@@ -132,7 +92,7 @@ public class DerRestDerInKeineKategoriePasstService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DerRestDerInKeineKategoriePasstService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             return fahrlehrerList;
         }

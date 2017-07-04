@@ -6,8 +6,8 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.controller.Converter;
-import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
-import fhdo.swt2.udrive.model.services.FahrstundeService;
+import fhdo.swt2.udrive.model.services.ControlCenterService;
+import fhdo.swt2.udrive.model.services.BuchungsServices;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrlehrer;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
@@ -28,9 +28,10 @@ import javax.swing.SwingUtilities;
  */
 public class ADDFahrstunde extends javax.swing.JFrame {
 
-    private final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
+    private final ControlCenterService CONTROLCENTERSERVICE = new ControlCenterService();
     private final KundenService KUNDENSERVICE = new KundenService();
-    private final FahrstundeService FAHRSTUNDENSERVICE = new FahrstundeService();
+    private final BuchungsServices BUCHUNGSSERVICE = new BuchungsServices();
+    
     private final Converter CONVERTER = new Converter();
     ArrayList<Treffpunkt> treffpunktList;
     ArrayList<Fahrlehrer> fahrlehrerList;
@@ -58,13 +59,13 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         jXDatePicker1.setDate(date);
 
         jComboBox1.addItem("Auswahl...");
-        treffpunktList = SERVICE.getTreffpunkte();
+        treffpunktList = BUCHUNGSSERVICE.getTreffpunkte();
         treffpunktList.forEach((treffpunkt) -> {
             jComboBox1.addItem(treffpunkt.getPlz());
         });
 
         jComboBox2.addItem("Auswahl...");
-        fahrlehrerList = SERVICE.getFahrlehrer();
+        fahrlehrerList = CONTROLCENTERSERVICE.getFahrlehrer();
         fahrlehrerList.forEach((fahrlehrer) -> {
             jComboBox2.addItem(fahrlehrer.getName());
         });
@@ -214,10 +215,10 @@ public class ADDFahrstunde extends javax.swing.JFrame {
 
             int rechnungID = Integer.parseInt(jTextField1.getText());
 
-            FAHRSTUNDENSERVICE.insertFahrstunde(datum, treffpunkt, fahrlehrer, fahrschueler, rechnungID);
+            BUCHUNGSSERVICE.insertFahrstunde(datum, treffpunkt, fahrlehrer, fahrschueler, rechnungID);
 
             int row = table1.getSelectedRow();
-            table2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDENSERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString()))));
+            table2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(BUCHUNGSSERVICE.getFahrstundeTable(Integer.parseInt(table1.getValueAt(row, 0).toString()))));
             dispose();
         } catch (NumberFormatException ex) {
             Logger.getLogger(ADDFahrstunde.class.getName()).log(Level.SEVERE, null, ex);

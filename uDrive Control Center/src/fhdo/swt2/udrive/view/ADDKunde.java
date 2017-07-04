@@ -6,7 +6,6 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.controller.Converter;
-import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import javax.swing.JRootPane;
@@ -18,19 +17,17 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
-
-    private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
-    private static final KundenService SERVICEKUNDE = new KundenService();
-    private static final Converter SERVICECONVERTER = new Converter();
+    private static final KundenService KUNDENSERVICES = new KundenService();
+    private static final Converter CONVERTER = new Converter();
     private final JTable table;
 
     /**
      * Creates new form ADDKunde
      *
-     * @param j
+     * @param table
      */
-    public ADDKunde(JTable j) {
-        table = j;
+    public ADDKunde(JTable table) {
+        this.table = table;
         initComponents();
         JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
         rootPane.setDefaultButton(jButton1);
@@ -261,9 +258,9 @@ public class ADDKunde extends javax.swing.JFrame {
         fahrschueler.setIban(iban);
         fahrschueler.setBic(bic);
 
-        SERVICEKUNDE.addKunde(fahrschueler);
+        KUNDENSERVICES.addKunde(fahrschueler);
 
-        table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
+        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKundenTable()));
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

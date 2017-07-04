@@ -6,7 +6,7 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.controller.Converter;
-import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.services.ControlCenterService;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import java.util.logging.Level;
@@ -21,9 +21,8 @@ import javax.swing.SwingUtilities;
  */
 public class UpdateCredit extends javax.swing.JFrame {
 
-    private final DerRestDerInKeineKategoriePasstService SERVICE;
-    private final KundenService SERVICEKUNDEN;
-    private final Converter SERVICECONVERTER;
+    private final KundenService KUNDENSERVICES;
+    private final Converter CONVERTER;
     private final int id;
     private final JTable table;
 
@@ -31,14 +30,15 @@ public class UpdateCredit extends javax.swing.JFrame {
      * Creates new form updateCredit
      *
      * @param id
-     * @param j
+     * @param table
      */
-    public UpdateCredit(int id, JTable j) {
-        table = j;
-        this.SERVICE = new DerRestDerInKeineKategoriePasstService();
-        this.SERVICEKUNDEN = new KundenService();
-        this.SERVICECONVERTER = new Converter();
+    public UpdateCredit(int id, JTable table) {
+        this.table = table;
         this.id = id;
+
+        KUNDENSERVICES = new KundenService();
+        CONVERTER = new Converter();
+
         initComponents();
         JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
         jRootPane.setDefaultButton(jButton1);
@@ -107,12 +107,12 @@ public class UpdateCredit extends javax.swing.JFrame {
             fahrschueler.setId(id);
             fahrschueler.setGuthaben(value);
 
-            SERVICEKUNDEN.updateCredit(fahrschueler);
+            KUNDENSERVICES.updateCredit(fahrschueler);
         } catch (NumberFormatException ex) {
             Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
+        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKundenTable()));
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

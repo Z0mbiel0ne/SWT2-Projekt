@@ -8,7 +8,7 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
 import fhdo.swt2.udrive.model.ADDKundeFactory;
-import fhdo.swt2.udrive.model.services.FahrstundeService;
+import fhdo.swt2.udrive.model.services.BuchungsServices;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.UpdateCreditFactory;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
@@ -24,13 +24,13 @@ import java.util.logging.Logger;
 public class Fenster extends javax.swing.JFrame {
 
     private final static KundenService KUNDENSERVICE = new KundenService();
-    private final static FahrstundeService FAHRSTUNDESERVICE = new FahrstundeService();
+    private final static BuchungsServices BUCHUNGSSERVICE = new BuchungsServices();
     private final static Converter CONVERTER = new Converter();
+    
     private ADDKunde addKunde;
     ADDKundeFactory addKundeFactory;
     ADDFahrstundenFactory addfactory;
     UpdateCreditFactory updateCreditFactory;
-    private UpdateCredit updateCredit;
 
     /**
      * Creates new form Fenster
@@ -276,7 +276,7 @@ public class Fenster extends javax.swing.JFrame {
 
                 Fahrstunde fahrstunde = new Fahrstunde();
                 fahrstunde.setId(value);
-                FAHRSTUNDESERVICE.deleteFahrstunde(fahrstunde);
+                BUCHUNGSSERVICE.deleteFahrstunde(fahrstunde);
             }
         }
         refreshtable2();
@@ -287,7 +287,7 @@ public class Fenster extends javax.swing.JFrame {
         if (rows != null) {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-                jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(value)));
+                jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(BUCHUNGSSERVICE.getFahrstundeTable(value)));
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
@@ -304,7 +304,7 @@ public class Fenster extends javax.swing.JFrame {
      */
     public void refreshtable2() {
         int row = jTable1.getSelectedRow();
-        jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
+        jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(BUCHUNGSSERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
