@@ -13,16 +13,15 @@ import javax.swing.JTable;
  * @author Marcel
  */
 public class ADDKundeFactory {
-    
+
     ADDKunde addKunde;
-    public ADDKundeFactory()
-    {
-        
+
+    public ADDKundeFactory() {
+
     }
-    
-    public ADDKunde newInstance(JTable jTable1)
-    {
-             addKunde = new ADDKunde(jTable1);
-             return addKunde;
+
+    public ADDKunde newInstance(JTable jTable1) {
+        addKunde = new ADDKunde(jTable1);
+        return addKunde;
     }
 }

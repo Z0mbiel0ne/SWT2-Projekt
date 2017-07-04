@@ -50,8 +50,8 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         table1 = j1;
         table2 = j2;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
-        rootPane.setDefaultButton(jButton1);
+        JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
+        jRootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
 
         setVisible(rootPaneCheckingEnabled);

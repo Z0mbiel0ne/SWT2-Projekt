@@ -14,8 +14,10 @@ import fhdo.swt2.udrive.model.UpdateCreditFactory;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import fhdo.swt2.udrive.model.services.objects.Fahrstunde;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Fenster extends javax.swing.JFrame {
     private final static KundenService KUNDENSERVICE = new KundenService();
     private final static BuchungsServices BUCHUNGSSERVICE = new BuchungsServices();
     private final static Converter CONVERTER = new Converter();
-    
+
     private ADDKunde addKunde;
     ADDKundeFactory addKundeFactory;
     ADDFahrstundenFactory addfactory;
@@ -239,9 +241,7 @@ public class Fenster extends javax.swing.JFrame {
                     Fahrschueler fahrschueler = new Fahrschueler();
                     fahrschueler.setId(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
                     KUNDENSERVICE.deleteKunde(fahrschueler);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (NumberFormatException ex) {
+                } catch (SQLException | NumberFormatException ex) {
                     Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 refreshtable1();
@@ -287,7 +287,9 @@ public class Fenster extends javax.swing.JFrame {
         if (rows != null) {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
-                jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(BUCHUNGSSERVICE.getFahrstundeTable(value)));
+                ArrayList<Fahrstunde> fahrstundenList = BUCHUNGSSERVICE.getFahrstundeTable(value);
+                DefaultTableModel fahrstundenTableModel = CONVERTER.convertFahrstundeToDefaultTableModel(fahrstundenList);
+                jTable2.setModel(fahrstundenTableModel);
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked

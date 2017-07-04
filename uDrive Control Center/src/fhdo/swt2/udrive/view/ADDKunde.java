@@ -29,8 +29,8 @@ public class ADDKunde extends javax.swing.JFrame {
     public ADDKunde(JTable table) {
         this.table = table;
         initComponents();
-        JRootPane rootPane = SwingUtilities.getRootPane(jButton1);
-        rootPane.setDefaultButton(jButton1);
+        JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
+        jRootPane.setDefaultButton(jButton1);
         jLabel11.setVisible(false);
     }
 
