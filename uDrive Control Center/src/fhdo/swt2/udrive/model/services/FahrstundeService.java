@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fhdo.swt2.udrive.model;
+package fhdo.swt2.udrive.model.services;
 
-import fhdo.swt2.udrive.model.dto.Fahrlehrer;
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
-import fhdo.swt2.udrive.model.dto.Fahrstunde;
-import fhdo.swt2.udrive.model.dto.Treffpunkt;
+import fhdo.swt2.udrive.model.ConnectionManager;
+import fhdo.swt2.udrive.model.services.objects.Fahrlehrer;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
+import fhdo.swt2.udrive.model.services.objects.Fahrstunde;
+import fhdo.swt2.udrive.model.services.objects.Treffpunkt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,9 +33,9 @@ public class FahrstundeService {
 
     /**
      * Gimme Fahrstunde
-     * 
+     *
      * @param kundenID
-     * @return 
+     * @return
      */
     public ArrayList<Fahrstunde> getFahrstundeTable(int kundenID) {
         ArrayList<Fahrstunde> fahrstundeList = new ArrayList<>();
@@ -66,15 +67,15 @@ public class FahrstundeService {
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             while (rs.next()) {
-                Fahrstunde fahrstunde = new Fahrstunde(
-                        rs.getInt("ID"),
-                        rs.getString("Schüler"),
-                        rs.getString("Fahrlehrer"),
-                        rs.getString("Strasse"),
-                        rs.getString("PLZ"),
-                        rs.getString("Stadt"),
-                        rs.getDate("Datum")
-                );
+                Fahrstunde fahrstunde = new Fahrstunde();
+
+                fahrstunde.setId(rs.getInt("ID"));
+                fahrstunde.setKundeName(rs.getString("Schüler"));
+                fahrstunde.setFahrlehrerName(rs.getString("Fahrlehrer"));
+                fahrstunde.setStrasse(rs.getString("Strasse"));
+                fahrstunde.setPlz(rs.getString("PLZ"));
+                fahrstunde.setStadt(rs.getString("Stadt"));
+                fahrstunde.setDatum(rs.getDate("Datum"));
 
                 fahrstundeList.add(fahrstunde);
             }

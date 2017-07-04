@@ -6,9 +6,9 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.controller.Converter;
-import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
-import fhdo.swt2.udrive.model.KundenService;
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.services.KundenService;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JRootPane;
@@ -98,18 +98,22 @@ public class UpdateCredit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         int value;
+        Fahrschueler fahrschueler = new Fahrschueler();
+
         try {
             value = Integer.parseInt(jTextField1.getText());
 
-            SERVICEKUNDEN.updateCredit(new Fahrschueler(id, 1, value, null, null, null, null, null));
+            fahrschueler.setId(id);
+            fahrschueler.setGuthaben(value);
 
-            table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
-            dispose();
+            SERVICEKUNDEN.updateCredit(fahrschueler);
         } catch (NumberFormatException ex) {
             Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDEN.getKundenTable()));
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,11 +8,11 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.ADDFahrstundenFactory;
 import fhdo.swt2.udrive.model.ADDKundeFactory;
-import fhdo.swt2.udrive.model.FahrstundeService;
-import fhdo.swt2.udrive.model.KundenService;
+import fhdo.swt2.udrive.model.services.FahrstundeService;
+import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.UpdateCreditFactory;
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
-import fhdo.swt2.udrive.model.dto.Fahrstunde;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
+import fhdo.swt2.udrive.model.services.objects.Fahrstunde;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -233,13 +233,15 @@ public class Fenster extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int rows[] = jTable1.getSelectedRows();
-        if (rows == null) {
-
-        } else {
+        if (rows != null) {
             for (int row : rows) {
                 try {
-                    KUNDENSERVICE.deleteKunde(new Fahrschueler(Integer.parseInt(jTable1.getValueAt(row, 0).toString()), 0, 0, null, null, null, null, null));
+                    Fahrschueler fahrschueler = new Fahrschueler();
+                    fahrschueler.setId(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+                    KUNDENSERVICE.deleteKunde(fahrschueler);
                 } catch (SQLException ex) {
+                    Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NumberFormatException ex) {
                     Logger.getLogger(Fenster.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 refreshtable1();
@@ -257,9 +259,7 @@ public class Fenster extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int rows[] = jTable1.getSelectedRows();
-        if (rows == null) {
-
-        } else {
+        if (rows != null) {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
                 updateCreditFactory = new UpdateCreditFactory();
@@ -270,9 +270,7 @@ public class Fenster extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int rows[] = jTable2.getSelectedRows();
-        if (rows == null) {
-
-        } else {
+        if (rows != null) {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable2.getValueAt(row, 0).toString());
 
@@ -286,9 +284,7 @@ public class Fenster extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int rows[] = jTable1.getSelectedRows();
-        if (rows == null) {
-
-        } else {
+        if (rows != null) {
             for (int row : rows) {
                 int value = Integer.parseInt(jTable1.getValueAt(row, 0).toString());
                 jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(FAHRSTUNDESERVICE.getFahrstundeTable(value)));

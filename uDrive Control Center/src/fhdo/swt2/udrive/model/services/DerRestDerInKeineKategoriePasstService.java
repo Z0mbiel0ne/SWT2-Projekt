@@ -1,8 +1,9 @@
-package fhdo.swt2.udrive.model;
+package fhdo.swt2.udrive.model.services;
 
-import fhdo.swt2.udrive.model.dto.Fahrlehrer;
-import fhdo.swt2.udrive.model.dto.Treffpunkt;
-import fhdo.swt2.udrive.model.dto.User;
+import fhdo.swt2.udrive.model.ConnectionManager;
+import fhdo.swt2.udrive.model.services.objects.Fahrlehrer;
+import fhdo.swt2.udrive.model.services.objects.Treffpunkt;
+import fhdo.swt2.udrive.model.services.objects.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,12 +66,12 @@ public class DerRestDerInKeineKategoriePasstService {
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             while (rs.next()) {
-                Treffpunkt treffpunkt = new Treffpunkt(
-                        rs.getInt("TreffpunktID"),
-                        rs.getString("Straße"),
-                        rs.getString("Postleitzahl"),
-                        rs.getString("Stadt")
-                );
+                Treffpunkt treffpunkt = new Treffpunkt();
+
+                treffpunkt.setId(rs.getInt("TreffpunktID"));
+                treffpunkt.setStrasse(rs.getString("Straße"));
+                treffpunkt.setPlz(rs.getString("Postleitzahl"));
+                treffpunkt.setStadt(rs.getString("Stadt"));
 
                 treffpunktList.add(treffpunkt);
             }
@@ -109,21 +110,21 @@ public class DerRestDerInKeineKategoriePasstService {
                     + "FROM fahrlehrer AS fa "
                     + "INNER JOIN personal AS pe "
                     + "ON pe.PersonalID = fa.PersonalID;";
-            
+
             stmt = conn.prepareStatement(sqlString); // Prepared Statement anlegen 
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             while (rs.next()) {
-                Fahrlehrer fahrlehrer = new Fahrlehrer(
-                        rs.getInt("FahrlehrerID"),
-                        rs.getInt("PersonalID"),
-                        rs.getString("Vorname"),
-                        rs.getString("Name"),
-                        rs.getString("Postleitzahl"),
-                        rs.getString("Stadt"),
-                        rs.getString("Straße"),
-                        rs.getString("Hausnummer")
-                );
+                Fahrlehrer fahrlehrer = new Fahrlehrer();
+
+                fahrlehrer.setFahrlehrerID(rs.getInt("FahrlehrerID"));
+                fahrlehrer.setPersonalID(rs.getInt("PersonalID"));
+                fahrlehrer.setVorname(rs.getString("Vorname"));
+                fahrlehrer.setName(rs.getString("Name"));
+                fahrlehrer.setPlz(rs.getString("Postleitzahl"));
+                fahrlehrer.setStadt(rs.getString("Stadt"));
+                fahrlehrer.setStrasse(rs.getString("Straße"));
+                fahrlehrer.setHausnummer(rs.getString("Hausnummer"));
 
                 fahrlehrerList.add(fahrlehrer);
             }

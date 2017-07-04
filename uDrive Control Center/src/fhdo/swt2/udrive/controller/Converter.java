@@ -5,8 +5,8 @@
  */
 package fhdo.swt2.udrive.controller;
 
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
-import fhdo.swt2.udrive.model.dto.Fahrstunde;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
+import fhdo.swt2.udrive.model.services.objects.Fahrstunde;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package fhdo.swt2.udrive.model.dto;
+package fhdo.swt2.udrive.model.services.objects;
 
 /**
  * Kunden eigentlich nur Personal, aber Marcel meint das waer besser.. Idiot -
@@ -16,48 +16,6 @@ public class Fahrlehrer {
             stadt,
             strasse,
             hausnummer;
-
-    /**
-     * Konstruktor
-     *
-     * @param fahrlehrerID
-     * @param personalID
-     * @param vorname
-     * @param name
-     * @param plz
-     * @param stadt
-     * @param strasse
-     * @param hausnummer
-     */
-    public Fahrlehrer(int fahrlehrerID, int personalID, String vorname, String name, String plz, String stadt, String strasse, String hausnummer) {
-        this.fahrlehrerID = fahrlehrerID;
-        this.personalID = personalID;
-        this.vorname = vorname;
-        this.name = name;
-        this.plz = plz;
-        this.stadt = stadt;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-    }
-
-    /**
-     * Konstruktor
-     *
-     * @param vorname
-     * @param name
-     * @param plz
-     * @param stadt
-     * @param strasse
-     * @param hausnummer
-     */
-    public Fahrlehrer(String vorname, String name, String plz, String stadt, String strasse, String hausnummer) {
-        this.vorname = vorname;
-        this.name = name;
-        this.plz = plz;
-        this.stadt = stadt;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-    }
 
     public int getFahrlehrerID() {
         return fahrlehrerID;

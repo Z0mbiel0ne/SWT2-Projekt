@@ -5,8 +5,8 @@
  */
 package fhdo.swt2.udrive.view;
 
-import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
-import fhdo.swt2.udrive.model.dto.User;
+import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.services.objects.User;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -95,11 +95,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String user = jTextField1.getText();
-        String pass = String.copyValueOf(jPasswordField1.getPassword());
-        if(!user.equals("") && !pass.equals(""))
-        {    
-            if (SERVICE.checkPasswort(new User(user, pass))) {
+        String nickname = jTextField1.getText();
+        String password = String.copyValueOf(jPasswordField1.getPassword());
+        
+        User user = new User();
+        user.setUsername(nickname);
+        user.setPassword(password);
+        
+        if(!nickname.equals("") && !password.equals("")) {    
+            if (SERVICE.checkPasswort(user)) {
                 setVisible(false);
                 dispose();
                 Fenster fenster = new Fenster();

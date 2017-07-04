@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fhdo.swt2.udrive.model.dto;
+package fhdo.swt2.udrive.model.services.objects;
 
 import java.util.Date;
 
@@ -23,54 +23,10 @@ public class Fahrstunde {
     private Date datum;
     
     /**
-     * Empty Constructor
-     */
-    public Fahrstunde() {}
-
-    /**
-     * Full constructor
+     * Gibt die vollständige Adresse wieder
      * 
-     * @param id
-     * @param kundeName
-     * @param FahrlehrerName
-     * @param strasse
-     * @param plz
-     * @param stadt
-     * @param datum 
+     * @return fullAddress
      */
-    public Fahrstunde(int id, String kundeName, String FahrlehrerName, String strasse, String plz, String stadt, Date datum) {
-        this.id = id;
-        this.kundeName = kundeName;
-        this.FahrlehrerName = FahrlehrerName;
-        this.strasse = strasse;
-        this.plz = plz;
-        this.stadt = stadt;
-        this.datum = datum;
-    }
-
-    /**
-     * Noref constructor
-     * 
-     * @param kundeName
-     * @param FahrlehrerName
-     * @param strasse
-     * @param plz
-     * @param stadt
-     * @param datum 
-     */
-    public Fahrstunde(String kundeName, String FahrlehrerName, String strasse, String plz, String stadt, Date datum) {
-        this.kundeName = kundeName;
-        this.FahrlehrerName = FahrlehrerName;
-        this.strasse = strasse;
-        this.plz = plz;
-        this.stadt = stadt;
-        this.datum = datum;
-    }
-
-    public Fahrstunde(Date datum) {
-        this.datum = datum;
-    }
-    
     public String getFullAddress() {
         return strasse + ", " + plz + " " + stadt;
     }

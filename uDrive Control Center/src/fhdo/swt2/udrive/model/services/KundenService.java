@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fhdo.swt2.udrive.model;
+package fhdo.swt2.udrive.model.services;
 
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.ConnectionManager;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +46,7 @@ public class KundenService {
             stmt.setString(3, kunde.getPlz());
             stmt.setString(4, kunde.getStadt());
             stmt.setString(5, kunde.getStrasse());
-            stmt.setInt(6, kunde.getHausnummer());
+            stmt.setString(6, kunde.getHausnummer());
             stmt.setString(7, kunde.getKontonummer());
             stmt.setString(8, kunde.getBlz());
             stmt.setString(9, kunde.getIban());
@@ -85,7 +86,7 @@ public class KundenService {
     /**
      * Hier nix Conventieren. Bitte weg damit
      *
-     * @return ArrayList 
+     * @return ArrayList
      */
     public ArrayList<Fahrschueler> getKundenTable() {
         return getKunden();
@@ -109,18 +110,18 @@ public class KundenService {
             ResultSet rs = stmt.executeQuery(); // Query absetzen und ResultSet zurückholen
 
             while (rs.next()) {
-                Fahrschueler kunde = new Fahrschueler(
-                        rs.getInt("KundeID"),
-                        rs.getInt("Hausnummer"),
-                        rs.getInt("Guthaben"),
-                        rs.getString("Vorname"),
-                        rs.getString("Nachname"),
-                        rs.getString("Postleitzahl"),
-                        rs.getString("Stadt"),
-                        rs.getString("Straße")
-                );
+                Fahrschueler fahrschueler = new Fahrschueler();
 
-                kundeList.add(kunde);
+                fahrschueler.setId(rs.getInt("KundeID"));
+                fahrschueler.setHausnummer(rs.getString("Hausnummer"));
+                fahrschueler.setGuthaben(rs.getInt("Guthaben"));
+                fahrschueler.setVorname(rs.getString("Vorname"));
+                fahrschueler.setNachname(rs.getString("Nachname"));
+                fahrschueler.setPlz(rs.getString("Postleitzahl"));
+                fahrschueler.setStadt(rs.getString("Stadt"));
+                fahrschueler.setStrasse(rs.getString("Straße"));
+
+                kundeList.add(fahrschueler);
             }
 
             stmt.close();

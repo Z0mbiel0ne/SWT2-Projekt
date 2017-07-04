@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fhdo.swt2.udrive.model.dto;
+package fhdo.swt2.udrive.model.services.objects;
 
 /**
  * Treffpunkt - Transfer Object
@@ -16,34 +16,6 @@ public class Treffpunkt {
     private String strasse,
             plz,
             stadt;
-
-    /**
-     * Full constructor
-     *
-     * @param id
-     * @param strasse
-     * @param plz
-     * @param stadt
-     */
-    public Treffpunkt(int id, String strasse, String plz, String stadt) {
-        this.id = id;
-        this.strasse = strasse;
-        this.plz = plz;
-        this.stadt = stadt;
-    }
-
-    /**
-     * Noref constructor
-     *
-     * @param strasse
-     * @param plz
-     * @param stadt
-     */
-    public Treffpunkt(String strasse, String plz, String stadt) {
-        this.strasse = strasse;
-        this.plz = plz;
-        this.stadt = stadt;
-    }
 
     public int getId() {
         return id;

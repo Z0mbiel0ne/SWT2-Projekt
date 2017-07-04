@@ -6,9 +6,9 @@
 package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.controller.Converter;
-import fhdo.swt2.udrive.model.DerRestDerInKeineKategoriePasstService;
-import fhdo.swt2.udrive.model.KundenService;
-import fhdo.swt2.udrive.model.dto.Fahrschueler;
+import fhdo.swt2.udrive.model.services.DerRestDerInKeineKategoriePasstService;
+import fhdo.swt2.udrive.model.services.KundenService;
+import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -20,12 +20,13 @@ import javax.swing.SwingUtilities;
 public class ADDKunde extends javax.swing.JFrame {
 
     private static final DerRestDerInKeineKategoriePasstService SERVICE = new DerRestDerInKeineKategoriePasstService();
-    private static  final KundenService SERVICEKUNDE = new KundenService();
-    private  static  final Converter SERVICECONVERTER = new Converter();
+    private static final KundenService SERVICEKUNDE = new KundenService();
+    private static final Converter SERVICECONVERTER = new Converter();
     private final JTable table;
 
     /**
      * Creates new form ADDKunde
+     *
      * @param j
      */
     public ADDKunde(JTable j) {
@@ -234,37 +235,36 @@ public class ADDKunde extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String vorname = null;
-        String nachname = null;
-        int plz = 0;
-        String stadt = null;
-        String strasse = null;
-        int hausnummer = 0;
-        int kontonummer = 0;
-        int blz = 0;
-        int iban = 0;
-        int bic = 0;
+        String vorname, nachname, plz, stadt, strasse, hausnummer, kontonummer, blz, iban, bic;
 
-        try {
-            vorname = jTextField1.getText();
-            nachname = jTextField6.getText();
-            plz = Integer.parseInt(jTextField2.getText());
-            stadt = jTextField7.getText();
-            strasse = jTextField3.getText();
-            hausnummer = Integer.parseInt(jTextField8.getText());
-            kontonummer = Integer.parseInt(jTextField4.getText());
-            blz = Integer.parseInt(jTextField9.getText());
-            iban = Integer.parseInt(jTextField5.getText());
-            bic = Integer.parseInt(jTextField10.getText());
+        Fahrschueler fahrschueler = new Fahrschueler();
 
-            SERVICEKUNDE.addKunde( new Fahrschueler(bic, hausnummer, iban, vorname, nachname, stadt, stadt, strasse));
+        vorname = jTextField1.getText();
+        nachname = jTextField6.getText();
+        plz = jTextField2.getText();
+        stadt = jTextField7.getText();
+        strasse = jTextField3.getText();
+        hausnummer = jTextField8.getText();
+        kontonummer = jTextField4.getText();
+        blz = jTextField9.getText();
+        iban = jTextField5.getText();
+        bic = jTextField10.getText();
 
-            table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
-            dispose();
-        } catch (NumberFormatException numberFormatException) {
-            jLabel11.setVisible(true);
-        }
+        fahrschueler.setVorname(vorname);
+        fahrschueler.setNachname(nachname);
+        fahrschueler.setPlz(plz);
+        fahrschueler.setStadt(stadt);
+        fahrschueler.setStrasse(strasse);
+        fahrschueler.setHausnummer(hausnummer);
+        fahrschueler.setKontonummer(kontonummer);
+        fahrschueler.setBlz(blz);
+        fahrschueler.setIban(iban);
+        fahrschueler.setBic(bic);
 
+        SERVICEKUNDE.addKunde(fahrschueler);
+
+        table.setModel(SERVICECONVERTER.convertFahrschuelerToDefaultTableModel(SERVICEKUNDE.getKundenTable()));
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

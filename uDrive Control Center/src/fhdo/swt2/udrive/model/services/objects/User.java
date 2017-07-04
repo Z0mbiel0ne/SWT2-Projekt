@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fhdo.swt2.udrive.model.dto;
+package fhdo.swt2.udrive.model.services.objects;
 
 /**
  * User Object
@@ -15,30 +15,6 @@ public class User {
     private int id;
     private String username,
             password;
-
-    /**
-     * Full constructor
-     *
-     * @param id
-     * @param username
-     * @param password
-     */
-    public User(int id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-
-    /**
-     * Noref constructor
-     *
-     * @param username
-     * @param password
-     */
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     /**
      * Clear PasswordAttr
