@@ -8,6 +8,7 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
+import java.util.Locale;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -92,27 +93,28 @@ public class ADDKunde extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Vorname");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/ADDKunde", Locale.getDefault()); // NOI18N
+        jLabel1.setText(bundle.getString("ADDKunde.jLabel1.text")); // NOI18N
 
-        jLabel2.setText("Nachname");
+        jLabel2.setText(bundle.getString("ADDKunde.jLabel2.text")); // NOI18N
 
-        jLabel3.setText("PLZ");
+        jLabel3.setText(bundle.getString("ADDKunde.jLabel3.text")); // NOI18N
 
-        jLabel4.setText("Stadt");
+        jLabel4.setText(bundle.getString("ADDKunde.jLabel4.text")); // NOI18N
 
-        jLabel5.setText("Straße");
+        jLabel5.setText(bundle.getString("ADDKunde.jLabel5.text")); // NOI18N
 
-        jLabel6.setText("Hausnummer");
+        jLabel6.setText(bundle.getString("ADDKunde.jLabel6.text")); // NOI18N
 
-        jLabel7.setText("Kontonummer");
+        jLabel7.setText(bundle.getString("ADDKunde.jLabel7.text")); // NOI18N
 
-        jLabel8.setText("BLZ");
+        jLabel8.setText(bundle.getString("ADDKunde.jLabel8.text")); // NOI18N
 
-        jLabel9.setText("IBAN");
+        jLabel9.setText(bundle.getString("ADDKunde.jLabel9.text")); // NOI18N
 
-        jLabel10.setText("BIC");
+        jLabel10.setText(bundle.getString("ADDKunde.jLabel10.text")); // NOI18N
 
-        jButton1.setText("Hinzufügen");
+        jButton1.setText(bundle.getString("ADDKunde.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -120,7 +122,7 @@ public class ADDKunde extends javax.swing.JFrame {
         });
 
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel11.setText("Bitte korrekte Werte eingeben.");
+        jLabel11.setText(bundle.getString("ADDKunde.jLabel11.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

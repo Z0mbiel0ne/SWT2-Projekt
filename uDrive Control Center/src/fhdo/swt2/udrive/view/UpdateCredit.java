@@ -8,6 +8,7 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JRootPane;
@@ -59,14 +60,15 @@ public class UpdateCredit extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("O.K.");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/UpdateCredit", Locale.getDefault()); // NOI18N
+        jButton1.setText(bundle.getString("UpdateCredit.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("€");
+        jLabel1.setText(bundle.getString("UpdateCredit.jLabel1.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -7,6 +7,7 @@ package fhdo.swt2.udrive.view;
 
 import fhdo.swt2.udrive.model.services.ControlCenterService;
 import fhdo.swt2.udrive.model.services.objects.User;
+import java.util.Locale;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -45,11 +46,12 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Kennwort:");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/Login", Locale.getDefault()); // NOI18N
+        jLabel1.setText(bundle.getString("KENNWORT:")); // NOI18N
 
-        jLabel2.setText("Benutzer:");
+        jLabel2.setText(bundle.getString("BENUTZER:")); // NOI18N
 
-        jButton1.setText("Login");
+        jButton1.setText(bundle.getString("LOGIN")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

@@ -42,14 +42,3 @@ uDrive Control Center/nbbuild/
 uDrive Control Center/dist/
 uDrive Control Center/nbdist/
 .nb-gradle/
-
-# End of https://www.gitignore.io/api/java,netbeans
-=======
-hs_err_pid
->>>>>>> origin/master
-uDrive Control Center/nbproject/private/private.xml
-uDrive Control Center/nbproject/private/private.xml
-*.properties
-uDrive Control Center/nbproject/private/private.properties
-*.xml
-*.properties

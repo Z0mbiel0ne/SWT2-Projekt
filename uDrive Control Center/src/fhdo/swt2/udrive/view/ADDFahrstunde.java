@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JRootPane;
@@ -101,21 +102,23 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Datum");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/ADDFahrstunde", Locale.getDefault()); // NOI18N
+        jLabel1.setText(bundle.getString("ADDFahrstunde.jLabel1.text")); // NOI18N
 
-        jLabel2.setText("Treffpunkt");
+        jLabel2.setText(bundle.getString("ADDFahrstunde.jLabel2.text")); // NOI18N
 
-        jLabel3.setText("Fahrlehrer");
+        jLabel3.setText(bundle.getString("ADDFahrstunde.jLabel3.text")); // NOI18N
 
         jComboBox3.setMaximumRowCount(10);
-        jComboBox3.setToolTipText("");
+        jComboBox3.setToolTipText(bundle.getString("ADDFahrstunde.jComboBox3.toolTipText")); // NOI18N
 
-        jLabel4.setText("Kunde");
+        jLabel4.setText(bundle.getString("ADDFahrstunde.jLabel4.text")); // NOI18N
 
-        jLabel5.setText("RechnungID");
+        jLabel5.setText(bundle.getString("ADDFahrstunde.jLabel5.text")); // NOI18N
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +126,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Hinzufügen");
+        jButton1.setText(bundle.getString("ADDFahrstunde.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -131,7 +134,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         });
 
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel11.setText("Bitte korrekte Werte eingeben.");
+        jLabel11.setText(bundle.getString("ADDFahrstunde.jLabel11.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,7 +155,8 @@ public class ADDFahrstunde extends javax.swing.JFrame {
                             .addComponent(jComboBox3, 0, 128, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(jTextField1)
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel11))
@@ -165,8 +169,13 @@ public class ADDFahrstunde extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -239,5 +248,6 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }
