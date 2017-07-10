@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fhdo.swt2.udrive.model.services;
 
 import fhdo.swt2.udrive.model.ConnectionManager;
@@ -24,6 +19,14 @@ import java.util.logging.Logger;
  * @author ExaShox
  */
 public class BuchungsServices {
+    private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    /**
+     * Konstruktor
+     */
+    public BuchungsServices() {
+        log.fine("Creating " + this.getClass().getName());
+    }
 
     /**
      * Gimme Fahrstunde
@@ -32,6 +35,8 @@ public class BuchungsServices {
      * @return
      */
     public ArrayList<Fahrstunde> getFahrstundeTable(int kundenID) {
+        log.info("Get List of Fahrstunden for Kunden");
+        
         ArrayList<Fahrstunde> fahrstundeList = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection()) {
@@ -77,7 +82,7 @@ public class BuchungsServices {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         } finally {
             return fahrstundeList;
         }
@@ -89,6 +94,8 @@ public class BuchungsServices {
      * @param fahrstunde
      */
     public void deleteFahrstunde(Fahrstunde fahrstunde) {
+        log.fine("Try to delete Fahrstunde");
+        
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
             String sqlString = "DELETE FROM fahrstunde WHERE FahrstundeID = ?";
@@ -99,8 +106,10 @@ public class BuchungsServices {
 
             stmt.close();
             conn.close();
+            
+            log.info("Fahrstunde deleted");
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,6 +124,9 @@ public class BuchungsServices {
      */
     public void insertFahrstunde(Date datum, Treffpunkt treffpunkt,
             Fahrlehrer fahrlehrer, Fahrschueler kunde, int rechnungID) {
+        
+        log.fine("Try to insert Fahrstunde");
+        
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
@@ -139,8 +151,10 @@ public class BuchungsServices {
 
             stmt.close();
             conn.close();
+            
+            log.info("Fahrstunde inserted");
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -150,6 +164,8 @@ public class BuchungsServices {
      * @return Bsp: [0][0] : 1 [0][1] : Essen
      */
     public ArrayList<Treffpunkt> getTreffpunkte() {
+        log.info("Get list of Treffpunkt");
+        
         ArrayList<Treffpunkt> treffpunktList = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection()) {
@@ -177,7 +193,7 @@ public class BuchungsServices {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         } finally {
             return treffpunktList;
         }

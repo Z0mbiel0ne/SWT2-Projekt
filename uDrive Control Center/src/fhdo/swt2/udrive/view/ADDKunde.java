@@ -9,6 +9,7 @@ import fhdo.swt2.udrive.controller.Converter;
 import fhdo.swt2.udrive.model.services.KundenService;
 import fhdo.swt2.udrive.model.services.objects.Fahrschueler;
 import java.util.Locale;
+import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -18,6 +19,8 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDKunde extends javax.swing.JFrame {
+    
+    private final Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final KundenService KUNDENSERVICES = new KundenService();
     private static final Converter CONVERTER = new Converter();
     private final JTable table;
@@ -28,6 +31,8 @@ public class ADDKunde extends javax.swing.JFrame {
      * @param table
      */
     public ADDKunde(JTable table) {
+        log.info("Starting AddKunden UI");
+        
         this.table = table;
         initComponents();
         JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
@@ -233,11 +238,11 @@ public class ADDKunde extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         String vorname, nachname, plz, stadt, strasse, hausnummer, kontonummer, blz, iban, bic;
-
+        
         Fahrschueler fahrschueler = new Fahrschueler();
-
+        
         vorname = jTextField1.getText();
         nachname = jTextField6.getText();
         plz = jTextField2.getText();
@@ -248,7 +253,7 @@ public class ADDKunde extends javax.swing.JFrame {
         blz = jTextField9.getText();
         iban = jTextField5.getText();
         bic = jTextField10.getText();
-
+        
         fahrschueler.setVorname(vorname);
         fahrschueler.setNachname(nachname);
         fahrschueler.setPlz(plz);
@@ -259,9 +264,9 @@ public class ADDKunde extends javax.swing.JFrame {
         fahrschueler.setBlz(blz);
         fahrschueler.setIban(iban);
         fahrschueler.setBic(bic);
-
+        
         KUNDENSERVICES.addKunde(fahrschueler);
-
+        
         table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKundenTable()));
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

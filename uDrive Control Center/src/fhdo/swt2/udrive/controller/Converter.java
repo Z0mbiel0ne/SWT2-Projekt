@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Converter {
 
+    private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     /**
      * Convert ArrayList to DefaultTableModel
      *
@@ -25,6 +27,8 @@ public class Converter {
      * @return tableModel
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
+        log.fine("Converting Fahrstunde to DefaultTableModel");
+
         LinkedList<Object> columnNames = new LinkedList<>();
         columnNames.add("ID");
         columnNames.add("Datum");
@@ -47,6 +51,7 @@ public class Converter {
 
         Object[][] objectArray = convertLinkedListToVector(data);
         DefaultTableModel tableModel = new DefaultTableModel(objectArray, columnNames.toArray());
+
         return tableModel;
     }
 
@@ -57,6 +62,8 @@ public class Converter {
      * @return tableModel
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
+        log.fine("Converting Fahrschueler to DefaultTableModel");
+        
         LinkedList<Object> columnNames = new LinkedList<>();
         columnNames.add("Id");
         columnNames.add("Name");
@@ -87,6 +94,8 @@ public class Converter {
      * @return tableModel
      */
     public DefaultTableModel convertToDefaultTableModel(ResultSet resultSet) {
+        log.fine("Converting ResultSet to DefaultTableModel");
+        
         try {
             ResultSetMetaData metaData;
             metaData = resultSet.getMetaData();
@@ -124,6 +133,8 @@ public class Converter {
      * @return String[][]
      */
     public String[][] convertTo2DStringArray(ResultSet resultSet) {
+        log.fine("Converting ResultSet to two dimentional Array");
+        
         String[][] resultArray = new String[0][0];
 
         try {
@@ -155,6 +166,8 @@ public class Converter {
      * @return doubleArray
      */
     private Object[][] convertLinkedListToVector(LinkedList<LinkedList<Object>> list) {
+        log.fine("Converting LinkedList<LinkedList<>> to two dimentional Array");
+        
         if (list.isEmpty()) {
             return new Object[0][0];
         }

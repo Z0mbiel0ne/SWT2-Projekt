@@ -41,7 +41,6 @@
                           <Component id="jComboBox1" max="32767" attributes="0"/>
                           <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField1" max="32767" attributes="0"/>
-                          <Component id="jXDatePicker1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -61,16 +60,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jXDatePicker1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -193,8 +184,6 @@
           <ResourceString bundle="Lang/ADDFahrstunde.properties" key="ADDFahrstunde.jLabel11.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
     </Component>
   </SubComponents>
 </Form>

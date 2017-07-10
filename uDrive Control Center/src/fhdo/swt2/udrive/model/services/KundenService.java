@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fhdo.swt2.udrive.model.services;
 
 import fhdo.swt2.udrive.model.ConnectionManager;
@@ -22,10 +17,13 @@ import java.util.logging.Logger;
  */
 public class KundenService {
 
+    private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     /**
-     * Empty Constructor
+     * Konstruktor
      */
     public KundenService() {
+        log.fine("Creating " + this.getClass().getName());
     }
 
     /**
@@ -34,6 +32,8 @@ public class KundenService {
      * @param kunde
      */
     public void addKunde(Fahrschueler kunde) {
+        log.fine("Try to add Kunde");
+
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
 
@@ -56,8 +56,10 @@ public class KundenService {
 
             stmt.close();
             conn.close();
+
+            log.info("Kunde added");
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -68,6 +70,8 @@ public class KundenService {
      * @throws SQLException
      */
     public void deleteKunde(Fahrschueler kunde) throws SQLException {
+        log.fine("Try to delete Kunde");
+
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
 
@@ -78,8 +82,10 @@ public class KundenService {
 
             stmt.close();
             conn.close();
+
+            log.info("Kunde deleted");
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,6 +95,8 @@ public class KundenService {
      * @return ArrayList
      */
     public ArrayList<Fahrschueler> getKundenTable() {
+        log.finest("Usless Method");
+
         return getKunden();
     }
 
@@ -98,6 +106,8 @@ public class KundenService {
      * @return ArrayList
      */
     public ArrayList<Fahrschueler> getKunden() {
+        log.info("Get table of Kunde");
+
         ArrayList<Fahrschueler> kundeList = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection()) {
@@ -127,7 +137,7 @@ public class KundenService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         } finally {
             return kundeList;
         }
@@ -139,10 +149,13 @@ public class KundenService {
      * @param kunde
      */
     public void updateCredit(Fahrschueler kunde) {
+        log.fine("Try to update Kunden Credits");
+        
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
-            String sqlString = "UPDATE kunde AS ku "
+            String sqlString
+                    = "UPDATE kunde AS ku "
                     + "SET ku.Guthaben = ku.Guthaben + ? "
                     + "WHERE ku.KundeID = ? ";
 
@@ -153,8 +166,10 @@ public class KundenService {
 
             stmt.close();
             conn.close();
+            
+            log.info("Credtis updated");
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         }
     }
 }

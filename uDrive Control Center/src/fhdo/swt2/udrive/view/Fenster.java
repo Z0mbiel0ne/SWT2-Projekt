@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Fenster extends javax.swing.JFrame {
 
+    private static final Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static KundenService KUNDENSERVICE = new KundenService();
     private final static BuchungsServices BUCHUNGSSERVICE = new BuchungsServices();
     private final static Converter CONVERTER = new Converter();
@@ -35,6 +36,8 @@ public class Fenster extends javax.swing.JFrame {
      * Creates new form Fenster
      */
     public Fenster() {
+        log.fine("Open Fenster");
+
         initComponents();
         setVisible(true);
         addfactory = new ADDFahrstundenFactory();
@@ -310,6 +313,7 @@ public class Fenster extends javax.swing.JFrame {
      *
      */
     public void refreshtable1() {
+        log.finer("Refresh Table 1");
         jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
     }
 
@@ -317,6 +321,7 @@ public class Fenster extends javax.swing.JFrame {
      *
      */
     public void refreshtable2() {
+        log.finer("Refresh Table 1");
         int row = jTable1.getSelectedRow();
         jTable2.setModel(CONVERTER.convertFahrstundeToDefaultTableModel(BUCHUNGSSERVICE.getFahrstundeTable(Integer.parseInt(jTable1.getValueAt(row, 0).toString()))));
     }

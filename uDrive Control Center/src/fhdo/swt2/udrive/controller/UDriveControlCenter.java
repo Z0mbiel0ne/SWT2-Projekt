@@ -10,6 +10,7 @@ import fhdo.swt2.udrive.view.Login;
 import fhdo.swt2.udrive.model.ConnectionManager;
 import fhdo.swt2.udrive.model.LoginFactory;
 import fhdo.swt2.udrive.model.FensterFactory;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +18,7 @@ import fhdo.swt2.udrive.model.FensterFactory;
  */
 public class UDriveControlCenter {
 
+    private static final Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static Login login;
     private static LoginFactory loginfactory;
     private static Fenster fenster;
@@ -26,6 +28,8 @@ public class UDriveControlCenter {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        log.info("Starting!");
+
         ConnectionManager manager = new ConnectionManager();
         if (manager.checkConnection()) {
             loginfactory = new LoginFactory();
@@ -34,6 +38,8 @@ public class UDriveControlCenter {
             fensterfactory = new FensterFactory();
             fenster = fensterfactory.newInstance();
         }
+               
+        log.info("Closing!");
     }
 
 }

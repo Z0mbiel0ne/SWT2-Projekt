@@ -18,13 +18,18 @@ import java.util.logging.Logger;
  */
 public class ControlCenterService {
 
+    private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     /**
      * Konstruktor
      */
     public ControlCenterService() {
+        log.fine("Creating " + this.getClass().getName());
     }
 
     public boolean checkPasswort(User user) {
+        log.fine("Checking login data");
+
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;
 
@@ -37,10 +42,10 @@ public class ControlCenterService {
 
             stmt.close();
             conn.close();
+
             return user.getPassword().equals(test);
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Es konnte keine Verbindung hergestellt werden Sie befinden sich im Testmodus");
+            log.log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -51,6 +56,8 @@ public class ControlCenterService {
      * @return Bsp: [0][0] : 1 [0][1] : Hans
      */
     public ArrayList<Fahrlehrer> getFahrlehrer() {
+        log.info("Get list of Fahrlehrer");
+        
         ArrayList<Fahrlehrer> fahrlehrerList = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection()) {
@@ -92,7 +99,7 @@ public class ControlCenterService {
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ControlCenterService.class.getName()).log(Level.SEVERE, null, ex);
+            log.log(Level.SEVERE, null, ex);
         } finally {
             return fahrlehrerList;
         }

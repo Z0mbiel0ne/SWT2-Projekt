@@ -8,6 +8,7 @@ package fhdo.swt2.udrive.view;
 import fhdo.swt2.udrive.model.services.ControlCenterService;
 import fhdo.swt2.udrive.model.services.objects.User;
 import java.util.Locale;
+import java.util.logging.Logger;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -17,12 +18,16 @@ import javax.swing.SwingUtilities;
  */
 public class Login extends javax.swing.JFrame {
 
+    private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private static final ControlCenterService CONTROLCENTERSERVICE = new ControlCenterService();
 
     /**
      * Creates new form Login
      */
     public Login() {
+        log.fine("Creating Login");
+
         initComponents();
         JRootPane jRootPane = SwingUtilities.getRootPane(jButton1);
         jRootPane.setDefaultButton(jButton1);
@@ -99,18 +104,24 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nickname = jTextField1.getText();
         String password = String.copyValueOf(jPasswordField1.getPassword());
-        
+
         User user = new User();
         user.setUsername(nickname);
         user.setPassword(password);
-        
-        if(!nickname.equals("") && !password.equals("")) {    
+
+        if (!nickname.equals("") && !password.equals("")) {
             if (CONTROLCENTERSERVICE.checkPasswort(user)) {
+                log.info("Log in success");
+
                 setVisible(false);
                 dispose();
                 Fenster fenster = new Fenster();
+            } else {
+                log.warning("Login refused");
             }
-        }    
+        } else {
+            log.warning("No input");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -28,7 +28,8 @@ import javax.swing.SwingUtilities;
  * @author Marcel
  */
 public class ADDFahrstunde extends javax.swing.JFrame {
-
+    
+    private final Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final ControlCenterService CONTROLCENTERSERVICE = new ControlCenterService();
     private final KundenService KUNDENSERVICE = new KundenService();
     private final BuchungsServices BUCHUNGSSERVICE = new BuchungsServices();
@@ -48,6 +49,8 @@ public class ADDFahrstunde extends javax.swing.JFrame {
      * @throws java.sql.SQLException
      */
     public ADDFahrstunde(JTable j1, JTable j2) throws SQLException {
+        log.info("Starting AddFahrstunde UI");
+        
         table1 = j1;
         table2 = j2;
         initComponents();
@@ -102,11 +105,10 @@ public class ADDFahrstunde extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/ADDFahrstunde", Locale.getDefault()); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/ADDFahrstunde"); // NOI18N
         jLabel1.setText(bundle.getString("ADDFahrstunde.jLabel1.text")); // NOI18N
 
         jLabel2.setText(bundle.getString("ADDFahrstunde.jLabel2.text")); // NOI18N
@@ -155,8 +157,7 @@ public class ADDFahrstunde extends javax.swing.JFrame {
                             .addComponent(jComboBox3, 0, 128, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel11))
@@ -169,13 +170,8 @@ public class ADDFahrstunde extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(20, 20, 20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel1)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -248,6 +244,5 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }
