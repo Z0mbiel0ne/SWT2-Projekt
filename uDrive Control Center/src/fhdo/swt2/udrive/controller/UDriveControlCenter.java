@@ -38,8 +38,6 @@ public class UDriveControlCenter {
             fensterfactory = new FensterFactory();
             fenster = fensterfactory.newInstance();
         }
-               
-        log.info("Closing!");
     }
 
 }

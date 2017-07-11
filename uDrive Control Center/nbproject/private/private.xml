@@ -3,26 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/ADDFahrstundenFactory.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Fenster_en_US.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDFahrstunde_de_DE.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDFahrstunde_en_US.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDFahrstunde.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Login.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/UpdateCredit.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/UpdateCredit.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDKunde_en_US.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Fenster.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Fenster_de_DE.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDKunde_de_DE.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/Login.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/Fenster.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/UpdateCredit.properties</file>
             <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/ADDFahrstunde.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Login_de_DE.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/Fenster.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/Login_en_US.properties</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/model/FensterFactory.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/ADDKunde.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/view/Login.java</file>
-            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/Lang/ADDKunde.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/ADDFahrstunde.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/ADDFahrstunde_en_US.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/ADDKunde.properties</file>
+            <file>file:/C:/Users/Marcel/Documents/GitHub/SWT2-Projekt/uDrive%20Control%20Center/src/fhdo/swt2/udrive/lang/ADDKunde_en_US.properties</file>
         </group>
     </open-files>
 </project-private>

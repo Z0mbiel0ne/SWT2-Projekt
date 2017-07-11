@@ -95,7 +95,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTable2);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/Fenster"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("fhdo.swt2.udrive.lang/Fenster"); // NOI18N
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("ID")); // NOI18N
             jTable2.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("Datum")); // NOI18N
@@ -136,8 +136,7 @@ public class Fenster extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setHeaderValue(bundle.getString("Guthaben")); // NOI18N
         }
 
-        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("Lang/Fenster", Locale.getDefault()); // NOI18N
-        jButton1.setText(bundle1.getString("Fenster.jButton1.text")); // NOI18N
+        jButton1.setText(bundle.getString("Fenster.jButton1.text")); // NOI18N
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -147,7 +146,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText(bundle1.getString("Fenster.jButton2.text")); // NOI18N
+        jButton2.setText(bundle.getString("Fenster.jButton2.text")); // NOI18N
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -157,7 +156,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText(bundle1.getString("Fenster.jButton3.text")); // NOI18N
+        jButton3.setText(bundle.getString("Fenster.jButton3.text")); // NOI18N
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -167,7 +166,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText(bundle1.getString("Fenster.jButton6.text")); // NOI18N
+        jButton6.setText(bundle.getString("Fenster.jButton6.text")); // NOI18N
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -177,7 +176,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText(bundle1.getString("Fenster.jButton5.text")); // NOI18N
+        jButton5.setText(bundle.getString("Fenster.jButton5.text")); // NOI18N
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -187,7 +186,7 @@ public class Fenster extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText(bundle1.getString("Fenster.jButton4.text")); // NOI18N
+        jButton4.setText(bundle.getString("Fenster.jButton4.text")); // NOI18N
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

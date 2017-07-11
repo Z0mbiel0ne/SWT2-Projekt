@@ -58,7 +58,7 @@ public class UpdateCredit extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/UpdateCredit", Locale.getDefault()); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("fhdo.swt2.udrive.lang/UpdateCredit", Locale.getDefault()); // NOI18N
         jButton1.setText(bundle.getString("UpdateCredit.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

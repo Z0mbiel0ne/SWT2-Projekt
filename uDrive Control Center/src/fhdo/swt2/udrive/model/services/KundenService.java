@@ -32,7 +32,7 @@ public class KundenService {
      * @param kunde
      */
     public void addKunde(Fahrschueler kunde) {
-        log.fine("Try to add Kunde");
+        log.fine("Try to add Kunde Name:" + kunde.getVorname() + " ID: " + kunde.getId() );
 
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
@@ -70,7 +70,7 @@ public class KundenService {
      * @throws SQLException
      */
     public void deleteKunde(Fahrschueler kunde) throws SQLException {
-        log.fine("Try to delete Kunde");
+        log.fine("Try to delete Kunde Name: " + kunde.getVorname() + " ID: " + kunde.getId());
 
         try (Connection conn = ConnectionManager.getConnection()) {
             CallableStatement stmt;
@@ -83,7 +83,7 @@ public class KundenService {
             stmt.close();
             conn.close();
 
-            log.info("Kunde deleted");
+            log.info("Kunde deleted Kunde: " + kunde.getVorname() + " ID: " + kunde.getId());
         } catch (SQLException ex) {
             log.log(Level.SEVERE, null, ex);
         }
@@ -149,7 +149,7 @@ public class KundenService {
      * @param kunde
      */
     public void updateCredit(Fahrschueler kunde) {
-        log.fine("Try to update Kunden Credits");
+        log.fine("Try to update Kunden Credits Name: " + kunde.getVorname() + " ID: " + kunde.getId());
         
         try (Connection conn = ConnectionManager.getConnection()) {
             PreparedStatement stmt;

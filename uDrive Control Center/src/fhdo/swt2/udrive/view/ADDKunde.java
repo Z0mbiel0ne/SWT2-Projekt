@@ -98,7 +98,7 @@ public class ADDKunde extends javax.swing.JFrame {
             }
         });
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/ADDKunde", Locale.getDefault()); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("fhdo.swt2.udrive.lang/ADDKunde", Locale.getDefault()); // NOI18N
         jLabel1.setText(bundle.getString("ADDKunde.jLabel1.text")); // NOI18N
 
         jLabel2.setText(bundle.getString("ADDKunde.jLabel2.text")); // NOI18N

@@ -35,7 +35,7 @@ public class BuchungsServices {
      * @return
      */
     public ArrayList<Fahrstunde> getFahrstundeTable(int kundenID) {
-        log.info("Get List of Fahrstunden for Kunden");
+        log.info("Get List of Fahrstunden for Kunden with ID: " + kundenID);
         
         ArrayList<Fahrstunde> fahrstundeList = new ArrayList<>();
 

@@ -51,7 +51,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Lang/Login", Locale.getDefault()); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("fhdo.swt2.udrive.lang/Login", Locale.getDefault()); // NOI18N
         jLabel1.setText(bundle.getString("KENNWORT:")); // NOI18N
 
         jLabel2.setText(bundle.getString("BENUTZER:")); // NOI18N
@@ -111,7 +111,7 @@ public class Login extends javax.swing.JFrame {
 
         if (!nickname.equals("") && !password.equals("")) {
             if (CONTROLCENTERSERVICE.checkPasswort(user)) {
-                log.info("Log in success");
+                log.info("Log in success with User: " + user.getUsername());
 
                 setVisible(false);
                 dispose();
