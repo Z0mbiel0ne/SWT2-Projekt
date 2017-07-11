@@ -30,8 +30,8 @@ public class UpdateCredit extends javax.swing.JFrame {
     /**
      * Creates new form updateCredit
      *
-     * @param id
-     * @param table
+     * @param id KundenID
+     * @param table KundenTabelle
      */
     public UpdateCredit(int id, JTable table) {
         log.info("Starting UpdateCredit UI");
@@ -111,7 +111,7 @@ public class UpdateCredit extends javax.swing.JFrame {
             Logger.getLogger(UpdateCredit.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKundenTable()));
+        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKunden()));
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

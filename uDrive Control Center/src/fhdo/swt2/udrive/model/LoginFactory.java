@@ -8,18 +8,16 @@ package fhdo.swt2.udrive.model;
 import fhdo.swt2.udrive.view.Login;
 
 /**
- *
+ * LoginFactory 
  * @author Marcel
  */
 public class LoginFactory {
     
     Login login;
-    
-    public LoginFactory()
-    {
-        
-    }
-    
+    /**
+     * Creates a new Instance of Login 
+     * @return Loginview
+     */
     public Login newInstance()
     {
         login = new Login();

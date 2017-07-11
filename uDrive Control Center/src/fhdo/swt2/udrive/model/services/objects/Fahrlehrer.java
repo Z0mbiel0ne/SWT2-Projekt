@@ -20,7 +20,7 @@ public class Fahrlehrer {
     public int getFahrlehrerID() {
         return fahrlehrerID;
     }
-
+    
     public void setFahrlehrerID(int fahrlehrerID) {
         this.fahrlehrerID = fahrlehrerID;
     }

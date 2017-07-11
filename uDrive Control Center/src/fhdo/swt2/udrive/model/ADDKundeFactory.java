@@ -9,17 +9,17 @@ import fhdo.swt2.udrive.view.ADDKunde;
 import javax.swing.JTable;
 
 /**
- *
+ * ADDKundeFactory
  * @author Marcel
  */
 public class ADDKundeFactory {
 
     ADDKunde addKunde;
-
-    public ADDKundeFactory() {
-
-    }
-
+    /**
+     * Creates a new Instance of AddFahrstundenView with Table Data
+     * @param jTable1 Table of Customer
+     * @return Object of AddKundeView
+     */
     public ADDKunde newInstance(JTable jTable1) {
         addKunde = new ADDKunde(jTable1);
         return addKunde;

@@ -13,7 +13,7 @@ import fhdo.swt2.udrive.model.FensterFactory;
 import java.util.logging.Logger;
 
 /**
- *
+ * Hauptklasse mit Mainmethode
  * @author Marcel
  */
 public class UDriveControlCenter {
@@ -25,6 +25,7 @@ public class UDriveControlCenter {
     private static FensterFactory fensterfactory;
 
     /**
+     * Hauptprogramm
      * @param args the command line arguments
      */
     public static void main(String[] args) {

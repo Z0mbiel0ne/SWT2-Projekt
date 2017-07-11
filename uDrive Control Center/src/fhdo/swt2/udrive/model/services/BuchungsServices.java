@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Bookingservice for Databasequerys
  * @author ExaShox
  */
 public class BuchungsServices {
@@ -29,10 +29,10 @@ public class BuchungsServices {
     }
 
     /**
-     * Gimme Fahrstunde
+     * Returns Fahrstunden
      *
-     * @param kundenID
-     * @return
+     * @param kundenID CustomerID
+     * @return ArrayList of Fahrstunden
      */
     public ArrayList<Fahrstunde> getFahrstundeTable(int kundenID) {
         log.info("Get List of Fahrstunden for Kunden with ID: " + kundenID);
@@ -89,9 +89,9 @@ public class BuchungsServices {
     }
 
     /**
-     * Löscht in der Tabelle Fahrstunde den eintrag mit der ID
+     * Löscht in der Tabelle Fahrstunde den Eintrag mit der ID
      *
-     * @param fahrstunde
+     * @param fahrstunde DrivingLessonID
      */
     public void deleteFahrstunde(Fahrstunde fahrstunde) {
         log.fine("Try to delete Fahrstunde");
@@ -116,11 +116,11 @@ public class BuchungsServices {
     /**
      * Erstellt einen Fahrstunde in der Tabelle Fahrstunden
      *
-     * @param datum
-     * @param treffpunkt
-     * @param fahrlehrer
-     * @param kunde
-     * @param rechnungID
+     * @param datum Date of DrivingLesson
+     * @param treffpunkt Meeting Point of DrivingLesson
+     * @param fahrlehrer Driving Instructor of DrivingLesson
+     * @param kunde Customer of DrivingLesson
+     * @param rechnungID BillID of DrivingLesson
      */
     public void insertFahrstunde(Date datum, Treffpunkt treffpunkt,
             Fahrlehrer fahrlehrer, Fahrschueler kunde, int rechnungID) {
@@ -161,7 +161,7 @@ public class BuchungsServices {
     /**
      * Liefert ALLE Treffpunkte in der Form ID|Straße
      *
-     * @return Bsp: [0][0] : 1 [0][1] : Essen
+     * @return Bsp: ArrayList [0][0] : ID [0][1] : Straße
      */
     public ArrayList<Treffpunkt> getTreffpunkte() {
         log.info("Get list of Treffpunkt");

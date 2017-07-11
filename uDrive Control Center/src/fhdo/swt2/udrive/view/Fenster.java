@@ -42,7 +42,7 @@ public class Fenster extends javax.swing.JFrame {
         setVisible(true);
         addfactory = new ADDFahrstundenFactory();
         addKundeFactory = new ADDKundeFactory();
-        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
+        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKunden()));
         jTable1.setRowSelectionInterval(0, 0);
     }
 
@@ -313,7 +313,7 @@ public class Fenster extends javax.swing.JFrame {
      */
     public void refreshtable1() {
         log.finer("Refresh Table 1");
-        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKundenTable()));
+        jTable1.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICE.getKunden()));
     }
 
     /**

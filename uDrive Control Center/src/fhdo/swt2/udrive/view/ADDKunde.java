@@ -28,7 +28,7 @@ public class ADDKunde extends javax.swing.JFrame {
     /**
      * Creates new form ADDKunde
      *
-     * @param table
+     * @param table Kudnentabelle
      */
     public ADDKunde(JTable table) {
         log.info("Starting AddKunden UI");
@@ -267,7 +267,7 @@ public class ADDKunde extends javax.swing.JFrame {
         
         KUNDENSERVICES.addKunde(fahrschueler);
         
-        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKundenTable()));
+        table.setModel(CONVERTER.convertFahrschuelerToDefaultTableModel(KUNDENSERVICES.getKunden()));
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

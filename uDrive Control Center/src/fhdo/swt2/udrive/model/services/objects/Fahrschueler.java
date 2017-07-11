@@ -23,7 +23,7 @@ public class Fahrschueler {
     /**
      * Get full address
      *
-     * @return
+     * @return Adresse
      */
     public String getFullAddress() {
         return strasse + " " + hausnummer + ", " + stadt;

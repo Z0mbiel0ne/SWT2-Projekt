@@ -8,17 +8,16 @@ package fhdo.swt2.udrive.model;
 import fhdo.swt2.udrive.view.Fenster;
 
 /**
- *
+ * Factory for Fenster
  * @author Marcel
  */
 public class FensterFactory {
     Fenster fenster;
     
-    public FensterFactory()
-    {
-        
-    }
-    
+    /**
+     * Creates a new Instance of Fenster
+     * @return Object of Fenster
+     */
     public Fenster newInstance()
     {
         fenster = new Fenster();

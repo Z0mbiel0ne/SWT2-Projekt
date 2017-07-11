@@ -9,18 +9,19 @@ import fhdo.swt2.udrive.view.UpdateCredit;
 import javax.swing.JTable;
 
 /**
- *
+ * UpdateCreditFacory
  * @author Marcel
  */
 public class UpdateCreditFactory 
 {
   UpdateCredit updateCredit;
   
-  public UpdateCreditFactory()
-  {
-      
-  }
-  
+  /**
+   * Creates a new Instance of UpdateCredit
+   * @param value UserID
+   * @param jtable1 Table of Kunden
+   * @return UpdateCreditView
+   */
   public  UpdateCredit newInsatnce(int value, JTable jtable1)
   {
       updateCredit = new UpdateCredit(value, jtable1);

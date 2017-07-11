@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Customer Service for Custom Data
  * @author ExaShox
  */
 public class KundenService {
@@ -29,7 +29,7 @@ public class KundenService {
     /**
      * Legt einen neuen Kunden in der Datenbank an
      *
-     * @param kunde
+     * @param kunde Kunde
      */
     public void addKunde(Fahrschueler kunde) {
         log.fine("Try to add Kunde Name:" + kunde.getVorname() + " ID: " + kunde.getId() );
@@ -64,10 +64,10 @@ public class KundenService {
     }
 
     /**
-     * Vernichtet einen Kunden
+     * Löscht einen Kunden
      *
-     * @param kunde
-     * @throws SQLException
+     * @param kunde Kunde
+     * @throws SQLException SQLException
      */
     public void deleteKunde(Fahrschueler kunde) throws SQLException {
         log.fine("Try to delete Kunde Name: " + kunde.getVorname() + " ID: " + kunde.getId());
@@ -87,17 +87,6 @@ public class KundenService {
         } catch (SQLException ex) {
             log.log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Hier nix Conventieren. Bitte weg damit
-     *
-     * @return ArrayList
-     */
-    public ArrayList<Fahrschueler> getKundenTable() {
-        log.finest("Usless Method");
-
-        return getKunden();
     }
 
     /**
@@ -146,7 +135,7 @@ public class KundenService {
     /**
      * Updatet den Geldbetrag eines Kunden
      *
-     * @param kunde
+     * @param kunde KudnenID
      */
     public void updateCredit(Fahrschueler kunde) {
         log.fine("Try to update Kunden Credits Name: " + kunde.getVorname() + " ID: " + kunde.getId());

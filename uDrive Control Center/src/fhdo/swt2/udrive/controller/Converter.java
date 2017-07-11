@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Converter Class
- *
+ *  
  * @author ExaShox
  */
 public class Converter {
@@ -23,7 +23,7 @@ public class Converter {
     /**
      * Convert ArrayList to DefaultTableModel
      *
-     * @param list
+     * @param list List of Fahrstunden
      * @return tableModel
      */
     public DefaultTableModel convertFahrstundeToDefaultTableModel(ArrayList<Fahrstunde> list) {
@@ -58,7 +58,7 @@ public class Converter {
     /**
      * Convert ArrayList to DefaultTableModel
      *
-     * @param list
+     * @param list List of Fahrschüler
      * @return tableModel
      */
     public DefaultTableModel convertFahrschuelerToDefaultTableModel(ArrayList<Fahrschueler> list) {
@@ -90,7 +90,7 @@ public class Converter {
     /**
      * Convert ResultSet to DefaultTableModel with header
      *
-     * @param resultSet
+     * @param resultSet ResultSet
      * @return tableModel
      */
     public DefaultTableModel convertToDefaultTableModel(ResultSet resultSet) {
@@ -129,7 +129,7 @@ public class Converter {
     /**
      * Convert ResultSet to 2D String Array
      *
-     * @param resultSet
+     * @param resultSet ResultSet
      * @return String[][]
      */
     public String[][] convertTo2DStringArray(ResultSet resultSet) {
@@ -162,7 +162,7 @@ public class Converter {
     /**
      * Convert LinkedList to Object[][]
      *
-     * @param list
+     * @param list LinkedList of LinkedList
      * @return doubleArray
      */
     private Object[][] convertLinkedListToVector(LinkedList<LinkedList<Object>> list) {

@@ -12,8 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * SQL Service
- *
+ * SQL Service for Programm Tasks
  * @author ExaShox
  */
 public class ControlCenterService {
@@ -26,7 +25,12 @@ public class ControlCenterService {
     public ControlCenterService() {
         log.fine("Creating " + this.getClass().getName());
     }
-
+    
+    /**
+     * Check the login Data of a User on Database
+     * @param user User
+     * @return boolean
+     */
     public boolean checkPasswort(User user) {
         log.fine("Checking login data");
 
@@ -53,7 +57,7 @@ public class ControlCenterService {
     /**
      * Liefert ALLE Fahrlehrer in der Form FahrlehrerID|Vorname
      *
-     * @return Bsp: [0][0] : 1 [0][1] : Hans
+     * @return Bsp: ArrayList [0][0] : 1 [0][1] : Hans
      */
     public ArrayList<Fahrlehrer> getFahrlehrer() {
         log.info("Get list of Fahrlehrer");

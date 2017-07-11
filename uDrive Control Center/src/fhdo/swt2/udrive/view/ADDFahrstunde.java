@@ -44,9 +44,9 @@ public class ADDFahrstunde extends javax.swing.JFrame {
     /**
      * Creates new form ADDFahrstunde
      *
-     * @param j1
-     * @param j2
-     * @throws java.sql.SQLException
+     * @param j1 Kunden Tabelle
+     * @param j2 Fahrstunden Tabelle
+     * @throws java.sql.SQLException SQLException
      */
     public ADDFahrstunde(JTable j1, JTable j2) throws SQLException {
         log.info("Starting AddFahrstunde UI");

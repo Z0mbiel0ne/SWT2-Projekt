@@ -13,18 +13,19 @@ import java.util.logging.Logger;
 import javax.swing.JTable;
 
 /**
- *
+ * Factory to create ADDFahrstunden Views
  * @author Marcel
  */
 public class ADDFahrstundenFactory 
 {
     ADDFahrstunde addfahrstunde;
     
-    public ADDFahrstundenFactory()
-    {
-      
-    }
-    
+    /**
+     * Creates a new Insatnce of AddFahrstundenView with Table Data
+     * @param jTable1 Customer Table
+     * @param jTable2 Driving Lesson Table
+     * @return Object of AddFahrstunden
+     */
     public Object newInstance(JTable jTable1, JTable jTable2)
     {
         try {
