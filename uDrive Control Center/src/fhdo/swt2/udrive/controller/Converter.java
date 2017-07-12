@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class Converter {
 
     private Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
+    java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("fhdo.swt2.udrive.lang/Fenster", Locale.getDefault());
     /**
      * Convert ArrayList to DefaultTableModel
      *
@@ -30,11 +31,11 @@ public class Converter {
         log.fine("Converting Fahrstunde to DefaultTableModel");
 
         LinkedList<Object> columnNames = new LinkedList<>();
-        columnNames.add("ID");
-        columnNames.add("Datum");
-        columnNames.add("Fahrschüler");
-        columnNames.add("Fahrlehrer");
-        columnNames.add("Adresse");
+        columnNames.add(bundle.getString("ID"));
+        columnNames.add(bundle.getString("Datum"));
+        columnNames.add(bundle.getString("Fahrschüler"));
+        columnNames.add(bundle.getString("Fahrlehrer"));
+        columnNames.add(bundle.getString("Adresse"));
 
         LinkedList<LinkedList<Object>> data = new LinkedList<>();
         list.stream().map((Fahrstunde Fahrstunde) -> {
@@ -65,10 +66,10 @@ public class Converter {
         log.fine("Converting Fahrschueler to DefaultTableModel");
         
         LinkedList<Object> columnNames = new LinkedList<>();
-        columnNames.add("Id");
-        columnNames.add("Name");
-        columnNames.add("Adresse");
-        columnNames.add("Guthaben");
+        columnNames.add(bundle.getString("ID"));
+        columnNames.add(bundle.getString("Name"));
+        columnNames.add(bundle.getString("Adresse"));
+        columnNames.add(bundle.getString("Guthaben"));
 
         LinkedList<LinkedList<Object>> data = new LinkedList<>();
         list.stream().map((Fahrschueler fahrschueler) -> {
